@@ -1,5 +1,6 @@
 class BulkUploadsController < ApplicationController
+    layout "layout"
   def upload_file
-      Product.parse_file(params)
+      
   end
 end

@@ -15,5 +15,8 @@
 <p><%= f.label :password_confirmation, 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><%= submit_tag 'Sign up' %></p>
+<p>
+<%= submit_tag 'Sign up' %>
+<%=link_to "Back",users_path if current_user%>
+</p>
 <% end -%>

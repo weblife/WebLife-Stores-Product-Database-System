@@ -1,0 +1,24 @@
+<h3>Users list</h3>
+<p style="float:right" >
+<%=link_to "Create New User",new_user_path%>
+  </p>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td style="width:35%" ><b>Email</b></td>
+    <td style="width:20%" ><b>Status</b></td>
+    <td style="width:20%" ><b>Edit</b></td>
+    <td style="width:20%" ><b>Login</b></td>
+    <td style="width:20%" ><b>Delete</b></td>
+  </tr>
+<%@users.each do |user| %>
+  <tr>
+    <td><%=user.email%></td>
+    <td><%=user.state%></td>
+    <td><%=link_to "Edit",edit_user_path(user)%></td>
+    <td><%=link_to "Login",login_from_admin_path(user)%></td>
+    <td><%if user.is_admin%>N/A<%else%><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %><%end%></td>
+  </tr>
+<%end%>
+
+</table>

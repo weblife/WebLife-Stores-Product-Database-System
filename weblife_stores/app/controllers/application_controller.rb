@@ -3,8 +3,10 @@
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
- # protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  protect_from_forgery # See ActionController::RequestForgeryProtection for details
   require "ruby-debug"
+  # Be sure to include AuthenticationSystem in Application Controller instead
+  include AuthenticatedSystem
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+   filter_parameter_logging :password
 end

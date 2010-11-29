@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-  
+  layout "layout"
   # Protect these actions behind an admin login
   # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
@@ -11,7 +10,11 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
- 
+
+  def index
+    @users=User.find :all
+  end
+
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
@@ -25,6 +28,33 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+
+  def update
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(users_path, :notice => 'User was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def login_from_admin
+    @user = User.find(params[:id])
+    session[:admin]=current_user
+    session[:admin]=nil if @user.is_admin
+    self.current_user = @user
+    redirect_back_or_default dashboard_url
+  end
+
 
   def activate
     logout_keeping_session!
@@ -42,6 +72,17 @@ class UsersController < ApplicationController
       redirect_back_or_default('/')
     end
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(users_url) }
+      format.xml  { head :ok }
+    end
+  end
+
 
   def suspend
     @user.suspend! 
@@ -62,7 +103,8 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_path
   end
-  
+  def dashboard
+  end
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
   # supply their old password along with a new one to update it, etc.
