@@ -16575,3 +16575,3514 @@ Rendering users/dashboard
   [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `users` WHERE (state='inactive' or state='deleted') [0m
   [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 5) LIMIT 1[0m
 Completed in 20ms (View: 17, DB: 1) | 200 OK [http://localhost/dashboard]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to AddAllTables (20101129193642)
+  [4;35;1mSQL (121.9ms)[0m   [0mDROP TABLE `products`[0m
+  [4;36;1mSQL (55.8ms)[0m   [0;1mDROP TABLE `insets`[0m
+  [4;35;1mSQL (67.1ms)[0m   [0mDROP TABLE `url_links`[0m
+  [4;36;1mSQL (66.8ms)[0m   [0;1mDROP TABLE `text_anchors`[0m
+  [4;35;1mSQL (56.2ms)[0m   [0mDROP TABLE `properties`[0m
+  [4;36;1mSQL (100.3ms)[0m   [0;1mDELETE FROM schema_migrations WHERE version = '20101129193642'[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (1.1ms)[0m   [0mdescribe `users`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100813223003)
+Migrating to AddIsAdminFieldInUsers (20101125181602)
+Migrating to AddAllTables (20101129193642)
+  [4;35;1mSQL (102.5ms)[0m   [0mCREATE TABLE `products` (`id` varchar(100) NOT NULL, `user_id` int(11) NOT NULL, `path` text(400), `manufacturer` varchar(60), `code` varchar(20), `name` varchar(200), `warranty` varchar(200), `is_usps_approved` tinyint(1) DEFAULT 0, `image` varchar(60), `Item_description_with_html` text, `options` text, `Item_description_without_html` text(500), `return_details` varchar(200), `availability` varchar(200), `shipping_time` varchar(200), `related_Items` varchar(100), `related_referrence_sku` varchar(60), `promo_code_section_availablility` tinyint(1) DEFAULT 0, `disclaimer_name` varchar(60), `disclaimer_text` text(400), `product_cmng_img_tag_html` text(400), `brief_summary_of_menu` text, `freight_cost_overide` decimal(8,2) DEFAULT 0, `po_description_details` text, `origin_zip` int(11) DEFAULT 0, `invalid_ship_methods` int(11) DEFAULT 0, `phone_number_visibility` tinyint(1) DEFAULT 0, `item_number_visiblity` tinyint(1) DEFAULT 0) ENGINE=InnoDB[0m
+  [4;36;1mSQL (112.7ms)[0m   [0;1mCREATE TABLE `insets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `inset` varchar(60), `inset_2` varchar(60), `inset_3` varchar(60), `inset_4` varchar(60), `inset_5` varchar(60), `inset_6` varchar(60), `inset_7` varchar(60), `inset_8` varchar(60), `inset_9` varchar(60)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (110.2ms)[0m   [0mCREATE TABLE `url_links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `url_link_1` varchar(255), `url_link_2` varchar(255), `url_link_3` varchar(255), `url_link_4` varchar(255), `url_link_5` varchar(255), `url_link_6` varchar(255), `url_link_7` varchar(255), `url_link_8` varchar(255), `url_link_9` varchar(255), `url_link_10` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (110.6ms)[0m   [0;1mCREATE TABLE `text_anchors` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `anchor_text_1` varchar(200), `anchor_text_2` varchar(200), `anchor_text_3` varchar(200), `anchor_text_4` varchar(200), `anchor_text_5` varchar(200), `anchor_text_6` varchar(200), `anchor_text_7` varchar(200), `anchor_text_8` varchar(200), `anchor_text_9` varchar(200), `anchor_text_10` varchar(200)) ENGINE=InnoDB[0m
+  [4;35;1mSQL (98.9ms)[0m   [0mCREATE TABLE `properties` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `material` varchar(30), `style` varchar(30), `color` varchar(30), `actual_weight` decimal(8,2) DEFAULT 0, `ship_weight` decimal(8,2) DEFAULT 0, `overall_size` varchar(200), `wholesale_cost` decimal(8,2) DEFAULT 0, `map_pricing` decimal(8,2) DEFAULT 0, `number_of_boxes` int(11) DEFAULT 0, `multi_box_weights` decimal(8,2) DEFAULT 0, `multi_box_dimensions` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (44.0ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20101129193642')[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mdescribe `insets`[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW KEYS FROM `insets`[0m
+  [4;35;1mSQL (1.8ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mSQL (1.7ms)[0m   [0;1mdescribe `products`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `products`[0m
+  [4;36;1mSQL (1.3ms)[0m   [0;1mSHOW FIELDS FROM `properties`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mdescribe `properties`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSHOW KEYS FROM `properties`[0m
+  [4;35;1mSQL (1.3ms)[0m   [0mSHOW FIELDS FROM `text_anchors`[0m
+  [4;36;1mSQL (1.2ms)[0m   [0;1mdescribe `text_anchors`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `text_anchors`[0m
+  [4;36;1mSQL (1.0ms)[0m   [0;1mSHOW FIELDS FROM `url_links`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mdescribe `url_links`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSHOW KEYS FROM `url_links`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (1.1ms)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#dashboard (for 127.0.0.1 at 2010-12-01 00:44:52) [GET]
+  Parameters: {"action"=>"dashboard", "controller"=>"users"}
+Rendering template within layouts/layout
+Rendering users/dashboard
+  [4;35;1mUser Columns (1.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT count(*) AS count_all FROM `users` WHERE (state='active') [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT count(*) AS count_all FROM `users` WHERE (state='inactive' or state='deleted') [0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 5) LIMIT 1[0m
+Completed in 204ms (View: 199, DB: 3) | 200 OK [http://localhost/dashboard]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-12-01 00:47:08) [GET]
+  Parameters: {"action"=>"destroy", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/logout]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:47:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 18ms (View: 17, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing ApplicationController#index (for 127.0.0.1 at 2010-12-01 00:47:13) [GET]
+
+ActionController::RoutingError (No route matches "/create" with {:method=>:get}):
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendering rescues/layout (not_found)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-12-01 00:47:20) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+  [4;35;1mUser Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+Rendering template within layouts/layout
+Rendering users/new
+Completed in 41ms (View: 31, DB: 1) | 200 OK [http://localhost/signup]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-12-01 00:50:01) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/signup]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:01) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:01) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:02) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:03) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:50:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:53:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:22) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:23) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:24) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:24) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:54:24) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:58:38) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+
+ArgumentError (wrong number of arguments (0 for 1)):
+  app/controllers/application_controller.rb:18:in `redirect_back_or_default'
+  app/controllers/application_controller.rb:18:in `login_required'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (15.3ms)
+Rendered rescues/_request_and_response (1.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:12) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.3ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:12) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:12) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:31) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:34) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/signup]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 00:59:56) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:00:25) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 8ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-12-01 01:00:44) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+  [4;36;1mUser Columns (1.0ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+Rendering template within layouts/layout
+Rendering users/new
+Completed in 99ms (View: 79, DB: 1) | 200 OK [http://localhost/signup]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"users"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/signup]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:15) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:01:16) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/session/new
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/session/new]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 58ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:07) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:08) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:06:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:08:14) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 9ms (View: 7, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.5ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-12-01 01:08:25) [POST]
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"5hAr8JeE/BxtHT2bFL1mQgahbSky/MqRBg5b9UOOURc=", "controller"=>"sessions", "login"=>"root", "password"=>"[FILTERED]"}
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`login` = 'root') AND (users.state = 'active') LIMIT 1[0m
+Failed login for 'root' from 127.0.0.1 at Tue Nov 30 20:08:25 UTC 2010
+Rendering sessions/new
+Completed in 26ms (View: 2, DB: 1) | 200 OK [http://localhost/session]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-12-01 01:08:33) [POST]
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"5hAr8JeE/BxtHT2bFL1mQgahbSky/MqRBg5b9UOOURc=", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;35;1mUser Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed in 14ms (DB: 2) | 302 Found [http://localhost/session]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:08:33) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:08:41) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#create (for 127.0.0.1 at 2010-12-01 01:08:51) [POST]
+  Parameters: {"commit"=>"Log in", "action"=>"create", "authenticity_token"=>"5hAr8JeE/BxtHT2bFL1mQgahbSky/MqRBg5b9UOOURc=", "controller"=>"sessions", "login"=>"admin", "password"=>"[FILTERED]"}
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`login` = 'admin') AND (users.state = 'active') LIMIT 1[0m
+  [4;36;1mUser Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard
+Completed in 14ms (DB: 1) | 302 Found [http://localhost/session]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#dashboard (for 127.0.0.1 at 2010-12-01 01:08:51) [GET]
+  Parameters: {"action"=>"dashboard", "controller"=>"users"}
+Rendering template within layouts/layout
+Rendering users/dashboard
+  [4;36;1mUser Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `users` WHERE (state='active') [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `users` WHERE (state='inactive' or state='deleted') [0m
+  [4;35;1mUser Load (0.1ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 5) LIMIT 1[0m
+Completed in 89ms (View: 87, DB: 1) | 200 OK [http://localhost/dashboard]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#destroy (for 127.0.0.1 at 2010-12-01 01:08:58) [GET]
+  Parameters: {"action"=>"destroy", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/logout]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:08:58) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#dashboard (for 127.0.0.1 at 2010-12-01 01:09:01) [GET]
+  Parameters: {"action"=>"dashboard", "controller"=>"users"}
+Rendering template within layouts/layout
+Rendering users/dashboard
+  [4;35;1mUser Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT count(*) AS count_all FROM `users` WHERE (state='active') [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM `users` WHERE (state='inactive' or state='deleted') [0m
+Completed in 14ms (View: 11, DB: 1) | 200 OK [http://localhost/dashboard]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#dashboard (for 127.0.0.1 at 2010-12-01 01:10:39) [GET]
+  Parameters: {"action"=>"dashboard", "controller"=>"users"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/dashboard]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:10:39) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing UsersController#dashboard (for 127.0.0.1 at 2010-12-01 01:11:00) [GET]
+  Parameters: {"action"=>"dashboard", "controller"=>"users"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/dashboard]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:00) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:27) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:27) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:27) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:27) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:28) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:29) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:29) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:50) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:50) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:50) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:52) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:52) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:52) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:52) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:52) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:54) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:11:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:12:45) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:15:24) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:15:25) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing AdminsController#users_list (for 127.0.0.1 at 2010-12-01 01:15:38) [GET]
+  Parameters: {"action"=>"users_list", "controller"=>"admins"}
+Redirected to http://localhost:3000/
+Filter chain halted as [:login_required] rendered_or_redirected.
+Completed in 1ms (DB: 0) | 302 Found [http://localhost/admins/users_list]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:15:38) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:17:05) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 4ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:17:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+Rendering sessions/new
+Completed in 3ms (View: 2, DB: 0) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:18:46) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (1.4ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+Rendering sessions/new
+Completed in 30ms (View: 2, DB: 2) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:19:11) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (1.0ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+Rendering sessions/new
+Completed in 8ms (View: 2, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:19:25) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+Rendering sessions/new
+Completed in 10ms (View: 2, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:21:36) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+Rendering sessions/new
+Completed in 10ms (View: 2, DB: 1) | 200 OK [http://localhost/]
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:21:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset must have at most 60 characters, Inset 2 must have at most 60 characters, Inset 3 must have at most 60 characters, Inset 4 must have at most 60 characters, Inset 5 must have at most 60 characters, Inset 6 must have at most 60 characters, Inset 7 must have at most 60 characters, Inset 8 must have at most 60 characters, Inset 9 must have at most 60 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.7ms)
+Rendered rescues/_request_and_response (1.4ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:22:44) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+
+ArgumentError (Too many range options specified.  Choose only one.):
+  app/models/inset.rb:4
+  app/controllers/sessions_controller.rb:8:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:24:39) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset is too short (minimum is 0 characters), Inset 2 is too short (minimum is 0 characters), Inset 3 is too short (minimum is 0 characters), Inset 4 is too short (minimum is 0 characters), Inset 5 is too short (minimum is 0 characters), Inset 6 is too short (minimum is 0 characters), Inset 7 is too short (minimum is 0 characters), Inset 8 is too short (minimum is 0 characters), Inset 9 is too short (minimum is 0 characters)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (16.0ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:25:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+
+ArgumentError (Too many range options specified.  Choose only one.):
+  app/models/inset.rb:4
+  app/controllers/sessions_controller.rb:8:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (18.7ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:25:21) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset must have at most 60 characters, Inset 2 must have at most 60 characters, Inset 3 must have at most 60 characters, Inset 4 must have at most 60 characters, Inset 5 must have at most 60 characters, Inset 6 must have at most 60 characters, Inset 7 must have at most 60 characters, Inset 8 must have at most 60 characters, Inset 9 must have at most 60 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.2ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:26:53) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset must have at most 60 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (16.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:27:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset is too short (minimum is 60 characters)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.9ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:27:26) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset is too short (minimum is 60 characters)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (18.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:27:43) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset is too long (maximum is 60 characters)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:28:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInset Create (0.0ms)[0m   [0mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, 'tes', NULL, NULL, NULL, NULL)[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, 'tes', NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:11:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (20.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:29:13) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mInset Columns (0.9ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mInset Columns (0.5ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+
+NameError (undefined local variable or method `inset' for #<Class:0xb6c3a4cc>):
+  app/models/inset.rb:8
+  app/controllers/sessions_controller.rb:8:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:29:30) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mInset Columns (0.7ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mInset Columns (0.6ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+
+NoMethodError (undefined method `inset' for #<Class:0xb6b667f8>):
+  app/models/inset.rb:8
+  app/controllers/sessions_controller.rb:8:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (16.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:31:09) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (0.9ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset is too long (maximum is 60 characters)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.1ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:32:06) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mInset Create (0.0ms)[0m   [0;1mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (20.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:32:50) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInset Create (0.0ms)[0m   [0mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (19.5ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:32:51) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (1.1ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mInset Create (0.0ms)[0m   [0;1mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (19.4ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:33:10) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mInset Columns (0.8ms)[0m   [0mSHOW FIELDS FROM `insets`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mBEGIN[0m
+  [4;35;1mInset Create (0.0ms)[0m   [0mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (22.6ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:33:24) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Inset must have at most 60 characters):
+  app/controllers/sessions_controller.rb:11:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (17.4ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:33:55) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;36;1mInset Columns (0.8ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mInset Create (0.0ms)[0m   [0;1mMysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::StatementInvalid (Mysql::Error: Column 'product_id' cannot be null: INSERT INTO `insets` (`inset_6`, `inset_7`, `product_id`, `inset_8`, `inset_9`, `inset`, `inset_2`, `inset_3`, `inset_4`, `inset_5`) VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (22.3ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:34:14) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mProduct Columns (1.9ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mProduct Load (0.4ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Id can't be blank, Image can't be blank, Image must have at most 60 characters, Item description with html can't be blank, Return details can't be blank, Return details must have at most 200 characters, Availability can't be blank, Availability must have at most 200 characters, Shipping time can't be blank, Shipping time must have at most 200 characters, Path must have at most 400 characters, Manufacturer must have at most 60 characters, Code must have at most 20 characters, Name must have at most 200 characters, Warranty must have at most 200 characters, Item description without html must have at most 500 characters, Related items must have at most 100 characters, Related referrence sku must have at most 60 characters, Disclaimer name must have at most 60 characters, Disclaimer text must have at most 400 characters, Product cmng img tag html must have at most 400 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (16.8ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:38:04) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mProduct Columns (1.1ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mProduct Load (0.1ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Id can't be blank, Image can't be blank, Image must have at most 60 characters, Item description with html can't be blank, Return details can't be blank, Return details must have at most 200 characters, Availability can't be blank, Availability must have at most 200 characters, Shipping time can't be blank, Shipping time must have at most 200 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (15.9ms)
+Rendered rescues/_request_and_response (0.2ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+
+
+Processing SessionsController#new (for 127.0.0.1 at 2010-12-01 01:40:14) [GET]
+  Parameters: {"action"=>"new", "controller"=>"sessions"}
+  [4;35;1mProduct Columns (1.3ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mProduct Load (0.2ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mBEGIN[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT `products`.id FROM `products` WHERE (`products`.`id` IS NULL) LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mROLLBACK[0m
+
+ActiveRecord::RecordInvalid (Validation failed: Id can't be blank, Image can't be blank, Image must have at most 60 characters, Item description with html can't be blank, Return details can't be blank, Return details must have at most 200 characters, Availability can't be blank, Availability must have at most 200 characters, Shipping time can't be blank, Shipping time must have at most 200 characters):
+  app/controllers/sessions_controller.rb:10:in `new'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/local/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/local/lib/ruby/1.8/webrick/server.rb:162
+
+Rendered rescues/_trace (16.2ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (unprocessable_entity)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100813223003)
+Migrating to AddIsAdminFieldInUsers (20101125181602)
+Migrating to AddAllTables (20101129193642)
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mdescribe `insets`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `insets`[0m
+  [4;35;1mSQL (1.0ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mdescribe `products`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW KEYS FROM `products`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW FIELDS FROM `properties`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mdescribe `properties`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `properties`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW FIELDS FROM `text_anchors`[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mdescribe `text_anchors`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `text_anchors`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW FIELDS FROM `url_links`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mdescribe `url_links`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `url_links`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW KEYS FROM `users`[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP DATABASE IF EXISTS `weblife_stores_test`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE DATABASE `weblife_stores_test` DEFAULT CHARACTER SET `utf8`[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (126.3ms)[0m   [0mCREATE TABLE `insets` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `inset` varchar(60), `inset_2` varchar(60), `inset_3` varchar(60), `inset_4` varchar(60), `inset_5` varchar(60), `inset_6` varchar(60), `inset_7` varchar(60), `inset_8` varchar(60), `inset_9` varchar(60)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (142.4ms)[0m   [0mCREATE TABLE `products` (`id` varchar(100) NOT NULL, `user_id` int(11) NOT NULL, `path` text, `manufacturer` varchar(60), `code` varchar(20), `name` varchar(200), `warranty` varchar(200), `is_usps_approved` tinyint(1) DEFAULT 0, `image` varchar(60), `Item_description_with_html` text, `options` text, `Item_description_without_html` text, `return_details` varchar(200), `availability` varchar(200), `shipping_time` varchar(200), `related_Items` varchar(100), `related_referrence_sku` varchar(60), `promo_code_section_availablility` tinyint(1) DEFAULT 0, `disclaimer_name` varchar(60), `disclaimer_text` text, `product_cmng_img_tag_html` text, `brief_summary_of_menu` text, `freight_cost_overide` decimal(8,2) DEFAULT 0.0, `po_description_details` text, `origin_zip` int(11) DEFAULT 0, `invalid_ship_methods` int(11) DEFAULT 0, `phone_number_visibility` tinyint(1) DEFAULT 0, `item_number_visiblity` tinyint(1) DEFAULT 0) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (155.6ms)[0m   [0mCREATE TABLE `properties` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `material` varchar(30), `style` varchar(30), `color` varchar(30), `actual_weight` decimal(8,2) DEFAULT 0.0, `ship_weight` decimal(8,2) DEFAULT 0.0, `overall_size` varchar(200), `wholesale_cost` decimal(8,2) DEFAULT 0.0, `map_pricing` decimal(8,2) DEFAULT 0.0, `number_of_boxes` int(11) DEFAULT 0, `multi_box_weights` decimal(8,2) DEFAULT 0.0, `multi_box_dimensions` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (200.2ms)[0m   [0mCREATE TABLE `text_anchors` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `anchor_text_1` varchar(200), `anchor_text_2` varchar(200), `anchor_text_3` varchar(200), `anchor_text_4` varchar(200), `anchor_text_5` varchar(200), `anchor_text_6` varchar(200), `anchor_text_7` varchar(200), `anchor_text_8` varchar(200), `anchor_text_9` varchar(200), `anchor_text_10` varchar(200)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (121.1ms)[0m   [0mCREATE TABLE `url_links` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `product_id` int(11) NOT NULL, `url_link_1` varchar(255), `url_link_2` varchar(255), `url_link_3` varchar(255), `url_link_4` varchar(255), `url_link_5` varchar(255), `url_link_6` varchar(255), `url_link_7` varchar(255), `url_link_8` varchar(255), `url_link_9` varchar(255), `url_link_10` varchar(255)) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (100.4ms)[0m   [0mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `login` varchar(40), `name` varchar(100) DEFAULT '', `email` varchar(100), `crypted_password` varchar(40), `salt` varchar(40), `created_at` datetime, `updated_at` datetime, `remember_token` varchar(40), `remember_token_expires_at` datetime, `activation_code` varchar(40), `activated_at` datetime, `state` varchar(255) DEFAULT 'passive', `deleted_at` datetime, `is_admin` tinyint(1) DEFAULT 0) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mSHOW KEYS FROM `users`[0m
+  [4;35;1mSQL (234.1ms)[0m   [0mCREATE UNIQUE INDEX `index_users_on_login` ON `users` (`login`)[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (99.7ms)[0m   [0mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW KEYS FROM `schema_migrations`[0m
+  [4;35;1mSQL (279.1ms)[0m   [0mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSELECT version FROM `schema_migrations`[0m
+  [4;36;1mSQL (42.7ms)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20101129193642')[0m
+  [4;35;1mSQL (44.6ms)[0m   [0mINSERT INTO `schema_migrations` (version) VALUES ('20101125181602')[0m
+  [4;36;1mSQL (44.3ms)[0m   [0;1mINSERT INTO `schema_migrations` (version) VALUES ('20100813223003')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSET SQL_AUTO_IS_NULL=0[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100813223003)
+Migrating to AddIsAdminFieldInUsers (20101125181602)
+Migrating to AddAllTables (20101129193642)
+  [4;35;1mSQL (0.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW FIELDS FROM `insets`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mdescribe `insets`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `insets`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW FIELDS FROM `products`[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1mdescribe `products`[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSHOW KEYS FROM `products`[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mSHOW FIELDS FROM `properties`[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mdescribe `properties`[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSHOW KEYS FROM `properties`[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW FIELDS FROM `text_anchors`[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mdescribe `text_anchors`[0m
+  [4;35;1mSQL (1.9ms)[0m   [0mSHOW KEYS FROM `text_anchors`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW FIELDS FROM `url_links`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mdescribe `url_links`[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSHOW KEYS FROM `url_links`[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW FIELDS FROM `users`[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mdescribe `users`[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW KEYS FROM `users`[0m
