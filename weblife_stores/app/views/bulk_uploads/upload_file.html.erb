@@ -8,7 +8,68 @@
   </tr>
   <tr >
     <td colspan="3" >
-          <label for="file">File to Upload</label> <%= file_field_tag "file" %>
+  <%= form_tag({:action => 'upload_file'}, :multipart => true)%>
+    <label for="file">File to Upload</label>
+        <%= file_field_tag "file" %>
+    <%= submit_tag 'Upload' %>
+   <%=form_tag %>
     </td>
   </tr>
 </table>
+<%if !@products.blank?%>
+
+
+    <table border="0" cellspacing="10" cellpadding="0" >
+      <tr>
+        <td><%= page_entries_info @products, :entry_name => '' %></td>
+        <td><%= will_paginate @products %></td>
+      </tr>
+      <%@products.each do |product|%>
+          <tr valign="top">
+            <td><b>Path</b></td>
+            <td><%=product.path%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Manufacturer</b></td>
+            <td><%=product.manufacturer%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Code</b></td>
+            <td><%=product.code%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Name</b></td>
+            <td><%=product.name%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Warranty</b></td>
+            <td><%=product.warranty%></td>
+          </tr>
+          <tr valign="top">
+            <td nowrap ><b>Is USPS Approved</b></td>
+            <td><%=(product.is_usps_approved)?("Yes"):("No")%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Image</b></td>
+            <td><%=product.image%></td>
+          </tr>
+          <tr valign="top">
+            <td nowrap><b>Item Description - HTML</b></td>
+            <td><%=product.Item_description_with_html%></td>
+          </tr>
+          <tr valign="top">
+            <td nowrap><b>Options</b></td>
+            <td><%=product.options%></td>
+          </tr>
+          <tr valign="top">
+            <td nowrap><b>Item Description - NO HTML</b></td>
+            <td><%=product.Item_description_without_html%></td>
+          </tr>
+          <tr valign="top">
+            <td colspan="2" >-----------------------------------------------------------------</td>
+          </tr>
+
+      <%end%>
+    </table>
+
+<%end%>
