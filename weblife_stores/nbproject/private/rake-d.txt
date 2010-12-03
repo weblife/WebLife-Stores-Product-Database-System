@@ -44,6 +44,7 @@ doc\:guides=Generate Rails guides
 doc\:plugins=Generate documentation for all installed plugins
 doc\:plugins\:acts_as_state_machine=Generate documentation for the acts_as_state_machine plugin
 doc\:plugins\:restful-authentication=Generate documentation for the restful-authentication plugin
+doc\:plugins\:will_paginate=Generate documentation for the will_paginate plugin
 doc\:rails=Build the RDOC HTML Files
 doc\:reapp=Force a rebuild of the RDOC files
 doc\:rerails=Force a rebuild of the RDOC files
