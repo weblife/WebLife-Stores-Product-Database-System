@@ -2,7 +2,9 @@
 
 <table border="1" cellspacing="10" cellpadding="0" >
   <tr>
-    <td>New Upload</td>
+    <td>New Upload
+
+    </td>
     <td>Add</td>
     <td>Revert</td>
   </tr>
@@ -18,109 +20,679 @@
 </table>
 <%if !@products.blank?%>
 
+<%@products.first.valid?%>
+    <table border="0" cellspacing="10" cellpadding="0" >
+      <tr>
+        <td colspan="2" >
+          <b>Errors and Warnings</b>
+        </td>
+      </tr>
+      <%count=1%>
+      <%@products.first.errors.each do |field,error|%>
+      <tr>
+        <td>
+          <%if count==1%>
+          <b>Warnings:</b>
+          <%else%>
+          &nbsp;
+          <%end%>
+          <%count+=1%>
+        </td>
+        <td><%=error if field!="id"%></td>
+      </tr>
+      <%end%>
+      <%unless @products.first.errors.on(:id).blank?%>
+      <tr>
+        <td>
+          <b>Errors:</b>
+        </td>
+        <td>
+            <%=@products.first.errors.on(:id)%>
+        </td>
+      </tr>
+      <%end%>
+    </table>
 
     <table border="0" cellspacing="10" cellpadding="0" >
       <tr>
+        <td colspan="2" >
+          <b>View Individual Records
+          
+          </b>
+
+        </td>
+      </tr>
+      <tr>
         <td><%= page_entries_info @products, :entry_name => '' %></td>
-        <td><%= will_paginate @products %></td>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <%= form_tag({:action => 'upload_file'},:method=>"get", :multipart => true)%>
+              Jump to #<%=text_field_tag "page",nil,{:size=>"2px"}%>
+              <%= submit_tag 'Go' %>
+              <%=form_tag %>
+              </td>
+              <td><%= will_paginate @products %></td>
+            </tr>
+          </table>
+
+        </td>
       </tr>
       <%@products.each do |product|%>
           <tr valign="top">
-            <td><b>Path</b></td>
-            <td><%=product.path%></td>
+            <td nowrap><b>id</b></td>
+            <td>
+              <%=product.id%>
+              <%unless product.errors.on(:id).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:id)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td nowrap><b>Path</b></td>
+            <td>
+                <%=product.path%>
+              <%unless product.errors.on(:path).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:path)%>)</label>
+              <%end%>
+
+            </td>
           </tr>
           <tr valign="top">
             <td><b>Manufacturer</b></td>
-            <td><%=product.manufacturer%></td>
+            <td><%=product.manufacturer%>
+              <%unless product.errors.on(:manufacturer).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:manufacturer)%>)</label>
+              <%end%>
+
+            </td>
           </tr>
           <tr valign="top">
             <td><b>Code</b></td>
-            <td><%=product.code%></td>
+            <td><%=product.code%>
+              <%unless product.errors.on(:code).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:code)%>)</label>
+              <%end%>
+
+            </td>
           </tr>
           <tr valign="top">
             <td><b>Name</b></td>
-            <td><%=product.name%></td>
+            <td><%=product.name%>
+              <%unless product.errors.on(:name).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:name)%>)</label>
+              <%end%>
+
+            </td>
           </tr>
           <tr valign="top">
-            <td><b>Warranty</b></td>
-            <td><%=product.warranty%></td>
+            <td><b>Item Description - HTML</b></td>
+            <td><%=product.Item_description_with_html%>
+              <%unless product.errors.on(:Item_description_with_html).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:Item_description_with_html)%>)</label>
+              <%end%>
+
+
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap ><b>Is USPS Approved</b></td>
-            <td><%=(product.is_usps_approved)?("Yes"):("No")%></td>
+            <td><b>Options</b></td>
+            <td><%=product.options%>
+              <%unless product.errors.on(:options).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:options)%>)</label>
+              <%end%>
+
+
+            </td>
           </tr>
           <tr valign="top">
-            <td><b>Image</b></td>
-            <td><%=product.image%></td>
+            <td><b>actual-weight</b></td>
+            <td><%=product.property.actual_weight%>
+              <%unless product.property.errors.on(:actual_weight).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:actual_weight)%>)</label>
+              <%end%>
+
+
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Item Description - HTML</b></td>
-            <td><%=product.Item_description_with_html%></td>
+            <td><b>ship-weight</b></td>
+            <td><%=product.property.ship_weight%>
+              <%unless product.property.errors.on(:ship_weight).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:ship_weight)%>)</label>
+              <%end%>
+
+
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Options</b></td>
-            <td><%=product.options%></td>
+            <td><b>Material</b></td>
+            <td><%=product.property.material%>
+              <%unless product.property.errors.on(:material).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:material)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Style</b></td>
+            <td><%=product.property.style%>
+              <%unless product.property.errors.on(:style).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:style)%>)</label>
+              <%end%>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Color</b></td>
+            <td><%=product.property.color%>
+              <%unless product.property.errors.on(:color).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:color)%>)</label>
+              <%end%>
+
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Overall size</b></td>
+            <td><%=product.property.overall_size%>
+              <%unless product.property.errors.on(:overall_size).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:overall_size)%>)</label>
+              <%end%>
+
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Wholesale Cost</b></td>
+            <td><%=product.property.wholesale_cost%>
+              <%unless product.property.errors.on(:wholesale_cost).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:wholesale_cost)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Map Pricing</b></td>
+            <td><%=product.property.map_pricing%>
+              <%unless product.property.errors.on(:map_pricing).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:map_pricing)%>)</label>
+              <%end%>
+
+
+            </td>
           </tr>
           <tr valign="top">
             <td nowrap><b>Item Description - NO HTML</b></td>
-            <td><%=product.Item_description_without_html%></td>
+            <td><%=product.Item_description_without_html%>
+              <%unless product.errors.on(:Item_description_without_html).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:Item_description_without_html)%>)</label>
+              <%end%>
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Related Items</b></td>
-            <td><%=product.related_Items%></td>
+            <td><b>return details</b></td>
+            <td><%=product.return_details%>
+              <%unless product.errors.on(:return_details).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:return_details)%>)</label>
+              <%end%>
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Related Referrence SKU</b></td>
-            <td><%=product.related_referrence_sku%></td>
+            <td><b>Availability</b></td>
+            <td><%=product.availability%>
+              <%unless product.errors.on(:availability).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:availability)%>)</label>
+              <%end%>
+
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Shipping-Time</b></td>
+            <td><%=product.shipping_time%>
+              <%unless product.errors.on(:shipping_time).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:shipping_time)%>)</label>
+              <%end%>
+
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Warranty</b></td>
+            <td><%=product.warranty%>
+              <%unless product.errors.on(:warranty).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:warranty)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Is USPS Approved</b></td>
+            <td><%=(product.is_usps_approved)?("Yes"):("No")%>
+              <%unless product.errors.on(:is_usps_approved).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:is_usps_approved)%>)</label>
+              <%end%>
+
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Image</b></td>
+            <td><%=product.image%>
+              <%unless product.errors.on(:image).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:image)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset </b></td>
+            <td><%=product.inset.inset%>
+              <%unless product.inset.errors.on(:inset).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 2</b></td>
+            <td><%=product.inset.inset_2%>
+              <%unless product.inset.errors.on(:inset_2).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_2)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 3</b></td>
+            <td><%=product.inset.inset_3%>
+              <%unless product.inset.errors.on(:inset_3).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_3)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 4</b></td>
+            <td><%=product.inset.inset_4%>
+              <%unless product.inset.errors.on(:inset_4).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_4)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 5</b></td>
+            <td><%=product.inset.inset_5%>
+              <%unless product.inset.errors.on(:inset_5).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_5)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Related Items</b></td>
+            <td><%=product.related_Items%>
+              <%unless product.errors.on(:related_Items).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:related_Items)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Related Referrence SKU</b></td>
+            <td><%=product.related_referrence_sku%>
+
+              <%unless product.errors.on(:related_referrence_sku).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:related_referrence_sku)%>)</label>
+              <%end%>
+
+            </td>
           </tr>
           <tr valign="top">
             <td nowrap><b>Promo Code Section Availablility</b></td>
-            <td><%=product.promo_code_section_availablility%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>Disclaimer Name</b></td>
-            <td><%=product.disclaimer_name%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>Disclaimer Text</b></td>
-            <td><%=product.disclaimer_text%></td>
-          </tr>
+            <td><%=(product.promo_code_section_availablility)?("Yes"):("No")%>
+              <%unless product.errors.on(:promo_code_section_availablility).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:promo_code_section_availablility)%>)</label>
+              <%end%>
 
-          <tr valign="top">
-            <td nowrap><b>Product cmng img tag html</b></td>
-            <td><%=product.product_cmng_img_tag_html%></td>
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Brief summary of menu</b></td>
-            <td><%=product.brief_summary_of_menu%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>Freight cost overide</b></td>
-            <td><%=product.freight_cost_overide%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>PO Description details</b></td>
-            <td><%=product.po_description_details%></td>
-          </tr>
+            <td><b>Inset 6</b></td>
+            <td><%=product.inset.inset_6%>
+              <%unless product.inset.errors.on(:inset_6).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_6)%>)</label>
+              <%end%>
 
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 7</b></td>
+            <td><%=product.inset.inset_7%>
+              <%unless product.inset.errors.on(:inset_7).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_7)%>)</label>
+              <%end%>
 
-          <tr valign="top">
-            <td nowrap><b>Origin Zip</b></td>
-            <td><%=product.origin_zip%></td>
+            </td>
           </tr>
           <tr valign="top">
-            <td nowrap><b>Invalid ship methods</b></td>
-            <td><%=product.invalid_ship_methods%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>Phone number visibility</b></td>
-            <td><%=product.phone_number_visibility%></td>
-          </tr>
-          <tr valign="top">
-            <td nowrap><b>Item number visibility</b></td>
-            <td><%=product.item_number_visiblity%></td>
-          </tr>
+            <td><b>Inset 8</b></td>
+            <td><%=product.inset.inset_8%>
+              <%unless product.inset.errors.on(:inset_8).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_8)%>)</label>
+              <%end%>
 
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Inset 9</b></td>
+            <td><%=product.inset.inset_9%>
+              <%unless product.inset.errors.on(:inset_9).blank?%>
+              <label style="color:red;" > (<%=product.inset.errors.on(:inset_9)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Disclaimer Name</b></td>
+            <td><%=product.disclaimer_name%>
+              <%unless product.errors.on(:disclaimer_name).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:disclaimer_name)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Disclaimer Text</b></td>
+            <td><%=product.disclaimer_text%>
+              <%unless product.errors.on(:disclaimer_text).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:disclaimer_text)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 1</b></td>
+            <td><%=product.url_link.url_link_1%>
+              <%unless product.url_link.errors.on(:url_link_1).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_1)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 1</b></td>
+            <td><%=product.text_anchor.anchor_text_1%>
+              <%unless product.text_anchor.errors.on(:anchor_text_1).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_1)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 2</b></td>
+            <td><%=product.url_link.url_link_2%>
+              <%unless product.url_link.errors.on(:url_link_2).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_2)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 2</b></td>
+            <td><%=product.text_anchor.anchor_text_2%>
+              <%unless product.text_anchor.errors.on(:anchor_text_2).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_2)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 3</b></td>
+            <td><%=product.url_link.url_link_3%>
+              <%unless product.url_link.errors.on(:url_link_3).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_3)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 3</b></td>
+            <td><%=product.text_anchor.anchor_text_3%>
+              <%unless product.text_anchor.errors.on(:anchor_text_3).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_3)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 4</b></td>
+            <td><%=product.url_link.url_link_4%>
+              <%unless product.url_link.errors.on(:url_link_4).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_4)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 4</b></td>
+            <td><%=product.text_anchor.anchor_text_4%>
+              <%unless product.text_anchor.errors.on(:anchor_text_4).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_4)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 5</b></td>
+            <td><%=product.url_link.url_link_5%>
+              <%unless product.url_link.errors.on(:url_link_5).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_5)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 5</b></td>
+            <td><%=product.text_anchor.anchor_text_5%>
+              <%unless product.text_anchor.errors.on(:anchor_text_5).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_5)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 6</b></td>
+            <td><%=product.url_link.url_link_6%>
+              <%unless product.url_link.errors.on(:url_link_6).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_6)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 6</b></td>
+            <td><%=product.text_anchor.anchor_text_6%>
+              <%unless product.text_anchor.errors.on(:anchor_text_6).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_6)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 7</b></td>
+            <td><%=product.url_link.url_link_7%>
+              <%unless product.url_link.errors.on(:url_link_7).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_7)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 7</b></td>
+            <td><%=product.text_anchor.anchor_text_7%>
+              <%unless product.text_anchor.errors.on(:anchor_text_7).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_7)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 8</b></td>
+            <td><%=product.url_link.url_link_8%>
+              <%unless product.url_link.errors.on(:url_link_8).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_8)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 8</b></td>
+            <td><%=product.text_anchor.anchor_text_8%>
+              <%unless product.text_anchor.errors.on(:anchor_text_8).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_8)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 9</b></td>
+            <td><%=product.url_link.url_link_9%>
+              <%unless product.url_link.errors.on(:url_link_9).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_9)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 9</b></td>
+            <td><%=product.text_anchor.anchor_text_9%>
+              <%unless product.text_anchor.errors.on(:anchor_text_9).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_9)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Url link 10</b></td>
+            <td><%=product.url_link.url_link_10%>
+              <%unless product.url_link.errors.on(:url_link_10).blank?%>
+              <label style="color:red;" > (<%=product.url_link.errors.on(:url_link_10)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Anchor text 10</b></td>
+            <td><%=product.text_anchor.anchor_text_10%>
+              <%unless product.text_anchor.errors.on(:anchor_text_10).blank?%>
+              <label style="color:red;" > (<%=product.text_anchor.errors.on(:anchor_text_10)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Product cmng img tag html</b></td>
+            <td><%=product.product_cmng_img_tag_html%>
+              <%unless product.errors.on(:product_cmng_img_tag_html).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:product_cmng_img_tag_html)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Brief summary of menu</b></td>
+            <td><%=product.brief_summary_of_menu%>
+              <%unless product.errors.on(:brief_summary_of_menu).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:brief_summary_of_menu)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>      
+          <tr valign="top">
+            <td><b>Freight cost overide</b></td>
+            <td>
+              <%=product.freight_cost_overide%>
+              <%unless product.errors.on(:freight_cost_overide).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:freight_cost_overide)%>)</label>
+              <%end%>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>PO Description details</b></td>
+            <td><%=product.po_description_details%>
+              <%unless product.errors.on(:po_description_details).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:po_description_details)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Origin Zip</b></td>
+            <td><%=product.origin_zip%>
+              <%unless product.errors.on(:origin_zip).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:origin_zip)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>No of Boxes</b></td>
+            <td><%=product.property.number_of_boxes%>
+              <%unless product.property.errors.on(:number_of_boxes).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:number_of_boxes)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Multi Box weights</b></td>
+            <td><%=product.property.multi_box_weights%>
+              <%unless product.property.errors.on(:multi_box_weights).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:multi_box_weights)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Multi Box dimensions</b></td>
+            <td><%=product.property.multi_box_dimensions%>
+              <%unless product.property.errors.on(:multi_box_dimensions).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:multi_box_dimensions)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Invalid ship methods</b></td>
+            <td><%=product.invalid_ship_methods%>
+              <%unless product.errors.on(:invalid_ship_methods).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:invalid_ship_methods)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Phone number visibility</b></td>
+            <td><%=(product.phone_number_visibility)?("Yes"):("No")%>
+              <%unless product.errors.on(:phone_number_visibility).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:phone_number_visibility)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><b>Item number visibility</b></td>
+            <td><%=(product.item_number_visiblity)?("Yes"):("No")%>
+              <%unless product.errors.on(:item_number_visiblity).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:item_number_visiblity)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
       <%end%>
     </table>
 

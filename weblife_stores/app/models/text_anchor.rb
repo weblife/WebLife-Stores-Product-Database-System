@@ -1,9 +1,45 @@
 class TextAnchor < ActiveRecord::Base
   belongs_to :product
 
-  validates_length_of :anchor_text_1,:anchor_text_2,:anchor_text_3,:anchor_text_4,:anchor_text_5,:anchor_text_6,:anchor_text_7,:anchor_text_8,:anchor_text_9,:anchor_text_10,
+  validates_length_of :anchor_text_1,
                       :allow_nil => true,
                       :maximum   => 200,
-                      :too_long  => "must have at most 200 characters"
+                      :too_long  => "Anchor text 1 must have at most 200 characters"
+  validates_length_of :anchor_text_2,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 2 must have at most 200 characters"
+  validates_length_of :anchor_text_3,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 3 must have at most 200 characters"
+  validates_length_of :anchor_text_4,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 4 must have at most 200 characters"
+  validates_length_of :anchor_text_5,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 5 must have at most 200 characters"
+  validates_length_of :anchor_text_6,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 6 must have at most 200 characters"
+  validates_length_of :anchor_text_7,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 7 must have at most 200 characters"
+  validates_length_of :anchor_text_8,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 8 must have at most 200 characters"
+  validates_length_of :anchor_text_9,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 9 must have at most 200 characters"
+  validates_length_of :anchor_text_10,
+                      :allow_nil => true,
+                      :maximum   => 200,
+                      :too_long  => "Anchor text 10 must have at most 200 characters"
 
 end
