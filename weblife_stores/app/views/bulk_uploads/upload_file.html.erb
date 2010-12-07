@@ -2,11 +2,15 @@
 
 <table border="1" cellspacing="10" cellpadding="0" >
   <tr>
-    <td>New Upload
-
+    <td>
+        <%=link_to "New Upload",upload_path%>
     </td>
-    <td>Add</td>
-    <td>Revert</td>
+    <td>
+      <%=link_to "Add",save_path%>
+    </td>
+    <td>
+    <%=link_to "Revert",revert_path((!@products.blank?)?(@products.total_entries):())%>
+    </td>
   </tr>
   <tr >
     <td colspan="3" >
@@ -38,16 +42,16 @@
           <%end%>
           <%count+=1%>
         </td>
-        <td><%=error if field!="id"%></td>
+        <td><%=error if field!="product_id"%></td>
       </tr>
       <%end%>
-      <%unless @products.first.errors.on(:id).blank?%>
+      <%if !@products.first.errors.on(:product_id).blank? && @products.first.errors.on(:product_id)!="Id must be uniq."%>
       <tr>
         <td>
           <b>Errors:</b>
         </td>
         <td>
-            <%=@products.first.errors.on(:id)%>
+            <%=@products.first.errors.on(:product_id)%>
         </td>
       </tr>
       <%end%>
@@ -63,6 +67,7 @@
         </td>
       </tr>
       <tr>
+        <%=@products.total_entries rescue nil%>
         <td><%= page_entries_info @products, :entry_name => '' %></td>
         <td>
           <table>
@@ -83,9 +88,9 @@
           <tr valign="top">
             <td nowrap><b>id</b></td>
             <td>
-              <%=product.id%>
-              <%unless product.errors.on(:id).blank?%>
-              <label style="color:red;" > (<%=product.errors.on(:id)%>)</label>
+              <%=product.product_id%>
+              <%unless product.errors.on(:product_id).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:product_id)%>)</label>
               <%end%>
 
             </td>

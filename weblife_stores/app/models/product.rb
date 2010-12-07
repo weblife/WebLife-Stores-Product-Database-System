@@ -24,13 +24,13 @@ class Product < ActiveRecord::Base
     url_link.product=self
   end 
 
-  validates_presence_of :id,:message=>"Id cannot be blank."
+  validates_presence_of :product_id,:message=>"Id cannot be blank."
   validates_presence_of :image,:message=>"Image cannot be blank."
   validates_presence_of :Item_description_with_html,:message=>"Item Description - HTML cannot be blank."
   validates_presence_of :return_details,:message=>"Return details cannot be blank."
   validates_presence_of :availability,:message=>"Availability cannot be blank."
   validates_presence_of :shipping_time,:message=>"Shipping time cannot be blank."
-  validates_uniqueness_of :id,:message=>"Id must be uniq."
+  validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true
   validates_numericality_of :freight_cost_overide,:message=>"Freight cost overide is not a number.",:allow_nil=>true
   validates_numericality_of :invalid_ship_methods,:only_integer=>true,:message=>"Invalid ship methods is not a number."
   validates_numericality_of :origin_zip,:only_integer=>true,:message=>"Origin Zip is not a number."
@@ -124,7 +124,7 @@ class Product < ActiveRecord::Base
 
 
               sequenced_csv_array=['path','Manufacturer','code','name','Item Description - HTML','Options','actual-weight','ship-weight','material','style','color','overall-size','Wholesale Cost','MAP Pricing','Item Description - NO HTML','return details','Availability','Shipping-Time','Warranty','Is this item USPS Approved?','Image','Inset','Inset-2','Inset-3','Inset-4','Inset-5','Related Items','id','Related Referrence Sku','Promo-Code Section Available','Inset-6','Inset-7','Inset-8','Inset-9','disclaimer-name','disclaimer-text','1st url link','1st anchor text','2nd url link','2nd anchor text','3rd url link','3rd anchor text','4th url link','4th anchor text','5th url link','5th anchor text','6th url link','6th anchor text','7th url link','7th anchor text','8th url link','8th anchor text','9th url link','9th anchor text','10th url link','10th anchor text','Where-Prod-Cmng-Img-Tag-HTML','Brief Summary of Manu.','Freight Cost Overide','PO Description Details','Origin-zip','Number-of-boxes','Multi-box-weights','Multi-box-dimensions','Invalid-ship-methods','Phone-number','Item-number-visiblity']
-              sequenced_db_array=['path','manufacturer','code','name','Item_description_with_html','options','actual_weight','ship_weight','material','style','color','overall_size','wholesale_cost','map_pricing','Item_description_without_html','return_details','availability','shipping_time','warranty','is_usps_approved','image','inset','inset_2','inset_3','inset_4','inset_5','related_Items','id','related_referrence_sku','promo_code_section_availablility','inset_6','inset_7','inset_8','inset_9','disclaimer_name','disclaimer_text','url_link_1','anchor_text_1','url_link_2','anchor_text_2','url_link_3','anchor_text_3','url_link_4','anchor_text_4','url_link_5','anchor_text_5','url_link_6','anchor_text_6','url_link_7','anchor_text_7','url_link_8','anchor_text_8','url_link_9','anchor_text_9','url_link_10','anchor_text_10','product_cmng_img_tag_html','brief_summary_of_menu','freight_cost_overide','po_description_details','origin_zip','number_of_boxes','multi_box_weights','multi_box_dimensions','invalid_ship_methods','phone_number_visibility','item_number_visiblity']
+              sequenced_db_array=['path','manufacturer','code','name','Item_description_with_html','options','actual_weight','ship_weight','material','style','color','overall_size','wholesale_cost','map_pricing','Item_description_without_html','return_details','availability','shipping_time','warranty','is_usps_approved','image','inset','inset_2','inset_3','inset_4','inset_5','related_Items','product_id','related_referrence_sku','promo_code_section_availablility','inset_6','inset_7','inset_8','inset_9','disclaimer_name','disclaimer_text','url_link_1','anchor_text_1','url_link_2','anchor_text_2','url_link_3','anchor_text_3','url_link_4','anchor_text_4','url_link_5','anchor_text_5','url_link_6','anchor_text_6','url_link_7','anchor_text_7','url_link_8','anchor_text_8','url_link_9','anchor_text_9','url_link_10','anchor_text_10','product_cmng_img_tag_html','brief_summary_of_menu','freight_cost_overide','po_description_details','origin_zip','number_of_boxes','multi_box_weights','multi_box_dimensions','invalid_ship_methods','phone_number_visibility','item_number_visiblity']
               params=Hash.new
               products_array=[]
               count=-1
@@ -160,7 +160,7 @@ class Product < ActiveRecord::Base
                   prod["text_anchor_attributes"]=params["product_#{count}"]["text_anchor"]
                   prod["url_link_attributes"]=params["product_#{count}"]["url_link"]
                   new_prod=Product.new(prod)
-                  new_prod.id=prod["id"]
+
                   products_array << new_prod
 
                  end

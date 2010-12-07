@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # Protect these actions behind an admin login
   # before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge]
   before_filter :find_user, :only => [:suspend, :unsuspend, :destroy, :purge]
-  #before_filter :login_required
+
   
 
   # render new.rhtml
@@ -17,12 +17,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    logout_keeping_session!
+    #logout_keeping_session!
     @user = User.new(params[:user])
     @user.register! if @user && @user.valid?
     success = @user && @user.valid?
     if success && @user.errors.empty?
-      redirect_back_or_default('/')
+      redirect_back_or_default(users_path)
       flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."

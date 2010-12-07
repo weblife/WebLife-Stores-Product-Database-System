@@ -1,7 +1,6 @@
 class AddAllTables < ActiveRecord::Migration
   def self.up
-    create_table :products, :id => false do |t|
-      t.string :id, :limit => 100, :null => false
+    create_table :products do |t|
       t.integer :user_id, :null => false
       t.text :path, :limit => 400
       t.string :manufacturer, :limit => 60
@@ -29,7 +28,8 @@ class AddAllTables < ActiveRecord::Migration
       t.integer :invalid_ship_methods,:default=>0
       t.boolean :phone_number_visibility,:default=>false
       t.boolean :item_number_visiblity,:default=>false
-
+      t.string :product_id, :limit => 100
+      t.timestamps
 
     end
     create_table :insets do |t|
@@ -43,6 +43,7 @@ class AddAllTables < ActiveRecord::Migration
       t.string :inset_7, :limit => 60
       t.string :inset_8, :limit => 60
       t.string :inset_9, :limit => 60
+      t.timestamps
     end
     create_table :url_links do |t|
       t.integer :product_id,:null=>false
@@ -56,6 +57,7 @@ class AddAllTables < ActiveRecord::Migration
       t.string :url_link_8
       t.string :url_link_9
       t.string :url_link_10
+      t.timestamps
 
     end
     create_table :text_anchors do |t|
@@ -70,6 +72,7 @@ class AddAllTables < ActiveRecord::Migration
       t.string :anchor_text_8, :limit => 200
       t.string :anchor_text_9, :limit => 200
       t.string :anchor_text_10, :limit => 200
+      t.timestamps
 
     end
     create_table :properties do |t|
@@ -85,6 +88,7 @@ class AddAllTables < ActiveRecord::Migration
       t.integer :number_of_boxes,:default=>0
       t.decimal :multi_box_weights , :precision=> 8 , :scale=>2,:default=>0
       t.string :multi_box_dimensions
+      t.timestamps
 
     end
 

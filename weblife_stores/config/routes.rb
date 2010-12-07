@@ -5,6 +5,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
   map.upload '/upload', :controller => 'bulk_uploads', :action => 'upload_file'
+  map.save '/save', :controller => 'bulk_uploads', :action => 'save'
+  map.revert '/revert/:id', :controller => 'bulk_uploads', :action => 'revert_products'
   map.login_from_admin '/login_from_admin/:id', :controller => 'users', :action => 'login_from_admin'
   map.dashboard '/dashboard', :controller => 'users', :action => 'dashboard'
   map.resources :users
