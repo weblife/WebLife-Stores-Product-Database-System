@@ -1,0 +1,31 @@
+<table border="0" cellspacing="10" cellpadding="0" >
+  <tr>
+    <td colspan="2" >
+      <b>Errors and Warnings</b>
+    </td>
+  </tr>
+  <%count=1%>
+  <%product.errors.each do |field,error|%>
+  <tr>
+    <td>
+      <%if count==1%>
+      <b>Warnings:</b>
+      <%else%>
+      &nbsp;
+      <%end%>
+      <%count+=1%>
+    </td>
+    <td><%=error if field!="product_id"%></td>
+  </tr>
+  <%end%>
+  <%if !product.errors.on(:product_id).blank?%>
+  <tr>
+    <td>
+      <b>Errors:</b>
+    </td>
+    <td>
+        <%=product.errors.on(:product_id)%>
+    </td>
+  </tr>
+  <%end%>
+</table>

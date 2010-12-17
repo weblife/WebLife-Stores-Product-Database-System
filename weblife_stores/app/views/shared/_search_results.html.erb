@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td colspan="3" ><b><%=title%></b></td>
+  </tr>
+  <tr>
+    <td colspan="3" >&nbsp;</td>
+  </tr>
+  <tr>
+    <td>
+       Enter Text:
+    </td>
+    <td>
+      <%=text_field_tag :search_text,params[:search_text]%>
+    </td>
+    <td>
+      Select Category:
+    </td>
+    <td colspan="2" >
+      <%=select("search", "search_field", options_for_select([["Manufacturer", "manufacturer"],["Code", "code"], ["Name", "name"], ["Description", "Item_description_with_html"]]))%>
+    </td>
+  </tr>
+</table>

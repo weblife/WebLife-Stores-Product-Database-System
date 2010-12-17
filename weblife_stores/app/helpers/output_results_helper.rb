@@ -1,0 +1,2 @@
+module OutputResultsHelper
+end

@@ -24,10 +24,10 @@ class AddAllTables < ActiveRecord::Migration
       t.text :brief_summary_of_menu
       t.decimal :freight_cost_overide , :precision=> 8 , :scale=>2,:default=>0
       t.text :po_description_details
-      t.integer :origin_zip,:default=>0
-      t.integer :invalid_ship_methods,:default=>0
+      t.integer :origin_zip,:default=>"30087"
+      t.integer :invalid_ship_methods,:default=>"101"
       t.boolean :phone_number_visibility,:default=>false
-      t.boolean :item_number_visiblity,:default=>false
+      t.boolean :item_number_visiblity,:default=>true
       t.string :product_id, :limit => 100
       t.timestamps
 
@@ -85,7 +85,7 @@ class AddAllTables < ActiveRecord::Migration
       t.string :overall_size, :limit => 200
       t.decimal :wholesale_cost , :precision=> 8 , :scale=>2,:default=>0
       t.decimal :map_pricing , :precision=> 8 , :scale=>2,:default=>0
-      t.integer :number_of_boxes,:default=>0
+      t.integer :number_of_boxes,:default=>1
       t.decimal :multi_box_weights , :precision=> 8 , :scale=>2,:default=>0
       t.string :multi_box_dimensions
       t.timestamps

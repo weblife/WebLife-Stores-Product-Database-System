@@ -9,7 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101129193642) do
+ActiveRecord::Schema.define(:version => 20101211162619) do
+
+  create_table "compscrapers", :force => true do |t|
+    t.integer  "user_id",                                                            :null => false
+    t.string   "item_search_phrase"
+    t.string   "word_that_occur"
+    t.string   "sort_options"
+    t.decimal  "lowest_price",        :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "decimal",             :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "second_lowest_price", :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "third_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "fourth_lowest_price", :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "fifth_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "sixth_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
+    t.string   "lowest_site"
+    t.string   "second_lowest_site"
+    t.string   "third_lowest_site"
+    t.string   "fourth_lowest_site"
+    t.string   "fifth_lowest_site"
+    t.string   "sixth_lowest_site"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "insets", :force => true do |t|
     t.integer  "product_id",               :null => false
@@ -27,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20101129193642) do
   end
 
   create_table "products", :force => true do |t|
-    t.integer  "user_id",                                                                                          :null => false
+    t.integer  "user_id",                                                                                                         :null => false
     t.text     "path"
     t.string   "manufacturer",                     :limit => 60
     t.string   "code",                             :limit => 20
@@ -50,13 +72,34 @@ ActiveRecord::Schema.define(:version => 20101129193642) do
     t.text     "brief_summary_of_menu"
     t.decimal  "freight_cost_overide",                            :precision => 8, :scale => 2, :default => 0.0
     t.text     "po_description_details"
-    t.integer  "origin_zip",                                                                    :default => 0
-    t.integer  "invalid_ship_methods",                                                          :default => 0
+    t.integer  "origin_zip",                                                                    :default => 30087
+    t.integer  "invalid_ship_methods",                                                          :default => 101
     t.boolean  "phone_number_visibility",                                                       :default => false
-    t.boolean  "item_number_visiblity",                                                         :default => false
+    t.boolean  "item_number_visiblity",                                                         :default => true
     t.string   "product_id",                       :limit => 100
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "price_override",                                  :precision => 8, :scale => 2, :default => 0.0
+    t.string   "active_status",                                                                 :default => "Active"
+    t.string   "product_type",                                                                  :default => "Non-inventory Part"
+    t.string   "cogs_account",                                                                  :default => "Cost of Goods Sold"
+    t.string   "account",                                                                       :default => "Sales"
+    t.string   "sales_tax_code",                                                                :default => "Tax"
+    t.string   "purchased_for_resale",                                                          :default => "y"
+    t.string   "is_new",                                                                        :default => "New"
+    t.integer  "free_ship_method",                                                              :default => 1
+    t.boolean  "taxable",                                                                       :default => true
+    t.boolean  "ship_alone",                                                                    :default => false
+    t.boolean  "free_shipping",                                                                 :default => false
+    t.string   "po_description_detail",                                                         :default => "NONE"
+    t.boolean  "commercial_free_shipping",                                                      :default => false
+    t.boolean  "streetsign_free_shipping",                                                      :default => false
+    t.boolean  "streetlights_free_shipping",                                                    :default => false
+    t.boolean  "addressplaq_free_shipping",                                                     :default => false
+    t.decimal  "commercial_adjustment",                           :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "streetsign_adjustment",                           :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "streetlights_adjustment",                         :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "addressplaq_adjustment",                          :precision => 8, :scale => 2, :default => 0.0
   end
 
   create_table "properties", :force => true do |t|
@@ -69,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20101129193642) do
     t.string   "overall_size",         :limit => 200
     t.decimal  "wholesale_cost",                      :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "map_pricing",                         :precision => 8, :scale => 2, :default => 0.0
-    t.integer  "number_of_boxes",                                                   :default => 0
+    t.integer  "number_of_boxes",                                                   :default => 1
     t.decimal  "multi_box_weights",                   :precision => 8, :scale => 2, :default => 0.0
     t.string   "multi_box_dimensions"
     t.datetime "created_at"
