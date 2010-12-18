@@ -4,6 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.activate '/activate', :controller => 'users', :action => 'activate'
+  map.meta_data '/meta_data', :controller => 'admins', :action => 'meta_data'
   map.upload '/upload', :controller => 'bulk_uploads', :action => 'upload_products_file'
   map.upload_compscraper_file '/upload_compscraper_file', :controller => 'bulk_uploads', :action => 'upload_compscraper_file'
   map.save '/save', :controller => 'bulk_uploads', :action => 'save_product_file'

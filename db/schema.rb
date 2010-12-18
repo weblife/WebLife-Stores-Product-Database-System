@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101211162619) do
+ActiveRecord::Schema.define(:version => 20101218154924) do
 
   create_table "compscrapers", :force => true do |t|
     t.integer  "user_id",                                                            :null => false
@@ -31,6 +31,41 @@ ActiveRecord::Schema.define(:version => 20101211162619) do
     t.string   "sixth_lowest_site"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "hard_code_informations", :force => true do |t|
+    t.text   "promo_tag"
+    t.string "backup_table_heading"
+    t.text   "backup_table_text"
+    t.text   "where_pro_coming_open_tag"
+    t.text   "pdf_logo_image_url"
+    t.text   "open_table_tag"
+    t.text   "open_table_tag_1_of_3"
+    t.text   "open_table_tag_2_of_3"
+    t.text   "open_table_tag_3_of_3"
+    t.text   "close_table_tag"
+    t.text   "where_pro_coming_mid_section"
+    t.text   "where_pro_coming_close_tag"
+    t.text   "product_title_ot"
+    t.string "product_title_ct"
+    t.text   "related_downloads_ot"
+    t.text   "re_dl_code_1_of_3"
+    t.text   "re_dl_code_2_of_3"
+    t.text   "re_dl_code_3_of_3"
+    t.text   "re_dl_code_a1"
+    t.text   "re_dl_code_a1_table"
+    t.text   "re_dl_code_a2"
+    t.text   "re_dl_code_a2_table"
+    t.text   "man_title_ot"
+    t.text   "man_title_ct"
+    t.text   "reference_ot"
+    t.string "reference_mid_tag"
+    t.string "reference_mid_2"
+    t.string "reference_end_tag"
+    t.text   "instructions"
+    t.text   "shipping_calculator"
+    t.text   "return_detail_open"
+    t.string "return_detail_close"
   end
 
   create_table "insets", :force => true do |t|

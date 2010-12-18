@@ -22,7 +22,7 @@ class Product < ActiveRecord::Base
                 :output_size_for_data_feeds,:output_good_margins,:output_profit,:output_invalid_ship_method,
                 :output_multibox_dimensions,:output_multibox_weights,:output_no_of_boxes,:output_origin_zip,
                 :output_flat_ship_rate,:output_free_shipping,:output_item,:output_purchase_description,:output_et_right_cross,
-                :output_et_right_break,:output_et_right_feature,:commercial_adjustment
+                :output_et_right_break,:output_et_right_feature,:commercial_adjustment,:meta_data
 #Boolean fields for validations
   attr_accessor :boolean_ups_approved_field,:boolean_promo_code_section_availablility,
                 :boolean_phone_number_visibility,:boolean_item_number_visiblity
@@ -38,15 +38,15 @@ class Product < ActiveRecord::Base
     url_link.product=self
   end 
 
-  validates_presence_of :product_id,:message=>"Id cannot be blank."
-  validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true
+  validates_presence_of :product_id,:message=>"Id cannot be blank.",:on=>:create
+  validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true,:on=>:create
   
   validates_presence_of :image,:message=>"Image cannot be blank."
   validates_presence_of :Item_description_with_html,:message=>"Item Description - HTML cannot be blank."
   validates_presence_of :return_details,:message=>"Return details cannot be blank."
   validates_presence_of :availability,:message=>"Availability cannot be blank."
   validates_presence_of :shipping_time,:message=>"Shipping time cannot be blank."
-  validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true
+  validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
   validates_numericality_of :freight_cost_overide,:message=>"Freight cost overide is not a number.",:allow_nil=>true
   validates_numericality_of :invalid_ship_methods,:only_integer=>true,:message=>"Invalid ship methods is not a number."
   validates_numericality_of :origin_zip,:only_integer=>true,:message=>"Origin Zip is not a number."
@@ -251,7 +251,7 @@ class Product < ActiveRecord::Base
   end
 
   def output_return_details
-    "<a href='#' onclick='mywindow=window.open('return-policy.html','MyWindow','toolbar=no,location=no,directories=yes,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=600,height=600'); return false;' rel='nofollow'>" +"#{return_details}"+"</A>"
+      meta_data.return_detail_open+"#{return_details}"+meta_data.return_detail_close
   end
 
   def output_need_for_feed_under_70
@@ -259,7 +259,8 @@ class Product < ActiveRecord::Base
       (name.length>70)? (name):(name)
   end
   def output_shipping_costs
-      (self.free_shipping)?("Free Shipping Today!!"):("<a href='#' onclick='mywindow=window.open('how-shipping-works2.html','MyWindow','toolbar=no,location=no,directories=yes,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=600,height=500'); return false;' rel='nofollow'>Shipping Calculator</a></p>")
+
+      (self.free_shipping)?("Free Shipping Today!!"):(meta_data.shipping_calculator)
   end
 
   def output_et_right_order
@@ -269,37 +270,21 @@ class Product < ActiveRecord::Base
 
   def output_caption
       caption=""
-      hardcode_c3="<p style='clear:left'><img src='/lib/yhst-14044557065217/Promo-Offer.GIF' alt='Promo Offer' width='131' height='35' /></p><p style='border: 1px solid rgb(204, 204, 204); margin: 5px 0pt; padding: 0px;'></p><strong>View all current <a href='#' onclick='mywindow=window.open('promo-coupons.html','MyWindow','toolbar=no,location=no,directories=yes,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=600,height=600'); return false;'>promo/coupon codes</a>.</strong>"
-      hard_code_k3="<p style='clear:left'><img src='/lib/yhst-14044557065217/Product-Details.GIF' alt='Product Details' width='151' height='40' /></p><p style='border: 1px solid rgb(204, 204, 204); margin: 5px 0pt; padding: 0px;'></p><h3>"
-      hard_code_l3="</h3>"
-      hard_code_m3="<p style='clear:left'><img src='/lib/yhst-14044557065217/Related-Downloads.GIF' alt='Related Downloads' style='clear:left'width='151' height='40' /></p><p style='border: 1px solid rgb(204, 204, 204); margin: 5px 0pt; padding: 0px;'></p>"
-      hard_code_h10="<table width='400' frame='void'>"
-      hard_code_h14="<tr><td><img src='http://lib.store.yahoo.net/lib/yhst-14044557065217/PDFLOGO' alt='PDF LOGO' width='25' height='25' longdesc='PDF LOGO' /></td><td><a href='"
-      hard_code_i14="'><strong>"
-      hard_code_j14="</strong></a></td></tr>"
-      hard_code_h19="</table>"
-      hard_code_q3="<p style='clear:left'><a name='manufacturer-details'><img src='/lib/yhst-14044557065217/Manufacturer-Details.GIF' alt='Manufacturer Details' width='167' height='40' /></a></p><p style='border: 1px solid rgb(204, 204, 204); margin: 5px 0pt; padding: 0px;'></p><h3>About"
-      hard_code_r3="</h3>"
-      
       #'item details'!xez2&'item details'!xfa2   formula left
 
-      hard_code_s3="<p style='clear:left'><img src='/lib/yhst-14044557065217/For-Your-Reference.GIF' alt='For-Your-Referrence' width='151' height='40' /></p><p style='border: 1px solid rgb(204, 204, 204); margin: 5px 0pt; padding: 0px;'></p>OUR SKU is"
-      hard_code_t3="<br /><br />"
-      hard_code_u3="is also sometimes referenced as:  <h4>"
-      hard_code_v3="</h4>"
-      caption+=(((self.promo_code_section_availablility)?(hardcode_c3):(""))+hard_code_k3+self.options+hard_code_l3+self.Item_description_with_html+((!self.url_link.url_link_1.blank?)?(hard_code_m3+hard_code_h10+hard_code_h14+self.url_link.url_link_1+hard_code_i14+self.text_anchor.anchor_text_1+hard_code_j14+hard_code_h19):("")))
-      caption+=(!self.url_link.url_link_2.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_2+hard_code_i14+self.text_anchor.anchor_text_2+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_3.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_3+hard_code_i14+self.text_anchor.anchor_text_3+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_4.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_4+hard_code_i14+self.text_anchor.anchor_text_4+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_5.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_5+hard_code_i14+self.text_anchor.anchor_text_5+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_6.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_6+hard_code_i14+self.text_anchor.anchor_text_6+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_7.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_7+hard_code_i14+self.text_anchor.anchor_text_7+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_8.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_8+hard_code_i14+self.text_anchor.anchor_text_8+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_9.blank?)? (hard_code_h10+hard_code_h14+self.url_link.url_link_9+hard_code_i14+self.text_anchor.anchor_text_9+hard_code_j14+hard_code_h19):("")
-      caption+=(!self.url_link.url_link_10.blank?)?(hard_code_h10+hard_code_h14+self.url_link.url_link_10+hard_code_i14+self.text_anchor.anchor_text_10+hard_code_j14+hard_code_h19):("")
-      caption+=(hard_code_q3+self.manufacturer+hard_code_r3)
-      caption+=(hard_code_s3+self.code)
-      caption+=(!self.related_referrence_sku.blank?)? (hard_code_t3+self.name+hard_code_u3+self.related_referrence_sku+hard_code_v3):("")
+      caption+=(((self.promo_code_section_availablility)?(meta_data.promo_tag):(""))+meta_data.product_title_ot+self.options+meta_data.product_title_ct+self.Item_description_with_html+((!self.url_link.url_link_1.blank?)?(meta_data.related_downloads_ot+meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_1+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_1+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")))
+      caption+=(!self.url_link.url_link_2.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_2+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_2+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_3.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_3+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_3+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_4.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_4+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_4+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_5.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_5+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_5+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_6.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_6+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_6+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_7.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_7+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_7+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_8.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_8+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_8+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_9.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_9+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_9+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(!self.url_link.url_link_10.blank?)?(meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_10+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_10+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
+      caption+=(meta_data.man_title_ot+self.manufacturer+meta_data.man_title_ct)
+      caption+=(meta_data.reference_ot+self.code)
+      caption+=(!self.related_referrence_sku.blank?)? (meta_data.reference_mid_tag+self.name+meta_data.reference_mid_2+self.related_referrence_sku+meta_data.reference_end_tag):("")
       
       return caption
 
@@ -307,10 +292,9 @@ class Product < ActiveRecord::Base
 
   def output_sale_price
     	j3=((self.property.wholesale_cost+(15+(0.1*self.property.wholesale_cost)))*1.045)
-      #r3=((self.property.wholesale_cost<20)?(2):((self.property.wholesale_cost<50)?(1.75):((self.property.wholesale_cost<150)?(1.5):((self.property.wholesale_cost<500)?(1.4):(1.25)))))/100
       r3=((self.property.wholesale_cost<20)?(2):((self.property.wholesale_cost<50)?(1.75):((self.property.wholesale_cost<150)?(1.5):((self.property.wholesale_cost<500)?(1.4):(1.25)))))*100
       cmp=Compscraper.find self.id rescue nil
-      k3=cmp.minimum_lowest_price
+      (cmp.blank?)?(k3=0):(k3=cmp.minimum_lowest_price)
       m3=(!self.free_shipping)?((((self.property.wholesale_cost*r3)<k3))?(k3-0.5):(self.property.wholesale_cost)):(((j3*r3)>k3)?(j3*r3):(k3-0.5))
       (self.property.map_pricing.to_f>(j3*r3))?(self.property.map_pricing.to_f):((self.price_override.blank?)?((m3<self.property.map_pricing)?(self.property.map_pricing):(m3)):(self.price_override))
   end
@@ -366,8 +350,7 @@ class Product < ActiveRecord::Base
   end
 
   def output_purchase_description
-      hard_code_aj2="------The Details Below will SUPERCEDE the Item Number if they conflict----- ------------------------------paste-options-here-------------------------------------------------------- ---Below-this-line-is-for-BudgetMailboxes-Use-Only-please-delete-before-processing-PO---  --------------------------------------------------------------------------------------------------------------- Special Instruction for Processing the PO:"
-      manufacturer+":"+code+hard_code_aj2+po_description_detail
+      manufacturer+":"+code+meta_data.instructions+po_description_detail
   end
 
   def output_et_right_cross
@@ -382,6 +365,10 @@ class Product < ActiveRecord::Base
 
   def commercial_adjustment
       (self.property.wholesale_cost<20)?(0.99):((self.property.wholesale_cost<50)?(0.95):((self.property.wholesale_cost<150)?(0.92):((self.property.wholesale_cost<500)?(0.9):(0.85))))
+  end
+
+  def meta_data
+      HardCodeInformation.find :first
   end
 
   def self.max_from_array(array)

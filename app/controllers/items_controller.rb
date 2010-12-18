@@ -13,16 +13,6 @@ class ItemsController < ApplicationController
     @text_anchor=@product.text_anchor
     @property=@product.property
 
-#    if request.post?
-#      @product=Product.find params[:id]
-#      prod=Hash.new
-#      prod=params[:product]
-#      prod[:inset_attributes]=params[:inset]
-#      prod[:property_attributes]=params[:property]
-#      prod[:text_anchor_attributes]=params[:text_anchor]
-#      prod[:url_link_attributes]=params[:url_link]
-#      @product.update_attributes(prod)
-#    end
     respond_to do |format|
       format.js {
         render :update do |page|
@@ -34,16 +24,12 @@ class ItemsController < ApplicationController
 
   def update_item
       @product=Product.find params[:id]
-      prod=Hash.new
-      params[:product][:product_id]=@product.product_id
-      prod=params[:product]
+      @product.update_attributes(params[:product])
+      @product.inset.update_attributes(params[:inset])
+      @product.property.update_attributes(params[:property])
+      @product.text_anchor.update_attributes(params[:text_anchor])
+      @product.url_link.update_attributes(params[:url_link])
 
-      prod[:inset_attributes]=params[:inset]
-      prod[:property_attributes]=params[:property]
-      prod[:text_anchor_attributes]=params[:text_anchor]
-      prod[:url_link_attributes]=params[:url_link]
-      @product.attributes=prod
-      @product.save(false)
 
     respond_to do |format|
       format.js {
