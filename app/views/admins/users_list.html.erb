@@ -1,0 +1,18 @@
+<h3>Users list</h3>
+<table cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td style="width:60%" ><b>Login</b></td>
+    <td style="width:60%" ><b>Email</b></td>
+    <td style="width:20%" ><b>Status</b></td>
+    <td style="width:20%" >&nbsp;</td>
+  </tr>
+<%@users.each do |user| %>
+  <tr>
+    <td><%=user.login%></td>
+    <td><%=user.email%></td>
+    <td><%=user.state%></td>
+    <td><%=link_to "Login"%></td>
+  </tr>
+<%end%>
+
+</table>

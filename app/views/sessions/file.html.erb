@@ -1,0 +1,8 @@
+<h1>File Upload</h1>
+<form action="bulk_uploads/upload_file" method="post" enctype="multipart/form-data">
+
+<p><label for="upload_file">Select File</label> :
+<%= file_field 'upload', 'datafile' %></p>
+<%= submit_tag "Upload" %>
+</form>
+
