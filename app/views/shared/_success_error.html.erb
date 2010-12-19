@@ -1,0 +1,8 @@
+<%if !flash[:error].nil?%>
+  <div class="error_div <%=error_class_name%>"><%=flash[:error]%></div>
+<%end%>
+<%if !flash[:notice].nil?%>
+  <div class="success_div <%=success_class_name%>"><%=flash[:notice]%></div>
+<%end%>
+
+<%flash[:error]=flash[:notice]=nil%>
