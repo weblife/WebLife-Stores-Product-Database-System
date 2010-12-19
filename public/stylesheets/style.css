@@ -60,3 +60,30 @@ font-family: Arial, Helvetica, sans-serif;
 margin:0px;
 padding:0px 0px 10px 0px;
 }
+
+.error_div
+{
+    background:red;
+    border:1px coral solid;
+    width:500px;
+    color:white;
+    text-align:center;
+    margin-left:463px;
+}
+.success_div
+{
+    background:green;
+    border:1px green solid;
+    width:500px;
+    color:white;
+    text-align:center;
+    
+}
+.user_login_margin
+{
+    margin-left:463px;
+}
+.user_created_margin
+{
+    margin-left:40px;
+}

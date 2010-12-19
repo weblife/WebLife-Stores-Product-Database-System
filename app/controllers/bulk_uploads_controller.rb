@@ -4,6 +4,7 @@ class BulkUploadsController < ApplicationController
     
   def upload_products_file
 
+     begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
         @products_array,session[:local_file_path]=Product.parse_csv(params[:file],current_user,true)
@@ -16,6 +17,10 @@ class BulkUploadsController < ApplicationController
       paginated_products.total_entries =@products_array.size
       @products=paginated_products
       end
+    rescue Exception => exc
+      flash[:error]="uploaded file is invalid."
+    end
+
   end
 
   def save_product_file
@@ -25,16 +30,16 @@ class BulkUploadsController < ApplicationController
       @products_array.each do |product|
           if !product.valid? && !product.errors.on(:product_id).blank?
             is_error=true
-            
             break
           end
           page_no+=1
       end
+      
       if (page_no-1)==@products_array.count && !is_error
          @products_array.each do |product|
            product.user_id=current_user.id
            product.save(false)
-           page_no=1
+           page_no=''
          end
       end
       redirect_to :action=>"upload_products_file",:page=>page_no
@@ -50,6 +55,7 @@ class BulkUploadsController < ApplicationController
   end
 
   def upload_compscraper_file
+     begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
         @compscraper_array,session[:local_file_path]=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
@@ -62,6 +68,10 @@ class BulkUploadsController < ApplicationController
         paginated_cps.total_entries =@compscraper_array.size
         @compscrapers=paginated_cps
       end
+    rescue Exception => exc
+      flash[:error]="uploaded file is invalid."
+    end
+
   end
 
   def save_compscraper_file

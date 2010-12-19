@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     success = @user && @user.valid?
     if success && @user.errors.empty?
       redirect_back_or_default(users_path)
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      flash[:notice] = "User has been successfully created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
       render :action => 'new'
@@ -79,7 +79,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(users_url,:notice => 'User has been successfully deleted.') }
       format.xml  { head :ok }
     end
   end
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user.delete!
-    redirect_to users_path
+    redirect_to users_path,:notice => 'User has been successfully deleted.'
   end
 
   def purge

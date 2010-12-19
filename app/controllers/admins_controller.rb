@@ -8,6 +8,7 @@ class AdminsController < ApplicationController
       @meta_data=HardCodeInformation.find :first
       if request.post?
          @meta_data.update_attributes(params[:meta_data])
+         flash[:notice] = "Date has been successfully saved."
       end
   end
 end

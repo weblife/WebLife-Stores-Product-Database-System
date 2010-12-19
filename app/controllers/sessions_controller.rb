@@ -8,10 +8,6 @@ class SessionsController < ApplicationController
   def create
     logout_keeping_session!
     user = User.authenticate(params[:login], params[:password])
-    puts "ttttttttttttttttttt"
-    puts user
-    puts params[:login]
-    puts params[:password]
     
     if user
       # Protects against session fixation attacks, causes request forgery
@@ -42,7 +38,7 @@ class SessionsController < ApplicationController
 protected
   # Track failed login attempts
   def note_failed_signin
-    flash[:error] = "Couldn't log you in as '#{params[:login]}'"
+    flash[:error] = "Invalid login/password"
     logger.warn "Failed login for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}"
   end
 end
