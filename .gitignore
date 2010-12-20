@@ -1,0 +1,16 @@
+log/*.log
+log/*.pid
+coverage
+config/database.yml
+config/development.sphinx.conf
+tmp/**/*
+.DS_Store
+doc/api
+doc/app
+db/*.db
+db/*.sqlite3
+db/sphinx
+index/*
+public/system
+public/javascripts/less_routes.js
+tmp
