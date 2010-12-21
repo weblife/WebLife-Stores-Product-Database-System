@@ -1,5 +1,5 @@
 class ExportCsv
-  require 'csv'
+
 
   def self.export_csv(search,searched_field,searched_text)
       products=Product.search_products(searched_field,searched_text)
@@ -41,7 +41,7 @@ class ExportCsv
   def self.create_file(header,products,name,type)
       file= "#{RAILS_ROOT}/public/input_files/#{name}.csv" #local directory path
       outfile = File.open(file, 'wb')
-      CSV::Writer.generate(outfile) do |title|
+      FasterCSV.open(file,"w") do |title|
          title << header
          products.each do |product|
            if type==1

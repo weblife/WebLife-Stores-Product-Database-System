@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  require 'csv'
+
   belongs_to :user
   has_one :inset, :dependent => :destroy
   has_one :property, :dependent => :destroy
@@ -172,7 +172,7 @@ class Product < ActiveRecord::Base
               params=Hash.new
               products_array=[]
               count=-1
-              CSV.open(file_path, 'r') do |row|
+              FasterCSV.foreach(file_path) do |row|
                 params["product_#{count}"]=Hash.new
                 params["product_#{count}"]["url_link"]=Hash.new
                 params["product_#{count}"]["text_anchor"]=Hash.new

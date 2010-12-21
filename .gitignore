@@ -14,3 +14,5 @@ index/*
 public/system
 public/javascripts/less_routes.js
 tmp
+nbproject/*
+public/input_files/*

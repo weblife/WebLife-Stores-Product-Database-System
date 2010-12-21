@@ -62,7 +62,7 @@ class Compscraper < ActiveRecord::Base
               params=Hash.new
               compscraper_array=[]
               count=-1
-              CSV.open(file_path, 'r') do |row|
+              FasterCSV.foreach(file_path) do |row|
                 params["compscraper_#{count}"]=Hash.new
                 inner_count=0
 
