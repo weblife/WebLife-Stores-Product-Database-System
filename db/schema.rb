@@ -154,6 +154,14 @@ ActiveRecord::Schema.define(:version => 20101218154924) do
     t.datetime "updated_at"
   end
 
+  create_table "stores", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "store_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "text_anchors", :force => true do |t|
     t.integer  "product_id",                    :null => false
     t.string   "anchor_text_1",  :limit => 200
