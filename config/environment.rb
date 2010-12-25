@@ -44,6 +44,4 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
 end
 
-ExceptionNotifier.sender_address = %("Weblife Errors" <exceptions@weblife.com>)
-ExceptionNotification::Notifier.email_prefix = "[Weblife]"
-ExceptionNotification::Notifier.exception_recipients = %w(rao_faisalejaz@hotmail.com)
+

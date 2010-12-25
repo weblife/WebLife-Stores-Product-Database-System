@@ -57,7 +57,7 @@
 #
 
 class Product < ActiveRecord::Base
-
+  require 'fastercsv'
   belongs_to :user
   has_one :inset, :dependent => :destroy
   has_one :property, :dependent => :destroy
