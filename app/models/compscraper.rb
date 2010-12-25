@@ -23,7 +23,7 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #
-
+  require 'fastercsv'
 class Compscraper < ActiveRecord::Base
 
   validates_length_of :item_search_phrase,

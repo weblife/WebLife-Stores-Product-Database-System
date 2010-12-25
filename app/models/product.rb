@@ -55,9 +55,9 @@
 #  streetlights_adjustment          :decimal(8, 2)   default(0.0)
 #  addressplaq_adjustment           :decimal(8, 2)   default(0.0)
 #
-
+require 'fastercsv'
 class Product < ActiveRecord::Base
-  require 'fastercsv'
+
   belongs_to :user
   has_one :inset, :dependent => :destroy
   has_one :property, :dependent => :destroy
