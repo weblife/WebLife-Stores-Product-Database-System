@@ -4,7 +4,7 @@ class BulkUploadsController < ApplicationController
     
   def upload_products_file
 
-     begin
+   #  begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
         @products_array,session[:local_file_path]=Product.parse_csv(params[:file],current_user,true)
@@ -17,10 +17,9 @@ class BulkUploadsController < ApplicationController
       paginated_products.total_entries =@products_array.size
       @products=paginated_products
       end
-    rescue Exception => exc
-      flash[:error]="uploaded file is invalid."
-    end
-
+#    rescue Exception => exc
+#      flash[:error]="uploaded file is invalid."
+#    end
   end
 
   def save_product_file
