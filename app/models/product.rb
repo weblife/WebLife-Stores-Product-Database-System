@@ -189,81 +189,22 @@ class Product < ActiveRecord::Base
   before_save :change_text_values_to_boolean
 
 
-  validates_length_of :product_id,
-                      :allow_nil => true,
-                      :maximum   => 100,
-                      :too_long  => "Product id must have at most 100 characters"
-
-  validates_length_of :path,
-                      :allow_nil => true,
-                      :maximum   => 400,
-                      :too_long  => "Path must have at most 400 characters"
-  validates_length_of :manufacturer,
-                      :allow_nil => true,
-                      :maximum   => 60,
-                      :too_long  => "Manufacturer must have at most 60 characters"
-  validates_length_of :code,
-                      :allow_nil => true,
-                      :maximum   => 20,
-                      :too_long  => "Code must have at most 20 characters"
-  validates_length_of :name,
-                      :allow_nil => true,
-                      :maximum   => 200,
-                      :too_long  => "Name must have at most 200 characters"
-
-  validates_length_of :warranty,
-                      :allow_nil => true,
-                      :maximum   => 200,
-                      :too_long  => "Warranty must have at most 200 characters"
-                    
-  validates_length_of :image,
-                      :maximum   => 60,
-                      :too_long  => "Image must have at most 60 characters"
-
-  validates_length_of :Item_description_without_html,
-                      :allow_nil => true,
-                      :maximum   => 500,
-                      :too_long  => "Item Description - NO HTML must have at most 500 characters"
-
-  validates_length_of :return_details,
-                      :maximum   => 200,
-                      :too_long  => "Return details must have at most 200 characters"
-
-  validates_length_of :availability,
-                      :maximum   => 200,
-                      :too_long  => "Availability must have at most 200 characters"
-
-  validates_length_of :shipping_time,
-                      :maximum   => 200,
-                      :too_long  => "Shipping time must have at most 200 characters"
-
-  validates_length_of :related_Items,
-                      :allow_nil => true,
-                      :maximum   => 100,
-                      :too_long  => "Related items must have at most 100 characters"
-
-  validates_length_of :related_referrence_sku,
-                      :allow_nil => true,
-                      :maximum   => 60,
-                      :too_long  => "Related Referrence SKU must have at most 60 characters"
-
-  validates_length_of :disclaimer_name,
-                      :allow_nil => true,
-                      :maximum   => 60,
-                      :too_long  => "Disclaimer name must have at most 60 characters"
-
-  validates_length_of :disclaimer_text,
-                      :allow_nil => true,
-                      :maximum   => 400,
-                      :too_long  => "Disclaimer text must have at most 400 characters"
-
-  validates_length_of :product_cmng_img_tag_html,
-                      :allow_nil => true,
-                      :maximum   => 400,
-                      :too_long  => "Product cmng img tag html must have at most 400 characters"
-
-
-
+  validates_length_of :product_id,:allow_nil => true,:maximum   => 100,:too_long  => "Product id must have at most 100 characters"
+  validates_length_of :path,:allow_nil => true,:maximum   => 400,:too_long  => "Path must have at most 400 characters"
+  validates_length_of :manufacturer,:allow_nil => true,:maximum   => 60,:too_long  => "Manufacturer must have at most 60 characters"
+  validates_length_of :code,:allow_nil => true,:maximum   => 20,:too_long  => "Code must have at most 20 characters"
+  validates_length_of :name,:allow_nil => true,:maximum   => 200,:too_long  => "Name must have at most 200 characters"
+  validates_length_of :warranty,:allow_nil => true,:maximum   => 200,:too_long  => "Warranty must have at most 200 characters"
+  validates_length_of :image,:maximum   => 60,:too_long  => "Image must have at most 60 characters"
+  validates_length_of :Item_description_without_html,:allow_nil => true,:maximum   => 500,:too_long  => "Item Description - NO HTML must have at most 500 characters"
+  validates_length_of :return_details,:maximum   => 200,:too_long  => "Return details must have at most 200 characters"
+  validates_length_of :availability,:maximum   => 200,:too_long  => "Availability must have at most 200 characters"
+  validates_length_of :shipping_time,:maximum   => 200,:too_long  => "Shipping time must have at most 200 characters"
+  validates_length_of :related_Items,:allow_nil => true,:maximum   => 100,:too_long  => "Related items must have at most 100 characters"
+  validates_length_of :related_referrence_sku,:allow_nil => true,:maximum   => 60,:too_long  => "Related Referrence SKU must have at most 60 characters"
+  validates_length_of :disclaimer_name,:allow_nil => true,:maximum   => 60,:too_long  => "Disclaimer name must have at most 60 characters"
+  validates_length_of :disclaimer_text,:allow_nil => true,:maximum   => 400,:too_long  => "Disclaimer text must have at most 400 characters"
+  validates_length_of :product_cmng_img_tag_html,:allow_nil => true,:maximum   => 400,:too_long  => "Product cmng img tag html must have at most 400 characters"
 
     def self.parse_csv(file,current_user,is_uploading_require)
               #uploading file locally
@@ -300,15 +241,15 @@ class Product < ActiveRecord::Base
                 row.each do |cell|
 
                   if product_array.include?(sequenced_csv_array[inner_count])
-                     params["product_#{count}"]["product"].store("#{sequenced_db_array[inner_count]}",cell)
+                     params["product_#{count}"]["product"]["#{sequenced_db_array[inner_count]}"]=cell
                   elsif inset_array.include?(sequenced_csv_array[inner_count])
-                     params["product_#{count}"]["inset"].store("#{sequenced_db_array[inner_count]}",cell)
+                     params["product_#{count}"]["inset"]["#{sequenced_db_array[inner_count]}"]=cell
                   elsif property_array.include?(sequenced_csv_array[inner_count])
-                     params["product_#{count}"]["property"].store("#{sequenced_db_array[inner_count]}",cell)
+                     params["product_#{count}"]["property"]["#{sequenced_db_array[inner_count]}"]=cell
                   elsif text_achor_array.include?(sequenced_csv_array[inner_count])
-                     params["product_#{count}"]["text_anchor"].store("#{sequenced_db_array[inner_count]}",cell)
+                     params["product_#{count}"]["text_anchor"]["#{sequenced_db_array[inner_count]}"]=cell
                   elsif url_link_array.include?(sequenced_csv_array[inner_count])
-                     params["product_#{count}"]["url_link"].store("#{sequenced_db_array[inner_count]}",cell)
+                     params["product_#{count}"]["url_link"]["#{sequenced_db_array[inner_count]}"]=cell
                   end
                   inner_count+=1
                 end if count!=-1

@@ -9,26 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101218154924) do
+ActiveRecord::Schema.define(:version => 20101228200016) do
 
   create_table "compscrapers", :force => true do |t|
-    t.integer  "user_id",                                                            :null => false
+    t.integer  "user_id",                                                           :null => false
     t.string   "item_search_phrase"
     t.string   "word_that_occur"
     t.string   "sort_options"
-    t.decimal  "lowest_price",        :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "decimal",             :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "second_lowest_price", :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "third_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "fourth_lowest_price", :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "fifth_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
-    t.decimal  "sixth_lowest_price",  :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price",       :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "decimal",            :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price_2",     :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price_3",     :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price_4",     :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price_5",     :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "lowest_price_6",     :precision => 8, :scale => 2, :default => 0.0
     t.string   "lowest_site"
-    t.string   "second_lowest_site"
-    t.string   "third_lowest_site"
-    t.string   "fourth_lowest_site"
-    t.string   "fifth_lowest_site"
-    t.string   "sixth_lowest_site"
+    t.string   "lowest_site_2"
+    t.string   "lowest_site_3"
+    t.string   "lowest_site_4"
+    t.string   "lowest_site_5"
+    t.string   "lowest_site_6"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

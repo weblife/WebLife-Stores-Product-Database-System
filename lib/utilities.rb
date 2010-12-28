@@ -16,20 +16,4 @@ class Utilities
     return mxm;
   end
   
-  def min_from_array(array)
-
-    mn = array[0];
-    i=0
-    while (i<array.length)
-      if (array[i]<mn)
-        mn = array[i];
-      end
-      i+=1
-    end
-    return mn
-  end
-
-
-
-
 end

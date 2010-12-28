@@ -34,28 +34,10 @@ class Property < ActiveRecord::Base
   validates_numericality_of :multi_box_weights,:message=>"Multi box weights is not a number."
   validates_numericality_of :number_of_boxes,:only_integer=>true,:message=>"Number of boxes is not a number."
   
-  validates_length_of :material,
-                      :allow_nil => true,
-                      :maximum   => 30,
-                      :too_long  => "Material must have at most 30 characters"
-
-  validates_length_of :style,
-                      :allow_nil => true,
-                      :maximum   => 30,
-                      :too_long  => "style must have at most 30 characters"
-  validates_length_of :color,
-                      :allow_nil => true,
-                      :maximum   => 30,
-                      :too_long  => "Color must have at most 30 characters"
-
-  validates_length_of :overall_size,
-                      :allow_nil => true,
-                      :maximum   => 200,
-                      :too_long  => "Overall size must have at most 200 characters"
-
-  validates_length_of :multi_box_dimensions,
-                      :allow_nil => true,
-                      :maximum   => 256,
-                      :too_long  => "Multi box dimensions must have at most 256 characters"
+  validates_length_of :material,:allow_nil => true,:maximum   => 30,:too_long  => "Material must have at most 30 characters"
+  validates_length_of :style,:allow_nil => true,:maximum   => 30,:too_long  => "style must have at most 30 characters"
+  validates_length_of :color,:allow_nil => true,:maximum   => 30,:too_long  => "Color must have at most 30 characters"
+  validates_length_of :overall_size,:allow_nil => true,:maximum   => 200,:too_long  => "Overall size must have at most 200 characters"
+  validates_length_of :multi_box_dimensions,:allow_nil => true,:maximum   => 256,:too_long  => "Multi box dimensions must have at most 256 characters"
 
 end
