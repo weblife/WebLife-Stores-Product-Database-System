@@ -336,7 +336,7 @@ class Product < ActiveRecord::Base
     #begin
       ext_array = [".csv"]
       file_name= file.original_filename
-      directory= "#{RAILS_ROOT}/public/input_files" #local directory path
+      directory= "public/input_files" #local directory path
       ext = File.extname(file_name)
       ext = ext.downcase
       if ext_array.include?(ext)
