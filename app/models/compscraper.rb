@@ -100,16 +100,15 @@ class Compscraper < ActiveRecord::Base
 
 
     def minimum_lowest_price
-        first_lp=second_lp=third_lp=fourth_lp=fifth_lp=sixth_lp=""
+        lp=[]
         prod=Product.find self.id
         whole_sale=prod.property.wholesale_cost rescue 0
-        first_lp=(lowest_price>whole_sale)?(lowest_price):(whole_sale) if lowest_site!="Budgetmailboxes.com"
-        second_lp=(lowest_price_2>whole_sale)?(lowest_price_2):(whole_sale) if lowest_site_2!="Budgetmailboxes.com"
-        third_lp=(lowest_price_3>whole_sale)?(lowest_price_3):(whole_sale) if lowest_site_3!="Budgetmailboxes.com"
-        fourth_lp=(lowest_price_4>whole_sale)?(lowest_price_4):(whole_sale) if lowest_site_4!="Budgetmailboxes.com"
-        fifth_lp=(lowest_price_5>whole_sale)?(lowest_price_5):(whole_sale) if lowest_site_5!="Budgetmailboxes.com"
-        sixth_lp=(lowest_price_6>whole_sale)?(lowest_price_6):(whole_sale) if lowest_site_6!="Budgetmailboxes.com"
-        [first_lp,second_lp,third_lp,fourth_lp,fifth_lp,sixth_lp].min
+        lowest_prices = [lowest_price,lowest_price_2,lowest_price_3,lowest_price_4,lowest_price_5,lowest_price_6]
+        lowest_sites =[lowest_site,lowest_site_2,lowest_site_3,lowest_site_4,lowest_site_5,lowest_site_6]
+        lowest_prices.each_with_index do |price, i|
+          lp << ((price > whole_sale) ?(price):(whole_sale)) if lowest_sites[i] != "Budgetmailboxes.com"
+        end
+        (lp.empty?)?(0):(lp.min)
     end
 
 end
