@@ -158,16 +158,11 @@ class Product < ActiveRecord::Base
 
   validates_presence_of :product_id,:message=>"Id cannot be blank.",:on=>:create
   validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true,:on=>:create
-  
-  validates_presence_of :image,:message=>"Image cannot be blank."
-  validates_presence_of :Item_description_with_html,:message=>"Item Description - HTML cannot be blank."
-  validates_presence_of :return_details,:message=>"Return details cannot be blank."
-  validates_presence_of :availability,:message=>"Availability cannot be blank."
-  validates_presence_of :shipping_time,:message=>"Shipping time cannot be blank."
+
   validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
   validates_numericality_of :freight_cost_overide,:message=>"Freight cost overide is not a number.",:allow_nil=>true
-  validates_numericality_of :invalid_ship_methods,:only_integer=>true,:message=>"Invalid ship methods is not a number."
-  validates_numericality_of :origin_zip,:only_integer=>true,:message=>"Origin Zip is not a number."
+  validates_numericality_of :invalid_ship_methods,:only_integer=>true,:message=>"Invalid ship methods is not a number.",:allow_nil=>true
+  validates_numericality_of :origin_zip,:only_integer=>true,:message=>"Origin Zip is not a number.",:allow_nil=>true
   validates_numericality_of :price_override,:message=>"Price overide is not a number.",:allow_nil=>true
 
   validates_inclusion_of :item_number_visiblity, :in => [true, false]
@@ -195,11 +190,11 @@ class Product < ActiveRecord::Base
   validates_length_of :code,:allow_nil => true,:maximum   => 20,:too_long  => "Code must have at most 20 characters"
   validates_length_of :name,:allow_nil => true,:maximum   => 200,:too_long  => "Name must have at most 200 characters"
   validates_length_of :warranty,:allow_nil => true,:maximum   => 200,:too_long  => "Warranty must have at most 200 characters"
-  validates_length_of :image,:maximum   => 60,:too_long  => "Image must have at most 60 characters"
+  validates_length_of :image,:maximum   => 60,:too_long  => "Image must have at most 60 characters",:allow_nil=>true
   validates_length_of :Item_description_without_html,:allow_nil => true,:maximum   => 500,:too_long  => "Item Description - NO HTML must have at most 500 characters"
-  validates_length_of :return_details,:maximum   => 200,:too_long  => "Return details must have at most 200 characters"
-  validates_length_of :availability,:maximum   => 200,:too_long  => "Availability must have at most 200 characters"
-  validates_length_of :shipping_time,:maximum   => 200,:too_long  => "Shipping time must have at most 200 characters"
+  validates_length_of :return_details,:maximum   => 200,:too_long  => "Return details must have at most 200 characters",:allow_nil=>true
+  validates_length_of :availability,:maximum   => 200,:too_long  => "Availability must have at most 200 characters",:allow_nil=>true
+  validates_length_of :shipping_time,:maximum   => 200,:too_long  => "Shipping time must have at most 200 characters",:allow_nil=>true
   validates_length_of :related_Items,:allow_nil => true,:maximum   => 100,:too_long  => "Related items must have at most 100 characters"
   validates_length_of :related_referrence_sku,:allow_nil => true,:maximum   => 60,:too_long  => "Related Referrence SKU must have at most 60 characters"
   validates_length_of :disclaimer_name,:allow_nil => true,:maximum   => 60,:too_long  => "Disclaimer name must have at most 60 characters"
