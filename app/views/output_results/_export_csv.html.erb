@@ -1,7 +1,7 @@
 <%= form_tag({:action => 'export_csv'})%>
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
   <tr>
-    <td align="center" >Store CSV:&nbsp; <%=select("search", "store_csv", options_for_select([["Choose One...", ""],["BudgetMailboxes.com", "1"], ["BudgetCommercialMailboxes.com", "2"], ["BudgetAddressPlaque.com", "3"], ["BudgetStreetSigns.com", "4"]]))%></td>
+    <td align="center" >Store CSV:&nbsp; <%=select("search", "store_csv", options_for_select([["Choose One...", ""],["BudgetMailboxes.com", "1"], ["BudgetCommercialMailboxes.com", "2"], ["BudgetAddressPlaque.com", "3"], ["BudgetStreetSigns.com", "4"]]),{:onclick=>"alert(1);"})%></td>
     <td align="center" >OR <%=hidden_field_tag(:searched_text,params[:search_text])%><%=hidden_field_tag(:searched_field,params[:search][:search_field]) rescue nil%>  </td>
     <td align="center" >Other CSV: &nbsp;<%=select("search", "other_csv", options_for_select([["Choose One...", ""],["QuickBooks", "5"], ["CompScrapper", "6"]]))%></td>
     <td align="center" ><%= submit_tag 'Export As CSV' %></td>
