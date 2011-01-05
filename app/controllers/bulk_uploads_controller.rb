@@ -69,6 +69,7 @@ class BulkUploadsController < ApplicationController
         @compscrapers=paginated_cps
       end
     rescue Exception => exc
+      logger.error("Message for (upload compscraper file) the log file #{exc.message}")
       flash[:error]="uploaded file is invalid."
     end
 
