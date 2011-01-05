@@ -55,7 +55,7 @@ class BulkUploadsController < ApplicationController
   end
 
   def upload_compscraper_file
-     #begin
+     begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
         @compscraper_array,session[:local_file_path]=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
@@ -68,10 +68,10 @@ class BulkUploadsController < ApplicationController
         paginated_cps.total_entries =@compscraper_array.size
         @compscrapers=paginated_cps
       end
-#    rescue Exception => exc
-#      logger.error("Message for (upload compscraper file) the log file #{exc.message}")
-#      flash[:error]="uploaded file is invalid."
-#    end
+    rescue Exception => exc
+      logger.error("Message for (upload compscraper file) the log file #{exc.message}")
+      flash[:error]="uploaded file is invalid."
+    end
 
   end
 
