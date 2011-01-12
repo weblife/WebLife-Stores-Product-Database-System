@@ -105,6 +105,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
   def dashboard
+      @products_count=Product.count :all
   end
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
