@@ -291,7 +291,13 @@ class Product < ActiveRecord::Base
   end
 
   def self.search_products(searched_field,searched_text)
-      Product.find(:all,:conditions=>["#{searched_field} LIKE ?","%#{searched_text}%"])
+      
+      db_field="code" if searched_field=="code"
+      db_field="name" if searched_field=="name"
+      db_field="Item_description_with_html" if searched_field=="Item_description_with_html"
+      db_field="manufacturer" if searched_field.blank? || (searched_field=="manufacturer") || db_field.blank?
+
+      Product.find(:all,:conditions=>["#{db_field} LIKE ?","%#{searched_text}%"])
   end
 
   #output fields
@@ -374,7 +380,7 @@ class Product < ActiveRecord::Base
       property.overall_size
   end
   def output_profit
-      (self.free_shipping)?(output_sale_price-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1)))):(output_sale_price+(Product.max_from_array([20+(self.property.actual_weight*0.45),((self.free_shipping)?(0):(15+(self.property.wholesale_cost*0.1))),0]))-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1))))
+      (self.free_shipping)?(output_sale_price-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1)))):(output_sale_price+([20+(self.property.actual_weight*0.45),((self.free_shipping)?(0):(15+(self.property.wholesale_cost*0.1))),0].max)-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1))))
   end
   def output_good_margins
       (output_profit>35)?("Yes"):("")
@@ -434,18 +440,6 @@ class Product < ActiveRecord::Base
       HardCodeInformation.find :first
   end
 
-  def self.max_from_array(array)
-
-    mxm = array[0];
-    i=0
-    while (i<array.length)
-      if (array[i]>mxm)
-        mxm = array[i];
-      end
-      i+=1
-    end
-    return mxm;
-  end
 
   private
   def set_default_values
