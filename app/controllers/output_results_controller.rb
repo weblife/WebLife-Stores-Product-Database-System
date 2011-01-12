@@ -2,8 +2,6 @@ class OutputResultsController < ApplicationController
     layout "layout"
   def output
     @product=Product.find :first
-    puts "ssssssssssssssssssqqqqqqqqqqqqqqqqqqqqqqqqq"
-    puts [1,2,4].max
     if request.post?
       @results=Product.search_products(params[:search][:search_field],params[:search_text])
     end

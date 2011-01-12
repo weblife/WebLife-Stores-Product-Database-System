@@ -340,23 +340,16 @@ class Product < ActiveRecord::Base
   def output_caption
       caption=""
       #'item details'!xez2&'item details'!xfa2   formula left
-
-      caption+=(((self.promo_code_section_availablility)?(meta_data.promo_tag):(""))+meta_data.product_title_ot+self.options+meta_data.product_title_ct+self.Item_description_with_html+((!self.url_link.url_link_1.blank?)?(meta_data.related_downloads_ot+meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_1+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_1+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")))
-      caption+=(!self.url_link.url_link_2.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_2+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_2+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_3.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_3+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_3+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_4.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_4+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_4+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_5.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_5+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_5+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_6.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_6+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_6+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_7.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_7+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_7+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_8.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_8+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_8+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_9.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_9+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_9+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(!self.url_link.url_link_10.blank?)?(meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+self.url_link.url_link_10+meta_data.open_table_tag_2_of_3+self.text_anchor.anchor_text_10+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("")
-      caption+=(meta_data.man_title_ot+self.manufacturer+meta_data.man_title_ct)
-      caption+=(meta_data.reference_ot+self.code)
+      url_links=[url_link.url_link_1,url_link.url_link_2,url_link.url_link_3,url_link.url_link_4,url_link.url_link_5,url_link.url_link_6,url_link.url_link_7,url_link.url_link_8,url_link.url_link_9,url_link.url_link_10]
+      text_anchors=[text_anchor.anchor_text_1,text_anchor.anchor_text_2,text_anchor.anchor_text_3,text_anchor.anchor_text_4,text_anchor.anchor_text_5,text_anchor.anchor_text_6,text_anchor.anchor_text_7,text_anchor.anchor_text_8,text_anchor.anchor_text_9,text_anchor.anchor_text_10]
+      url_links.each_with_index do |url_link, i|
+          caption+=(((self.promo_code_section_availablility)?(meta_data.promo_tag):(""))+meta_data.product_title_ot+((self.options.blank?)?(""):(self.options))+meta_data.product_title_ct+((self.Item_description_with_html.blank?)?(""):(self.Item_description_with_html))+((!url_link.blank?)?(meta_data.related_downloads_ot+meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+((text_anchors[i].blank?)?(""):(text_anchors[i]))+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):(""))) if i==0
+          caption+=(!url_link.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+((text_anchors[i].blank?)?(""):(text_anchors[i]))+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("") if i!=0
+      end
+      caption+=(meta_data.man_title_ot+((self.manufacturer.blank?)?(""):(self.manufacturer))+meta_data.man_title_ct)
+      caption+=(meta_data.reference_ot+((self.code.blank?)?(""):(self.code)))
       caption+=(!self.related_referrence_sku.blank?)? (meta_data.reference_mid_tag+self.name+meta_data.reference_mid_2+self.related_referrence_sku+meta_data.reference_end_tag):("")
-      
       return caption
-
   end
 
   def output_sale_price
