@@ -277,7 +277,7 @@ class Product < ActiveRecord::Base
       ext = ext.downcase
       if ext_array.include?(ext)
         local_path= File.join(directory,file_name)
-        new_path= File.join(directory,"#{new_file_name}_#{user.id}")
+        new_path= File.join(directory,"#{new_file_name}_#{user.id}_#{Time.now.strftime("%Y-%m-%dT%H:%M:%S%z")}")
         file.rewind
         File.open(local_path,"wb"){|f| f.write(file.read)}
         File.rename(local_path,new_path)
@@ -339,15 +339,15 @@ class Product < ActiveRecord::Base
 
   def output_caption
       caption=""
-      #'item details'!xez2&'item details'!xfa2   formula left
+      #TODO 'item details'!xez2&'item details'!xfa2   formula left
       url_links=[url_link.url_link_1,url_link.url_link_2,url_link.url_link_3,url_link.url_link_4,url_link.url_link_5,url_link.url_link_6,url_link.url_link_7,url_link.url_link_8,url_link.url_link_9,url_link.url_link_10]
       text_anchors=[text_anchor.anchor_text_1,text_anchor.anchor_text_2,text_anchor.anchor_text_3,text_anchor.anchor_text_4,text_anchor.anchor_text_5,text_anchor.anchor_text_6,text_anchor.anchor_text_7,text_anchor.anchor_text_8,text_anchor.anchor_text_9,text_anchor.anchor_text_10]
       url_links.each_with_index do |url_link, i|
-          caption+=(((self.promo_code_section_availablility)?(meta_data.promo_tag):(""))+meta_data.product_title_ot+((self.options.blank?)?(""):(self.options))+meta_data.product_title_ct+((self.Item_description_with_html.blank?)?(""):(self.Item_description_with_html))+((!url_link.blank?)?(meta_data.related_downloads_ot+meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+((text_anchors[i].blank?)?(""):(text_anchors[i]))+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):(""))) if i==0
-          caption+=(!url_link.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+((text_anchors[i].blank?)?(""):(text_anchors[i]))+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("") if i!=0
+          caption+=(((self.promo_code_section_availablility)?(meta_data.promo_tag):(""))+meta_data.product_title_ot+(options||"")+meta_data.product_title_ct+(self.Item_description_with_html||"")+((!url_link.blank?)?(meta_data.related_downloads_ot+meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+(text_anchors[i]||"")+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):(""))) if i==0
+          caption+=(!url_link.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+(text_anchors[i]||"")+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("") if i!=0
       end
-      caption+=(meta_data.man_title_ot+((self.manufacturer.blank?)?(""):(self.manufacturer))+meta_data.man_title_ct)
-      caption+=(meta_data.reference_ot+((self.code.blank?)?(""):(self.code)))
+      caption+=(meta_data.man_title_ot+(manufacturer||"")+meta_data.man_title_ct)
+      caption+=(meta_data.reference_ot+(code||""))
       caption+=(!self.related_referrence_sku.blank?)? (meta_data.reference_mid_tag+self.name+meta_data.reference_mid_2+self.related_referrence_sku+meta_data.reference_end_tag):("")
       return caption
   end

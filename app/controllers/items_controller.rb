@@ -24,11 +24,16 @@ class ItemsController < ApplicationController
 
   def update_item
       @product=Product.find params[:id]
-      @product.update_attributes(params[:product])
-      @product.inset.update_attributes(params[:inset])
-      @product.property.update_attributes(params[:property])
-      @product.text_anchor.update_attributes(params[:text_anchor])
-      @product.url_link.update_attributes(params[:url_link])
+      @product.attributes=(params[:product])
+      @product.save(false)
+      @product.inset.attributes=(params[:inset])
+      @product.inset.save(false)
+      @product.property.attributes=(params[:property])
+      @product.property.save(false)
+      @product.text_anchor.attributes=(params[:text_anchor])
+      @product.text_anchor.save(false)
+      @product.url_link.attributes=(params[:url_link])
+      @product.url_link.save(false)
 
 
     respond_to do |format|
