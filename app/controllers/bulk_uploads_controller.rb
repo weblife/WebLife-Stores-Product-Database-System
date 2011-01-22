@@ -18,7 +18,7 @@ class BulkUploadsController < ApplicationController
       @products=paginated_products
       end
     rescue Exception => exc
-      flash[:error]="uploaded file is invalid."
+      flash[:error]=exc.message
     end
 
   end
@@ -70,7 +70,7 @@ class BulkUploadsController < ApplicationController
       end
     rescue Exception => exc
       logger.error("Message for (upload compscraper file) the log file #{exc.message}")
-      flash[:error]="uploaded file is invalid."
+      flash[:error]=exc.message
     end
 
   end

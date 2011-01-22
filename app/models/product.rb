@@ -269,7 +269,6 @@ class Product < ActiveRecord::Base
 
 
   def self.upload_file_locally file, user,new_file_name
-    #begin
       ext_array = [".csv"]
       file_name= file.original_filename
       directory= "#{RAILS_ROOT}/public/input_files" #local directory path
@@ -283,11 +282,8 @@ class Product < ActiveRecord::Base
         File.rename(local_path,new_path)
         return new_path
       else
-        return nil
+        raise "File is invalid."
       end
-#    rescue
-#      return nil
-#    end
   end
 
   def self.search_products(searched_field,searched_text)
