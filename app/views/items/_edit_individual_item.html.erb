@@ -4,12 +4,10 @@
     <td>ID:</td>
     <td><%=@product.product_id%></td>
   </tr>
-
   <tr>
     <td>Path:</td>
     <td><%=text_field(:product, :path, :size => 50)%></td>
   </tr>
-
   <tr>
     <td>Manufacturer:</td>
     <td><%=text_field(:product, :manufacturer, :size => 50)%></td>
@@ -23,12 +21,16 @@
     <td><%=text_field(:product, :name, :size => 50)%></td>
   </tr>
   <tr>
-    <td>Item Description - HTML:</td>
-    <td><%=text_field(:product, :Item_description_with_html, :size => 50)%></td>
+    <td valign="top">Item Description - HTML:</td>
+    <td>
+      <%=text_area(:product, :Item_description_with_html,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
-    <td>Options:</td>
-    <td><%=text_field(:product, :options, :size => 50)%></td>
+    <td valign="top">Options:</td>
+    <td>
+      <%=text_area(:product, :options,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
     <td>actual-weight:</td>
@@ -63,8 +65,10 @@
     <td><%=text_field(:property, :map_pricing, :size => 50)%></td>
   </tr>
   <tr>
-    <td>Item Description - NO HTML:</td>
-    <td><%=text_field(:product, :Item_description_without_html, :size => 50)%></td>
+    <td valign="top">Item Description - NO HTML:</td>
+    <td>
+      <%=text_area(:product, :Item_description_without_html,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
     <td>Return Details:</td>
@@ -241,20 +245,26 @@
     <td><%=text_field(:text_anchor, :anchor_text_10, :size => 50)%></td>
   </tr>
   <tr>
-    <td>Where-Prod-Cmng-Img-Tag-HTML:</td>
-    <td><%=text_field(:product, :product_cmng_img_tag_html, :size => 50)%></td>
+    <td valign="top">Where-Prod-Cmng-Img-Tag-HTML:</td>
+    <td>
+      <%=text_area(:product, :product_cmng_img_tag_html,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
-    <td>Brief Summary of Manu:</td>
-    <td><%=text_field(:product, :brief_summary_of_menu, :size => 50)%></td>
+    <td valign="top">Brief Summary of Manu:</td>
+    <td>
+      <%=text_area(:product, :brief_summary_of_menu,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
     <td>Freight Cost Overide:</td>
     <td><%=text_field(:product, :freight_cost_overide, :size => 50)%></td>
   </tr>
   <tr>
-    <td>PO Description Details:</td>
-    <td><%=text_field(:product, :po_description_details, :size => 50)%></td>
+    <td valign="top">PO Description Details:</td>
+    <td>
+      <%=text_area(:product, :po_description_details,:rows=>10,:cols=>60)%>
+    </td>
   </tr>
   <tr>
     <td>Origin-zip:</td>
