@@ -1,9 +1,23 @@
+<%if !@products_array.blank?%>
+  <%product_ids_array=[]%>
+  <%@products_array.each do |product|%>
+     <%product_ids_array.push(product.product_id)%>
+  <%end%>
+<%end%>
 <table border="0" cellspacing="10" cellpadding="0" >
   <tr>
     <td colspan="2" >
       <b>Errors and Warnings</b>
     </td>
   </tr>
+    <%if !product_ids_array.blank? && !product_ids_array.uniq!.blank?%>
+  <tr>
+    <td colspan="2" >
+       Duplicate ids in same upload not allowed.
+    </td>
+    </tr>
+    <%end%>
+
   <%count=1%>
   <%product.errors.each do |field,error|%>
   <tr>

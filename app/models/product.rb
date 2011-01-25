@@ -159,7 +159,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :product_id,:message=>"Id cannot be blank.",:on=>:create
   validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true,:on=>:create
 
-  validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
+  #validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
   validates_numericality_of :freight_cost_overide,:message=>"Freight cost overide is not a number.",:allow_nil=>true
   validates_numericality_of :invalid_ship_methods,:only_integer=>true,:message=>"Invalid ship methods is not a number.",:allow_nil=>true
   validates_numericality_of :origin_zip,:only_integer=>true,:message=>"Origin Zip is not a number.",:allow_nil=>true
