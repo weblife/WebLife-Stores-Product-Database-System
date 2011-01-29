@@ -13,7 +13,7 @@
     <%if !product_ids_array.blank? && !product_ids_array.uniq!.blank?%>
   <tr>
     <td colspan="2" >
-       Duplicate ids in same upload not allowed.
+      <label style="color:red;" ><b>  Duplicate ids in same upload not allowed.</b></label>
     </td>
     </tr>
     <%end%>

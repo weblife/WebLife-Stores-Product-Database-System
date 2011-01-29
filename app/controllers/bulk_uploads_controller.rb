@@ -93,4 +93,15 @@ class BulkUploadsController < ApplicationController
       redirect_to upload_compscraper_file_path
   end
 
+  def product_template
+      download_file("/public/sample_csv_input_files/items.csv",'product_upload_template.csv')
+  end
+  def compscraper_template
+      download_file("/public/sample_csv_input_files/comprasor.csv",'compscraper_upload_template.csv')
+  end
+
+  private
+  def download_file(root,filename)
+      send_file(RAILS_ROOT + root,:filename => filename)
+  end
 end
