@@ -343,7 +343,7 @@ class Product < ActiveRecord::Base
           caption+=(!url_link.blank?)? (meta_data.open_table_tag+meta_data.open_table_tag_1_of_3+url_link+meta_data.open_table_tag_2_of_3+(text_anchors[i]||"")+meta_data.open_table_tag_3_of_3+meta_data.close_table_tag):("") if i!=0
       end
       caption+=(meta_data.man_title_ot+" "+(manufacturer||"")+meta_data.man_title_ct)
-      caption+= brief_summary_of_menu
+      caption+= ((product_cmng_img_tag_html||"")+(brief_summary_of_menu||""))
       caption+=(meta_data.reference_ot+" "+(code||""))
       caption+=(!self.related_referrence_sku.blank?)? (meta_data.reference_mid_tag+self.name+" "+meta_data.reference_mid_2+self.related_referrence_sku+meta_data.reference_end_tag):("")
       return caption
