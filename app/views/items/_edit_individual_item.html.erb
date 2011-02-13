@@ -89,7 +89,7 @@
   <tr>
     <td>is_usps_approved:</td>
     <td>
-        <%=select(:product, :boolean_ups_approved_field,{ "No" => "No", "Yes" => "Yes"})%>
+        <%=select(:product, :is_usps_approved,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.is_usps_approved)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
@@ -127,7 +127,7 @@
   <tr>
     <td>Promo Code Section Availablility:</td>
     <td>
-        <%=select(:product, :boolean_promo_code_section_availablility,{ "No" => "no", "Yes" => "yes"})%>
+        <%=select(:product, :promo_code_section_availablility,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.promo_code_section_availablility)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
@@ -289,13 +289,13 @@
   <tr>
     <td>Phone-number:</td>
     <td>
-      <%=select(:product, :boolean_phone_number_visibility,{ "No" => "no", "Yes" => "yes"})%>
+      <%=select(:product, :phone_number_visibility,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.phone_number_visibility)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Item-number-visiblity:</td>
     <td>
-      <%=select(:product, :boolean_item_number_visiblity,{ "No" => "no", "Yes" => "yes"})%>
+      <%=select(:product, :item_number_visiblity,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.item_number_visiblity)?("1"):("0")})%>
     </td>
   </tr>
 </table>

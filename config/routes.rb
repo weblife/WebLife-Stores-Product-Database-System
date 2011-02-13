@@ -15,8 +15,8 @@ ActionController::Routing::Routes.draw do |map|
   map.revert_compscraper '/revert_compscraper/:id', :controller => 'bulk_uploads', :action => 'revert_compscraper'
   map.output '/output', :controller => 'output_results', :action => 'output'
   map.search_items '/search_items', :controller => 'items', :action => 'search_items'
-  map.edit_item '/edit_item/:id', :controller => 'items', :action => 'edit_item'
-  map.update_item '/update_item/:id', :controller => 'items', :action => 'update_item'
+  map.edit_item '/edit_item/:id', :controller => 'items', :action => 'edit'
+  map.update_item '/update_item/:id', :controller => 'items', :action => 'update'
   map.login_from_admin '/login_from_admin/:id', :controller => 'users', :action => 'login_from_admin'
   map.dashboard '/dashboard', :controller => 'users', :action => 'dashboard'
   map.resources :users

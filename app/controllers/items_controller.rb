@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
       end
   end
 
-  def edit_item
+  def edit
     @product=Product.find(params[:id])
     @inset=@product.inset
     @url_link=@product.url_link
@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def update_item
+  def update
       @product=Product.find params[:id]
       @product.attributes=(params[:product])
       @product.save(false)
