@@ -10,7 +10,7 @@ class BulkUploadsController < ApplicationController
         @products_array,session[:local_file_path]=Product.parse_csv(params[:file],current_user,true)
       end
       @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false) if !params[:page].blank? && !session[:local_file_path].blank?
-
+      
       if  !@products_array.blank?
       paginated_products =  WillPaginate::Collection.new(params[:page].blank? ? 1 : params[:page].to_i,1)
       paginated_products.replace @products_array[paginated_products.offset,paginated_products.per_page]
@@ -39,18 +39,21 @@ class BulkUploadsController < ApplicationController
          @products_array.each do |product|
            product.user_id=current_user.id
            product.save(false)
-           page_no=''
+           page_no=page_no-1
+           flash[:notice]="#{@products_array.count} product(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
          end
       end
+      
       redirect_to :action=>"upload_products_file",:page=>page_no
   end
 
   def revert_products
-      products=Product.find(:all,:conditions=>["user_id=?",current_user.id],:limit=>params[:id],:order=>"id DESC")
+      products=Product.find_latest_products(current_user)
+      products_count=products.count rescue nil
       products.each do |product|
         product.destroy
       end
-      
+      flash[:notice]="#{products_count} latest uploaded product(s) successfully reverted."
       redirect_to upload_path
   end
 
@@ -81,15 +84,16 @@ class BulkUploadsController < ApplicationController
          comp.user_id=current_user.id
          comp.save(false)
       end
-      redirect_to upload_compscraper_file_path
+      flash[:notice]="#{@compscraper_array.count rescue 0} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
+      redirect_to :action=>"upload_compscraper_file",:page=>1
   end
 
   def revert_compscraper
-      compscrapers=Compscraper.find(:all,:conditions=>["user_id=?",current_user.id],:limit=>params[:id],:order=>"id DESC")
+      compscrapers=Compscraper.find_latest_compscraper_items(current_user)
+      flash[:notice]="#{compscrapers.count rescue 0} latest uploaded item(s) successfully reverted."
       compscrapers.each do |comp|
         comp.destroy
       end
-
       redirect_to upload_compscraper_file_path
   end
 

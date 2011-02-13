@@ -335,7 +335,6 @@ class Product < ActiveRecord::Base
 
   def output_caption
       caption=""
-      #TODO 'item details'!xez2&'item details'!xfa2   formula left
       url_links=[url_link.url_link_1,url_link.url_link_2,url_link.url_link_3,url_link.url_link_4,url_link.url_link_5,url_link.url_link_6,url_link.url_link_7,url_link.url_link_8,url_link.url_link_9,url_link.url_link_10]
       text_anchors=[text_anchor.anchor_text_1,text_anchor.anchor_text_2,text_anchor.anchor_text_3,text_anchor.anchor_text_4,text_anchor.anchor_text_5,text_anchor.anchor_text_6,text_anchor.anchor_text_7,text_anchor.anchor_text_8,text_anchor.anchor_text_9,text_anchor.anchor_text_10]
       url_links.each_with_index do |url_link, i|
@@ -430,6 +429,11 @@ class Product < ActiveRecord::Base
       HardCodeInformation.find :first
   end
 
+  def self.find_latest_products(current_user)
+      last_product=Product.find(:last)
+      products=Product.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,last_product.created_at]) rescue nil
+      return products
+  end
 
   private
   def set_default_values

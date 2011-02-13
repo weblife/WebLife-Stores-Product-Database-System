@@ -86,4 +86,11 @@ class Compscraper < ActiveRecord::Base
         (lp.empty?)?(0):(lp.min)
     end
 
+  def self.find_latest_compscraper_items(current_user)
+      last_item=self.find(:last)
+      items=self.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,last_item.created_at]) rescue nil
+      return items
+  end
+
+
 end
