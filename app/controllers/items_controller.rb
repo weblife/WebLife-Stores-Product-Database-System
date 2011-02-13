@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "individual_item",:partial=>"edit_individual_item"
+          page << "scrollToDiv('success_msg_top')"
         end
       }
     end
@@ -35,11 +36,11 @@ class ItemsController < ApplicationController
       @product.url_link.attributes=(params[:url_link])
       @product.url_link.save(false)
 
-
     respond_to do |format|
       format.js {
         render :update do |page|
-          page.replace_html "success_msg","Product is successfully updated."
+          page.replace_html "success_msg_top","<p style='color:red'><b>Product is successfully updated.</b></p>"
+          page << "scrollToDiv('success_msg_top')"
         end
       }
     end

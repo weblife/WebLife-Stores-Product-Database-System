@@ -1,6 +1,6 @@
 <div style="width:700px;height:550px;overflow:scroll;" >
 <table border="1" cellspacing="0" cellpadding="0" width="100%">
-    <tr>
+  <tr class="gray_bgcolor" >
       <%if is_edit%>
         <td>&nbsp;</td>
         <%end%>
@@ -76,7 +76,7 @@
       <%products.each_with_index do |product,index|%>
         <tr>
           <%if is_edit%>
-            <td valign="top" nowrap>
+            <td valign="top" nowrap class="gray_bgcolor">
               <%=button_to_remote("Edit", {:url=>edit_item_url(product)}, {})%>
             </td>
             <%end%>

@@ -1,5 +1,14 @@
+<br></br><br></br>
+<div>
+  <b>Edit Item-<%=@product.product_id%></b>
+</div>
+<br></br><br></br>
 <% form_remote_tag :url => update_item_url(@product) do -%>
 <table>
+  <tr>
+    <td colspan="2">
+          <%= submit_tag 'Update',{:name=>"up_botton",:id=>"up_botton"} %>
+    </td>
   <tr>
     <td>ID:</td>
     <td><%=@product.product_id%></td>
@@ -300,5 +309,5 @@
   </tr>
 </table>
 
-    <%= submit_tag 'Update' %>
+    <%= submit_tag 'Update',{:name=>"bottom_botton",:id=>"bottom_botton"}  %>
    <% end -%>
