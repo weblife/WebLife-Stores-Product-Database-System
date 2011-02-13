@@ -77,6 +77,7 @@ class Compscraper < ActiveRecord::Base
         lp=[]
         prod=Product.find self.id
         whole_sale=prod.property.wholesale_cost rescue 0
+        whole_sale=0.0 if whole_sale.blank?
         lowest_prices = [lowest_price,lowest_price_2,lowest_price_3,lowest_price_4,lowest_price_5,lowest_price_6]
         lowest_sites =[lowest_site,lowest_site_2,lowest_site_3,lowest_site_4,lowest_site_5,lowest_site_6]
         lowest_prices.each_with_index do |price, i|

@@ -349,16 +349,16 @@ class Product < ActiveRecord::Base
   end
 
   def output_sale_price
-    	j3=((self.property.wholesale_cost+(15+(0.1*self.property.wholesale_cost)))*1.045)
-      r3=((self.property.wholesale_cost<20)?(2):((self.property.wholesale_cost<50)?(1.75):((self.property.wholesale_cost<150)?(1.5):((self.property.wholesale_cost<500)?(1.4):(1.25)))))*100
+    	j3=((self.property.wholesale_cost.to_f+(15+(0.1*self.property.wholesale_cost.to_f)))*1.045)
+      r3=((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))*100
       cmp=Compscraper.find self.id rescue nil
       (cmp.blank?)?(k3=0):(k3=cmp.minimum_lowest_price)
-      m3=(!self.free_shipping)?((((self.property.wholesale_cost*r3)<k3))?(k3-0.5):(self.property.wholesale_cost)):(((j3*r3)>k3)?(j3*r3):(k3-0.5))
-      (self.property.map_pricing.to_f>(j3*r3))?(self.property.map_pricing.to_f):((self.price_override.blank?)?((m3<self.property.map_pricing)?(self.property.map_pricing):(m3)):(self.price_override))
+      m3=(!self.free_shipping)?((((self.property.wholesale_cost.to_f*r3)<k3))?(k3-0.5):(self.property.wholesale_cost.to_f)):(((j3*r3)>k3)?(j3*r3):(k3-0.5))
+      (self.property.map_pricing.to_f>(j3*r3))?(self.property.map_pricing.to_f):((self.price_override.blank?)?((m3<self.property.map_pricing.to_f)?(self.property.map_pricing.to_f):(m3)):(self.price_override.to_f))
   end
 
   def output_price
-      output_sale_price*1.25
+      output_sale_price.to_f*1.25
   end
 
   def output_ships_within_for_feed
