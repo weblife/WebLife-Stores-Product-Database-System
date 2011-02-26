@@ -67,6 +67,13 @@ class Compscraper < ActiveRecord::Base
 
                   count+=1
               end
+
+              if is_uploading_require
+                current_user.cached_information.back_compscraper_reverted
+                current_user.cached_information.set_compscraper_cached_file(file_path)
+              end
+
+
               #File.delete(file_path)
               return compscraper_array,file_path
         end
@@ -87,7 +94,7 @@ class Compscraper < ActiveRecord::Base
     end
 
   def self.find_latest_compscraper_items(current_user)
-      last_item=self.find(:last)
+      last_item=self.find(:last,:conditions=>["user_id=?",current_user.id])
       items=self.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,last_item.created_at]) rescue nil
       return items
   end

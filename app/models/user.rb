@@ -41,6 +41,9 @@ class User < ActiveRecord::Base
 
   has_many :products,:dependent => :destroy
   has_many :compscrapers,:dependent => :destroy
+  has_one :cached_information,:dependent => :destroy
+
+  after_save :set_cached_info
 
 
   
@@ -48,7 +51,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :login, :email, :name, :password, :password_confirmation,:state
+  attr_accessible :login, :email, :name, :password, :password_confirmation,:state,:cached_file_path
 
 
 
@@ -84,5 +87,9 @@ class User < ActiveRecord::Base
             self.deleted_at = nil
             self.activation_code = self.class.make_token
       end
-  
+
+      private
+  def set_cached_info
+        CachedInformation.create(:user_id=>id) if cached_information.blank?
+  end
 end

@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228200016) do
+ActiveRecord::Schema.define(:version => 20110216203616) do
+
+  create_table "cached_informations", :force => true do |t|
+    t.integer  "user_id"
+    t.boolean  "is_product_info_reverted",      :default => false
+    t.string   "products_cached_path"
+    t.boolean  "is_compscrapper_info_reverted", :default => false
+    t.string   "compscrapper_cached_path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "compscrapers", :force => true do |t|
     t.integer  "user_id",                                                           :null => false
@@ -154,6 +164,15 @@ ActiveRecord::Schema.define(:version => 20101228200016) do
     t.datetime "updated_at"
   end
 
+  create_table "settings", :force => true do |t|
+    t.string   "var",        :null => false
+    t.text     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "settings", ["var"], :name => "index_settings_on_var"
+
   create_table "stores", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -209,6 +228,7 @@ ActiveRecord::Schema.define(:version => 20101228200016) do
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
     t.boolean  "is_admin",                                 :default => false
+    t.string   "cached_file_path"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

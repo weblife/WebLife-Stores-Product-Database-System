@@ -8,15 +8,20 @@ class BulkUploadsController < ApplicationController
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
         @products_array,session[:local_file_path]=Product.parse_csv(params[:file],current_user,true)
+      elsif ((!params[:page].blank? && !session[:local_file_path].blank?) or (!current_user.cached_information.products_cached_path.nil?))
+        @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false)
+        flash[:notice]="Products are not saved yet" if !current_user.cached_information.products_cached_path.nil?
+      elsif current_user.cached_information.products_cached_path.nil? and current_user.cached_information.is_product_info_reverted
+        @products_array=Product.find_latest_products(current_user)
       end
-      @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false) if !params[:page].blank? && !session[:local_file_path].blank?
-      
+
       if  !@products_array.blank?
-      paginated_products =  WillPaginate::Collection.new(params[:page].blank? ? 1 : params[:page].to_i,1)
-      paginated_products.replace @products_array[paginated_products.offset,paginated_products.per_page]
-      paginated_products.total_entries =@products_array.size
-      @products=paginated_products
+        paginated_products =  WillPaginate::Collection.new(params[:page].blank? ? 1 : params[:page].to_i,1)
+        paginated_products.replace @products_array[paginated_products.offset,paginated_products.per_page]
+        paginated_products.total_entries =@products_array.size
+        @products=paginated_products
       end
+      
     rescue Exception => exc
       flash[:error]=exc.message
     end
@@ -24,6 +29,7 @@ class BulkUploadsController < ApplicationController
   end
 
   def save_product_file
+      flash[:notice]=nil
       @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false)
       page_no=1
       is_error=false
@@ -43,6 +49,8 @@ class BulkUploadsController < ApplicationController
            flash[:notice]="#{@products_array.count} product(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
          end
       end
+      current_user.cached_information.set_product_reverted
+      current_user.cached_information.set_product_cached_file_null
       
       redirect_to :action=>"upload_products_file",:page=>page_no
   end
@@ -53,6 +61,7 @@ class BulkUploadsController < ApplicationController
       products.each do |product|
         product.destroy
       end
+      current_user.cached_information.back_product_reverted
       flash[:notice]="#{products_count} latest uploaded product(s) successfully reverted."
       redirect_to upload_path
   end
@@ -61,9 +70,14 @@ class BulkUploadsController < ApplicationController
      begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
-        @compscraper_array,session[:local_file_path]=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
+        @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
+      elsif ((!params[:page].blank? && !session[:local_file_path_cp].blank?) or (!current_user.cached_information.compscrapper_cached_path.nil?))
+        @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(session[:local_file_path_cp],current_user,false)
+        flash[:notice]="Compscraper items are not saved yet" if !current_user.cached_information.compscrapper_cached_path.nil?
+      elsif current_user.cached_information.compscrapper_cached_path.nil? and current_user.cached_information.is_compscrapper_info_reverted
+        @compscraper_array=Compscraper.find_latest_compscraper_items(current_user)
       end
-      @compscraper_array,session[:local_file_path]=Compscraper.parse_compsraper_csv(session[:local_file_path],current_user,false) if !params[:page].blank? && !session[:local_file_path].blank?
+      
 
       if  !@compscraper_array.blank?
         paginated_cps =  WillPaginate::Collection.new(params[:page].blank? ? 1 : params[:page].to_i,1)
@@ -79,11 +93,14 @@ class BulkUploadsController < ApplicationController
   end
 
   def save_compscraper_file
-      @compscraper_array,session[:local_file_path]=Compscraper.parse_compsraper_csv(session[:local_file_path],current_user,false)
+      @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(session[:local_file_path_cp],current_user,false)
       @compscraper_array.each do |comp|
          comp.user_id=current_user.id
          comp.save(false)
       end
+      current_user.cached_information.set_compscraper_reverted
+      current_user.cached_information.set_compscraper_cached_file_null
+
       flash[:notice]="#{@compscraper_array.count rescue 0} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
       redirect_to :action=>"upload_compscraper_file",:page=>1
   end
@@ -94,6 +111,7 @@ class BulkUploadsController < ApplicationController
       compscrapers.each do |comp|
         comp.destroy
       end
+      current_user.cached_information.back_compscraper_reverted
       redirect_to upload_compscraper_file_path
   end
 

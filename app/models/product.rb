@@ -169,15 +169,15 @@ class Product < ActiveRecord::Base
 
   
   before_validation :capitalize_boolean_fields_text_value
-  validates_inclusion_of :boolean_ups_approved_field, :in => ["YES", "NO"],:message=>"USPS value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_promo_code_section_availablility, :in => ["YES", "NO"],:message=>"Promo code section availability value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_phone_number_visibility, :in => ["YES", "NO"],:message=>"Phone number value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_item_number_visiblity, :in => ["YES", "NO"],:message=>"Item number visibility value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_shipping_free, :in => ["YES", "NO"],:message=>"Shipping free value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_commercial_free_shipping, :in => ["YES", "NO"],:message=>"Commercial free value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_streetsign_freeshiping, :in => ["YES", "NO"],:message=>"StreetSign free value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_streetlights_free_shipping, :in => ["YES", "NO"],:message=>"Streetlights free value should contain 'Yes' or 'No' "
-  validates_inclusion_of :boolean_addressplag_free_shipping, :in => ["YES", "NO"],:message=>"Addressplag free value should contain 'Yes' or 'No' "
+  validates_inclusion_of :boolean_ups_approved_field, :in => ["YES", "NO"],:message=>"USPS value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_promo_code_section_availablility, :in => ["YES", "NO"],:message=>"Promo code section availability value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_phone_number_visibility, :in => ["YES", "NO"],:message=>"Phone number value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_item_number_visiblity, :in => ["YES", "NO"],:message=>"Item number visibility value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_shipping_free, :in => ["YES", "NO"],:message=>"Shipping free value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_commercial_free_shipping, :in => ["YES", "NO"],:message=>"Commercial free value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_streetsign_freeshiping, :in => ["YES", "NO"],:message=>"StreetSign free value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_streetlights_free_shipping, :in => ["YES", "NO"],:message=>"Streetlights free value should contain 'Yes' or 'No' ",:allow_nil=>true
+  validates_inclusion_of :boolean_addressplag_free_shipping, :in => ["YES", "NO"],:message=>"Addressplag free value should contain 'Yes' or 'No' ",:allow_nil=>true
 
 
 
@@ -262,6 +262,10 @@ class Product < ActiveRecord::Base
                  end
 
                   count+=1
+              end
+              if is_uploading_require
+                current_user.cached_information.back_product_reverted
+                current_user.cached_information.set_product_cached_file(file_path)
               end
               #File.delete(file_path)
               return products_array,file_path
@@ -430,7 +434,7 @@ class Product < ActiveRecord::Base
   end
 
   def self.find_latest_products(current_user)
-      last_product=Product.find(:last)
+      last_product=Product.find(:last,:conditions=>["user_id=?",current_user.id])
       products=Product.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,last_product.created_at]) rescue nil
       return products
   end
