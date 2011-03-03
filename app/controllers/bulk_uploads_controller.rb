@@ -13,6 +13,7 @@ class BulkUploadsController < ApplicationController
         flash[:notice]="Products are not saved yet" if !current_user.cached_information.products_cached_path.nil?
       elsif current_user.cached_information.products_cached_path.nil? and current_user.cached_information.is_product_info_reverted
         @products_array=Product.find_latest_products(current_user)
+        flash[:notice]="#{@products_array.count} product(s) successfully added at #{@products_array.first.created_at.strftime("%a %b %d %H:%M:%S %Y")}" if @products_array
       end
 
       if  !@products_array.blank?
@@ -44,7 +45,14 @@ class BulkUploadsController < ApplicationController
       if (page_no-1)==@products_array.count && !is_error
          @products_array.each do |product|
            product.user_id=current_user.id
-           product.save(false)
+           pr=Product.find_by_product_id(product.product_id) rescue nil
+           if pr
+              pr.attributes=product.attributes
+              pr.created_at=Time.now
+              pr.save(false)
+           else
+             product.save(false)
+           end
            page_no=page_no-1
            flash[:notice]="#{@products_array.count} product(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
          end
@@ -76,6 +84,7 @@ class BulkUploadsController < ApplicationController
         flash[:notice]="Compscraper items are not saved yet" if !current_user.cached_information.compscrapper_cached_path.nil?
       elsif current_user.cached_information.compscrapper_cached_path.nil? and current_user.cached_information.is_compscrapper_info_reverted
         @compscraper_array=Compscraper.find_latest_compscraper_items(current_user)
+        flash[:notice]="#{@compscraper_array.count rescue 0} item(s) successfully added at #{@compscraper_array.first.created_at.strftime("%a %b %d %H:%M:%S %Y")}" if @compscraper_array
       end
       
 
@@ -94,15 +103,36 @@ class BulkUploadsController < ApplicationController
 
   def save_compscraper_file
       @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(session[:local_file_path_cp],current_user,false)
-      @compscraper_array.each do |comp|
-         comp.user_id=current_user.id
-         comp.save(false)
+      page_no=1
+      is_error=false
+      @compscraper_array.each do |compp|
+          if !compp.valid? && !compp.errors.on(:compscrapper_id).blank?
+            is_error=true
+            break
+          end
+          page_no+=1
+      end
+
+      if (page_no-1)==@compscraper_array.count && !is_error
+        @compscraper_array.each do |comp|
+           comp.user_id=current_user.id
+           compscraper=Compscraper.find_by_compscrapper_id(comp.compscrapper_id) rescue nil
+           if compscraper
+            compscraper.attributes=comp.attributes
+            compscraper.created_at=Time.now
+            compscraper.save(false)
+           else
+            comp.save(false)
+           end
+           page_no=page_no-1
+        end
+        flash[:notice]="#{@compscraper_array.count rescue 0} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
       end
       current_user.cached_information.set_compscraper_reverted
       current_user.cached_information.set_compscraper_cached_file_null
 
-      flash[:notice]="#{@compscraper_array.count rescue 0} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %Y")}"
-      redirect_to :action=>"upload_compscraper_file",:page=>1
+      
+      redirect_to :action=>"upload_compscraper_file",:page=>page_no
   end
 
   def revert_compscraper

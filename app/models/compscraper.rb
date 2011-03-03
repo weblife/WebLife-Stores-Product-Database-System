@@ -26,6 +26,9 @@
 
 class Compscraper < ActiveRecord::Base
 
+  validates_presence_of :compscrapper_id,:message=>"Id cannot be blank.",:on=>:create
+  validates_format_of :compscrapper_id, :with => /^[a-z0-9-]+$/i,:message=>"ID format is invalid.",:allow_nil=>true,:on=>:create
+
   validates_length_of :item_search_phrase,:allow_nil => true,:maximum   => 100,:too_long  => "Search item phrase must have at most 100 characters"
   validates_length_of :word_that_occur,:allow_nil => true,:maximum   => 100,:too_long  => "word that occur must have at most 100 characters"
   validates_length_of :sort_options,:allow_nil => true,:maximum   => 100,:too_long  => "Sort options must have at most 100 characters"
@@ -47,7 +50,7 @@ class Compscraper < ActiveRecord::Base
               end
 
               #sequenced_csv_array=['Item search phrase','Word that occur:','Sort Options:','Lowest Price','2nd','3rd','4th','5th','6th','Lowest Site','2nd Site','3rd Site','4th Site','5th Site','6th Site']
-              sequenced_db_array=['item_search_phrase','word_that_occur','sort_options','lowest_price','lowest_price_2','lowest_price_3','lowest_price_4','lowest_price_5','lowest_price_6','lowest_site','lowest_site_2','lowest_site_3','lowest_site_4','lowest_site_5','lowest_site_6']
+              sequenced_db_array=['compscrapper_id','item_search_phrase','word_that_occur','sort_options','lowest_price','lowest_price_2','lowest_price_3','lowest_price_4','lowest_price_5','lowest_price_6','lowest_site','lowest_site_2','lowest_site_3','lowest_site_4','lowest_site_5','lowest_site_6']
               params=Hash.new
               compscraper_array=[]
               count=-1

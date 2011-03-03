@@ -1,0 +1,45 @@
+<%if !@compscrapers.blank?%>
+  <%cmp_ids_array=[]%>
+  <%@compscrapers.each do |comp|%>
+     <%cmp_ids_array.push(comp.compscrapper_id)%>
+  <%end%>
+<%end%>
+<table border="0" cellspacing="10" cellpadding="0" >
+  <tr>
+    <td colspan="2" >
+      <b>Errors and Warnings</b>
+    </td>
+  </tr>
+    <%if !cmp_ids_array.blank? && !cmp_ids_array.uniq!.blank?%>
+  <tr>
+    <td colspan="2" >
+      <label style="color:red;" ><b>  Duplicate ids in same upload not allowed.</b></label>
+    </td>
+    </tr>
+    <%end%>
+
+  <%count=1%>
+  <%compscraper.errors.each do |field,error|%>
+  <tr>
+    <td>
+      <%if count==1%>
+      <b>Warnings:</b>
+      <%else%>
+      &nbsp;
+      <%end%>
+      <%count+=1%>
+    </td>
+    <td><%=error if field!="compscrapper_id"%></td>
+  </tr>
+  <%end%>
+  <%if !compscraper.errors.on(:compscrapper_id).blank?%>
+  <tr>
+    <td>
+      <b>Errors:</b>
+    </td>
+    <td>
+        <%=compscraper.errors.on(:compscrapper_id)%>
+    </td>
+  </tr>
+  <%end%>
+</table>

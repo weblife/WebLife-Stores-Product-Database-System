@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110216203616) do
+ActiveRecord::Schema.define(:version => 20110303173256) do
 
   create_table "cached_informations", :force => true do |t|
     t.integer  "user_id"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20110216203616) do
     t.string   "lowest_site_6"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "compscrapper_id"
   end
 
   create_table "hard_code_informations", :force => true do |t|
@@ -228,7 +229,6 @@ ActiveRecord::Schema.define(:version => 20110216203616) do
     t.string   "state",                                    :default => "passive"
     t.datetime "deleted_at"
     t.boolean  "is_admin",                                 :default => false
-    t.string   "cached_file_path"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
