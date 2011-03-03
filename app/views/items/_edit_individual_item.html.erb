@@ -307,6 +307,58 @@
       <%=select(:product, :item_number_visiblity,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.item_number_visiblity)?("1"):("0")})%>
     </td>
   </tr>
+  <tr>
+    <td>Price Overide:</td>
+    <td><%=text_field(:product, :price_override, :size => 50)%></td>
+  </tr>
+  <tr>
+    <td>Free Shipping:</td>
+    <td>
+      <%=select(:product, :free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
+  <tr>
+    <td>Commercial Free Shipping:</td>
+    <td>
+      <%=select(:product, :commercial_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.commercial_free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
+  <tr>
+    <td>Commercial Adjustment:</td>
+    <td><%=text_field(:product, :price_override, :size => 50)%></td>
+  </tr>
+  <tr>
+    <td>Streetsign Free Shipping:</td>
+    <td>
+      <%=select(:product, :streetsign_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.streetsign_free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
+  <tr>
+    <td>Streetsign Adjustment:</td>
+    <td><%=text_field(:product, :streetsign_adjustment, :size => 50)%></td>
+  </tr>
+ <tr>
+    <td>Streetlights Free Shipping:</td>
+    <td>
+      <%=select(:product, :streetlights_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.streetlights_free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
+  <tr>
+    <td>Streetlights Adjustment:</td>
+    <td><%=text_field(:product, :streetlights_adjustment, :size => 50)%></td>
+  </tr>
+
+ <tr>
+    <td>Addressplaq Free Shipping:</td>
+    <td>
+      <%=select(:product, :addressplaq_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.addressplaq_free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
+  <tr>
+    <td>Addressplaq Adjustment:</td>
+    <td><%=text_field(:product, :addressplaq_adjustment, :size => 50)%></td>
+  </tr>
+
 </table>
 
     <%= submit_tag 'Update',{:name=>"bottom_botton",:id=>"bottom_botton"}  %>
