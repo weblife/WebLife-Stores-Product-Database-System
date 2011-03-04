@@ -12,7 +12,8 @@ class ItemsController < ApplicationController
     @url_link=@product.url_link
     @text_anchor=@product.text_anchor
     @property=@product.property
-
+    comp=Compscraper.find_by_id(@product.id)
+    @compscraper=(!comp.blank?)?(comp):(Compscraper.new)
     respond_to do |format|
       format.js {
         render :update do |page|
@@ -35,6 +36,12 @@ class ItemsController < ApplicationController
       @product.text_anchor.save(false)
       @product.url_link.attributes=(params[:url_link])
       @product.url_link.save(false)
+      comp=Compscraper.find_by_id(@product.id)
+      @compscraper=(!comp.blank?)?(comp):(Compscraper.new)
+      @compscraper.id=@product.id if comp.blank?
+      @compscraper.user_id=@product.user_id
+      @compscraper.attributes=params[:compscraper]
+      @compscraper.save(false)
 
     respond_to do |format|
       format.js {
