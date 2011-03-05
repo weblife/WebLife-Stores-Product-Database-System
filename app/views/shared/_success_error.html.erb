@@ -4,5 +4,10 @@
 <%if !flash[:notice].nil?%>
   <div class="success_div <%=success_class_name%>"><%=flash[:notice]%></div>
 <%end%>
+<%if !flash[:updated_notice].nil?%>
+  <br/>
+  <div style="background:#6666CC;text-align:left;" class="success_div <%=success_class_name%>"><%=flash[:updated_notice]%></div>
+  <br/>
+<%end%>
 
-<%flash[:error]=flash[:notice]=nil%>
+<%flash[:error]=flash[:notice]=flash[:updated_notice]=nil%>

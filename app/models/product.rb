@@ -434,9 +434,21 @@ class Product < ActiveRecord::Base
   end
 
   def self.find_latest_products(current_user)
-      last_product=Product.find(:last,:conditions=>["user_id=?",current_user.id])
-      products=Product.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,last_product.created_at]) rescue nil
+      products=Product.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,current_user.cached_information.latest_products_uploaded_time])
+      updated_products=Product.find(:all,:conditions=>["user_id=? and updated_at=?",current_user.id,current_user.cached_information.latest_products_uploaded_time])
+      updated_products.each do |p|
+          products << p
+      end
+      products=products.uniq rescue nil
       return products
+  end
+
+  def self.count_latest_uploaded_products(user)
+      added_products_count=updated_products_count=0
+      added_products=Product.count(:all,:conditions=>["user_id=? and created_at=?",user.id,user.cached_information.latest_products_uploaded_time])
+      updated_products=Product.count(:all,:conditions=>["user_id=? and updated_at=?",user.id,user.cached_information.latest_products_uploaded_time])
+      (added_products==updated_products)?(added_products_count=added_products):(added_products_count=added_products;updated_products_count=(updated_products-added_products))
+      return added_products_count,updated_products_count
   end
 
   private

@@ -23,6 +23,12 @@ class CachedInformation < ActiveRecord::Base
   def set_product_cached_file_null
       self.update_attribute(:products_cached_path,nil)
   end
+  def set_products_uploaded_time
+      self.update_attribute(:latest_products_uploaded_time,Time.now.utc)
+  end
+  def set_compscraper_uploaded_time
+      self.update_attribute(:latest_comp_uploaded_time,Time.now.utc)
+  end
 
   def set_compscraper_reverted
       self.is_compscrapper_info_reverted=true

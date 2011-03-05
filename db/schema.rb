@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110303173256) do
+ActiveRecord::Schema.define(:version => 20110305122042) do
 
   create_table "cached_informations", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20110303173256) do
     t.string   "compscrapper_cached_path"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "latest_products_uploaded_time"
+    t.datetime "latest_comp_uploaded_time"
   end
 
   create_table "compscrapers", :force => true do |t|

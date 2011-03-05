@@ -83,6 +83,14 @@ padding:0px 0px 10px 0px;
 {
     margin-left:463px;
 }
+.zero_left_margin
+{
+    margin-left:0px;
+}
+.left_align_text
+{
+    text-align: left;
+}
 .user_created_margin
 {
     margin-left:40px;
