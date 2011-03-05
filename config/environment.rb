@@ -33,7 +33,9 @@ Rails::Initializer.run do |config|
 
   # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
-  config.time_zone = 'UTC'
+  config.active_record.default_timezone = :utc
+  config.time_zone = 'Pacific Time (US & Canada)'
+
   config.gem 'ruby-debug', :version => '0.10.3', :environment => [:development]
   config.gem 'fastercsv', :version => '1.5.3'
   config.gem 'annotate', :version => '2.4.0', :environment => [:development]
