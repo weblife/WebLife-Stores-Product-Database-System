@@ -198,6 +198,15 @@
             </td>
           </tr>
           <tr valign="top">
+            <td><b>Price Override</b></td>
+            <td><%=product.price_override%>
+              <%unless product.errors.on(:price_override).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:price_override)%>)</label>
+              <%end%>
+
+            </td>
+          </tr>
+          <tr valign="top">
             <td><b>Map Pricing</b></td>
             <td><%=product.property.map_pricing%>
               <%unless product.property.errors.on(:map_pricing).blank?%>

@@ -32,16 +32,22 @@ class BulkUploadsController < ApplicationController
   end
 
   def save_product_file
-      flash[:notice]=nil
+    #Need to improve that code, will do after periority tasks
+      flash[:notice]=session[:duplicate_error]=nil
       @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false)
       page_no=1
       is_error=false
+      product_ids_array=[]
       @products_array.each do |product|
-          if !product.valid? && !product.errors.on(:product_id).blank?
+        product_ids_array.push(product.product_id)
+          if !product.valid? && !product.errors.on(:product_id).blank? or !product.property.errors.on(:wholesale_cost).blank? or !product.errors.on(:name).blank?
             is_error=true
             break
           end
           page_no+=1
+      end
+      if !product_ids_array.blank? && !product_ids_array.uniq!.blank?
+          is_error=true
       end
       
       if (page_no-1)==@products_array.count && !is_error
@@ -59,12 +65,12 @@ class BulkUploadsController < ApplicationController
            current_user.cached_information.set_products_uploaded_time
            page_no=page_no-1
           added_count,updated_count=Product.count_latest_uploaded_products(current_user)
-          flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.utc.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
-          flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.utc.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
+          flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
+          flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
          end
+        current_user.cached_information.set_product_reverted
+        current_user.cached_information.set_product_cached_file_null
       end
-      current_user.cached_information.set_product_reverted
-      current_user.cached_information.set_product_cached_file_null
       
       redirect_to :action=>"upload_products_file",:page=>page_no
   end
@@ -137,8 +143,8 @@ class BulkUploadsController < ApplicationController
         end
         current_user.cached_information.set_compscraper_uploaded_time
         added_count,updated_count=Compscraper.count_latest_uploaded_comp_items(current_user)
-        flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.utc.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
-        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.utc.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
+        flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
+        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
       end
       current_user.cached_information.set_compscraper_reverted
       current_user.cached_information.set_compscraper_cached_file_null

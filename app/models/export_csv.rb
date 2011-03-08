@@ -4,6 +4,7 @@ class ExportCsv
   BUDGET_ADDRESS_PLAQUE=3
   BUDGET_STREET_SIGNS=4
   QUICKBOOKS=5
+  COMPSCRAPER=6
 
 
   def self.export_csv(search,searched_field,searched_text)
@@ -13,6 +14,7 @@ class ExportCsv
       file_path=export_addressplaques(products) if search[:store_csv].to_i==BUDGET_ADDRESS_PLAQUE
       file_path=export_streetsign(products) if search[:store_csv].to_i==BUDGET_STREET_SIGNS
       file_path=export_quickbooks(products) if search[:other_csv].to_i==QUICKBOOKS
+      file_path=export_compscraper() if search[:other_csv].to_i==COMPSCRAPER
       return file_path
   end
 
@@ -42,6 +44,12 @@ class ExportCsv
         header=['Active Status','item','Description','Type','Purchase Description','COGS Account','Cost','Price','Account','Sales Tax Code','Preferred Vendor','Purchased for Resale','Is New','MPN']
         create_file(header,products,"quickbooks-#{Time.now.strftime("%d-%m-%Y %H:%M")}",5)
   end
+  def self.export_compscraper()
+        compscrappers=Compscraper.find :all
+        header=['id','Item search phrase','Word that occur','Sort Options','Lowest Price','2nd','3rd','4th','5th','6th','Lowest Site','2nd Site','3rd Site','4th Site','5th Site','6th Site']
+        create_compscraper_file(header,compscrappers,"compscraper-#{Time.now.strftime("%d-%m-%Y %H:%M")}")
+  end
+
 
   def self.create_file(header,products,name,type)
       file= "#{RAILS_ROOT}/public/input_files/#{name}.csv" #local directory path
@@ -60,6 +68,19 @@ class ExportCsv
            elsif type==QUICKBOOKS
              title << FasterCSV::Row.new(header,[product.active_status,product.output_item,product.name,product.product_type,product.output_purchase_description,product.cogs_account,product.property.wholesale_cost,product.output_sale_price,product.account,product.sales_tax_code,product.manufacturer,product.purchased_for_resale,product.is_new,product.code])
            end
+         end
+      end
+      outfile.close
+      return file
+  end
+
+  def self.create_compscraper_file(header,compscrapers,name)
+      file= "#{RAILS_ROOT}/public/input_files/#{name}.csv" #local directory path
+      outfile = File.open(file, 'wb')
+      FasterCSV.open(file,"w") do |title|
+         title << header
+         compscrapers.each do |comp|
+             title << FasterCSV::Row.new(header,[comp.compscrapper_id,comp.item_search_phrase,comp.word_that_occur,comp.sort_options,comp.lowest_price,comp.lowest_price_2,comp.lowest_price_3,comp.lowest_price_4,comp.lowest_price_5,comp.lowest_price_6,comp.lowest_site,comp.lowest_site_2,comp.lowest_site_3,comp.lowest_site_4,comp.lowest_site_5,comp.lowest_site_6])
          end
       end
       outfile.close

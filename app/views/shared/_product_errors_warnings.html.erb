@@ -10,36 +10,46 @@
       <b>Errors and Warnings</b>
     </td>
   </tr>
+  <%errors=warnings=""%>
     <%if !product_ids_array.blank? && !product_ids_array.uniq!.blank?%>
-  <tr>
-    <td colspan="2" >
-      <label style="color:red;" ><b>  Duplicate ids in same upload not allowed.</b></label>
-    </td>
-    </tr>
+      <%errors+="Duplicate ids in same upload not allowed.<br/>"%>
     <%end%>
 
-  <%count=1%>
-  <%product.errors.each do |field,error|%>
-  <tr>
-    <td>
-      <%if count==1%>
-      <b>Warnings:</b>
-      <%else%>
-      &nbsp;
-      <%end%>
-      <%count+=1%>
-    </td>
-    <td><%=error if field!="product_id"%></td>
-  </tr>
+ <%product.errors.each do |field,error|%>
+    <%if field=="product_id" or field=="name" or field=="property.wholesale_cost"%>
+      <%errors+="#{error}<br/>"%>
+    <%else%>
+      <%warnings+="#{error}<br/>"%>
+    <%end%>
   <%end%>
-  <%if !product.errors.on(:product_id).blank?%>
+<%if !errors.blank?%>
   <tr>
     <td>
       <b>Errors:</b>
     </td>
     <td>
-        <%=product.errors.on(:product_id)%>
+      &nbsp;
     </td>
   </tr>
-  <%end%>
+  <tr>
+    <td>
+      <b>&nbsp;</b>
+    </td>
+    <td>
+      <label style="color:red;" ><b><%=errors%></b></label>
+    </td>
+  </tr>
+<%end%>
+<%if !warnings.blank?%>
+  <tr>
+    <td>
+      <b>Warnings:</b>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><%=warnings%></td>
+  </tr>
+<%end%>
 </table>

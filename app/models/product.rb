@@ -157,6 +157,7 @@ class Product < ActiveRecord::Base
   end 
 
   validates_presence_of :product_id,:message=>"Id cannot be blank.",:on=>:create
+  validates_presence_of :name,:message=>"Name cannot be blank.",:on=>:create
   validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true,:on=>:create
 
   #validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
@@ -453,7 +454,6 @@ class Product < ActiveRecord::Base
 
   private
   def set_default_values
-      self.price_override=0 if self.price_override.blank?
       self.active_status="Active" if self.active_status.blank?
       self.product_type="Non-inventory Part" if self.product_type.blank?
       self.cogs_account="Cost of Goods Sold" if self.cogs_account.blank?
