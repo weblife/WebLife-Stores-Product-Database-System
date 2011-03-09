@@ -14,8 +14,8 @@ class BulkUploadsController < ApplicationController
       elsif current_user.cached_information.products_cached_path.nil? and current_user.cached_information.is_product_info_reverted
         @products_array=Product.find_latest_products(current_user)
         added_count,updated_count=Product.count_latest_uploaded_products(current_user)
-        flash[:notice]="#{added_count} item(s) successfully added at #{@products_array.first.created_at.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
-        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{@products_array.first.created_at.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
+        flash[:notice]="#{added_count} item(s) successfully added at #{current_user.cached_information.latest_products_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
+        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_products_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
       end
 
       if  !@products_array.blank?
@@ -42,6 +42,7 @@ class BulkUploadsController < ApplicationController
         product_ids_array.push(product.product_id)
           if !product.valid? && !product.errors.on(:product_id).blank? or !product.property.errors.on(:wholesale_cost).blank? or !product.errors.on(:name).blank?
             is_error=true
+            page_no+=1
             break
           end
           page_no+=1
@@ -65,8 +66,8 @@ class BulkUploadsController < ApplicationController
            current_user.cached_information.set_products_uploaded_time
            page_no=page_no-1
           added_count,updated_count=Product.count_latest_uploaded_products(current_user)
-          flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
-          flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
+          flash[:notice]="#{added_count} item(s) successfully added at #{current_user.cached_information.latest_products_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && added_count!=0
+          flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_products_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
          end
         current_user.cached_information.set_product_reverted
         current_user.cached_information.set_product_cached_file_null
@@ -97,8 +98,8 @@ class BulkUploadsController < ApplicationController
       elsif current_user.cached_information.compscrapper_cached_path.nil? and current_user.cached_information.is_compscrapper_info_reverted
         @compscraper_array=Compscraper.find_latest_compscraper_items(current_user)
         added_count,updated_count=Compscraper.count_latest_uploaded_comp_items(current_user)
-        flash[:notice]="#{added_count} item(s) successfully added at #{@compscraper_array.first.created_at.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
-        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{@compscraper_array.first.created_at.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
+        flash[:notice]="#{added_count} item(s) successfully added at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
+        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
       end
       
 
@@ -130,21 +131,23 @@ class BulkUploadsController < ApplicationController
       if (page_no-1)==@compscraper_array.count && !is_error
         @compscraper_array.each do |comp|
            comp.user_id=current_user.id
-           compscraper=Compscraper.find_by_compscrapper_id(comp.compscrapper_id) rescue nil
+           product=Product.find_by_product_id(comp.compscrapper_id)
+           compscraper=Compscraper.find_by_id(product.id) rescue nil
            if compscraper
              cr_at=compscraper.created_at
             compscraper.attributes=comp.attributes
             compscraper.created_at=cr_at
             compscraper.save(false)
            else
+            comp.id=product.id if product
             comp.save(false)
            end
            page_no=page_no-1
         end
         current_user.cached_information.set_compscraper_uploaded_time
         added_count,updated_count=Compscraper.count_latest_uploaded_comp_items(current_user)
-        flash[:notice]="#{added_count} item(s) successfully added at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
-        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{Time.now.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
+        flash[:notice]="#{added_count} item(s) successfully added at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
+        flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
       end
       current_user.cached_information.set_compscraper_reverted
       current_user.cached_information.set_compscraper_cached_file_null
