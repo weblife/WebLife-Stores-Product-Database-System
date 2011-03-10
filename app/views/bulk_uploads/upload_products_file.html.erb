@@ -35,7 +35,7 @@
 <%if !@products.blank?%>
 
 <%@products.first.valid?%>
-    <%=render :partial=>"/shared/product_errors_warnings",:locals=>{:product=>@products.first}%>
+    <%=render :partial=>"/shared/product_errors_warnings",:locals=>{:products=>@products}%>
 
     <table border="0" cellspacing="10" cellpadding="0" >
       <tr>

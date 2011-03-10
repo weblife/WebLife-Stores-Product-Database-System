@@ -268,8 +268,8 @@ class Product < ActiveRecord::Base
                 current_user.cached_information.back_product_reverted
                 current_user.cached_information.set_product_cached_file(file_path)
               end
-              #File.delete(file_path)
-              return products_array,file_path
+              
+              return products_array
         end
 
 

@@ -77,8 +77,8 @@ class Compscraper < ActiveRecord::Base
               end
 
 
-              #File.delete(file_path)
-              return compscraper_array,file_path
+
+              return compscraper_array
         end
 
 

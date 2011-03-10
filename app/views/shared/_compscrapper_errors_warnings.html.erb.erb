@@ -1,45 +1,63 @@
-<%if !@compscrapers.blank?%>
-  <%cmp_ids_array=[]%>
-  <%@compscrapers.each do |comp|%>
-     <%cmp_ids_array.push(comp.compscrapper_id)%>
-  <%end%>
-<%end%>
 <table border="0" cellspacing="10" cellpadding="0" >
   <tr>
     <td colspan="2" >
       <b>Errors and Warnings</b>
     </td>
   </tr>
-    <%if !cmp_ids_array.blank? && !cmp_ids_array.uniq!.blank?%>
-  <tr>
-    <td colspan="2" >
-      <label style="color:red;" ><b>  Duplicate ids in same upload not allowed.</b></label>
-    </td>
-    </tr>
+  <%errors=[]%>
+  <%warnings=[]%>
+  <%comp_ids_array=[]%>
+<%@compscraper_array.each do |comp|%>
+  <%comp.valid?%>
+ <%comp.errors.each do |field,error|%>
+    <%if field=="compscrapper_id"%>
+      <%errors.push(error)%>
+    <%else%>
+      <%warnings.push(error)%>
+    <%end%>
+  <%end%>
+    <%comp_ids_array.push(comp.compscrapper_id)%>
+<%end%>
+<%if !errors.blank?%>
+  <%hash=errors.dup_hash%>
+  <%errs=""%>
+  <%hash.each {|key, value| errs+="(#{value}) #{key}<br/>" }%>
+    <%if !comp_ids_array.blank? && !comp_ids_array.uniq!.blank?%>
+      <%errs+="Duplicate ids in same upload not allowed.<br/>"%>
     <%end%>
 
-  <%count=1%>
-  <%compscraper.errors.each do |field,error|%>
-  <tr>
-    <td>
-      <%if count==1%>
-      <b>Warnings:</b>
-      <%else%>
-      &nbsp;
-      <%end%>
-      <%count+=1%>
-    </td>
-    <td><%=error if field!="compscrapper_id"%></td>
-  </tr>
-  <%end%>
-  <%if !compscraper.errors.on(:compscrapper_id).blank?%>
   <tr>
     <td>
       <b>Errors:</b>
     </td>
     <td>
-        <%=compscraper.errors.on(:compscrapper_id)%>
+      &nbsp;
     </td>
   </tr>
-  <%end%>
+  <tr>
+    <td>
+      <b>&nbsp;</b>
+    </td>
+    <td>
+      <label style="color:red;" ><b><%=errs%></b></label>
+    </td>
+  </tr>
+<%end%>
+
+<%if !warnings.blank?%>
+  <%hash=warnings.dup_hash%>
+  <%warn=""%>
+  <%hash.each {|key, value| warn+="(#{value}) #{key}<br/>" }%>
+
+  <tr>
+    <td>
+      <b>Warnings:</b>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><%=warn%></td>
+  </tr>
+<%end%>
 </table>

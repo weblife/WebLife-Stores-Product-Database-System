@@ -7,10 +7,10 @@ class BulkUploadsController < ApplicationController
      begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
-        @products_array,session[:local_file_path]=Product.parse_csv(params[:file],current_user,true)
-      elsif ((!params[:page].blank? && !session[:local_file_path].blank?) or (!current_user.cached_information.products_cached_path.nil?))
-        @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false)
-        flash[:notice]="Products are not saved yet" if !current_user.cached_information.products_cached_path.nil?
+        @products_array=Product.parse_csv(params[:file],current_user,true)
+      elsif !current_user.cached_information.products_cached_path.nil?
+        @products_array=Product.parse_csv(current_user.cached_information.products_cached_path,current_user,false)
+        flash[:notice]="Products are not saved yet" 
       elsif current_user.cached_information.products_cached_path.nil? and current_user.cached_information.is_product_info_reverted
         @products_array=Product.find_latest_products(current_user)
         added_count,updated_count=Product.count_latest_uploaded_products(current_user)
@@ -34,7 +34,7 @@ class BulkUploadsController < ApplicationController
   def save_product_file
     #Need to improve that code, will do after periority tasks
       flash[:notice]=session[:duplicate_error]=nil
-      @products_array,session[:local_file_path]=Product.parse_csv(session[:local_file_path],current_user,false)
+      @products_array=Product.parse_csv(current_user.cached_information.products_cached_path,current_user,false)
       page_no=1
       is_error=false
       product_ids_array=[]
@@ -70,6 +70,7 @@ class BulkUploadsController < ApplicationController
           flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_products_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @products_array && updated_count!=0
          end
         current_user.cached_information.set_product_reverted
+        File.delete(current_user.cached_information.products_cached_path)
         current_user.cached_information.set_product_cached_file_null
       end
       
@@ -91,10 +92,10 @@ class BulkUploadsController < ApplicationController
      begin
       #params[:page] condition is added due to jump to # feature
       if request.post? and params[:page].blank?
-        @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
-      elsif ((!params[:page].blank? && !session[:local_file_path_cp].blank?) or (!current_user.cached_information.compscrapper_cached_path.nil?))
-        @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(session[:local_file_path_cp],current_user,false)
-        flash[:notice]="Compscraper items are not saved yet" if !current_user.cached_information.compscrapper_cached_path.nil?
+        @compscraper_array=Compscraper.parse_compsraper_csv(params[:file],current_user,true)
+      elsif !current_user.cached_information.compscrapper_cached_path.nil?
+        @compscraper_array=Compscraper.parse_compsraper_csv(current_user.cached_information.compscrapper_cached_path,current_user,false)
+        flash[:notice]="Compscraper items are not saved yet."
       elsif current_user.cached_information.compscrapper_cached_path.nil? and current_user.cached_information.is_compscrapper_info_reverted
         @compscraper_array=Compscraper.find_latest_compscraper_items(current_user)
         added_count,updated_count=Compscraper.count_latest_uploaded_comp_items(current_user)
@@ -117,7 +118,7 @@ class BulkUploadsController < ApplicationController
   end
 
   def save_compscraper_file
-      @compscraper_array,session[:local_file_path_cp]=Compscraper.parse_compsraper_csv(session[:local_file_path_cp],current_user,false)
+      @compscraper_array=Compscraper.parse_compsraper_csv(current_user.cached_information.compscrapper_cached_path,current_user,false)
       page_no=1
       is_error=false
       @compscraper_array.each do |compp|
@@ -150,6 +151,7 @@ class BulkUploadsController < ApplicationController
         flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
       end
       current_user.cached_information.set_compscraper_reverted
+      File.delete(current_user.cached_information.compscrapper_cached_path)
       current_user.cached_information.set_compscraper_cached_file_null
 
       
