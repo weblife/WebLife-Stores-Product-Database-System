@@ -138,7 +138,7 @@ class Product < ActiveRecord::Base
                 :output_size_for_data_feeds,:output_good_margins,:output_profit,:output_invalid_ship_method,
                 :output_multibox_dimensions,:output_multibox_weights,:output_no_of_boxes,:output_origin_zip,
                 :output_flat_ship_rate,:output_free_shipping,:output_item,:output_purchase_description,:output_et_right_cross,
-                :output_et_right_break,:output_et_right_feature,:commercial_adjustment,:meta_data
+                :output_et_right_break,:output_et_right_feature,:meta_data
 #Boolean fields for validations
   attr_accessor :boolean_ups_approved_field,:boolean_promo_code_section_availablility,
                 :boolean_phone_number_visibility,:boolean_item_number_visiblity,
@@ -496,7 +496,7 @@ class Product < ActiveRecord::Base
       self.is_usps_approved=true if self.boolean_ups_approved_field=="YES"
       self.promo_code_section_availablility=true if self.boolean_promo_code_section_availablility=="YES"
       self.phone_number_visibility=true if self.boolean_phone_number_visibility=="YES"
-      self.item_number_visiblity=true if self.boolean_item_number_visiblity=="YES"
+      self.item_number_visiblity=false if self.boolean_item_number_visiblity=="NO"
       self.free_shipping=true if self.boolean_shipping_free=="YES"
       self.commercial_free_shipping=true if self.boolean_commercial_free_shipping=="YES"
       self.streetsign_free_shipping=true if self.boolean_streetsign_freeshiping=="YES"

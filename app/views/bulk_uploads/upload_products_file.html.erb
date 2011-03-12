@@ -263,7 +263,7 @@
           </tr>
           <tr valign="top">
             <td><b>Is USPS Approved</b></td>
-            <td><%=product.boolean_ups_approved_field%>
+            <td><%=(product.boolean_ups_approved_field)?(product.boolean_ups_approved_field):((product.is_usps_approved)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_ups_approved_field).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_ups_approved_field)%>)</label>
               <%end%>
@@ -346,7 +346,7 @@
           </tr>
           <tr valign="top">
             <td nowrap><b>Promo Code Section Availablility</b></td>
-            <td><%=product.boolean_promo_code_section_availablility%>
+            <td><%=(product.boolean_promo_code_section_availablility)?():((product.promo_code_section_availablility)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_promo_code_section_availablility).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_promo_code_section_availablility)%>)</label>
               <%end%>
@@ -670,7 +670,7 @@
           </tr>
           <tr valign="top">
             <td><b>Phone number visibility</b></td>
-            <td><%=product.boolean_phone_number_visibility%>
+            <td><%=(product.boolean_phone_number_visibility)?(product.boolean_phone_number_visibility):((product.phone_number_visibility)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_phone_number_visibility).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_phone_number_visibility)%>)</label>
               <%end%>
@@ -679,7 +679,7 @@
           </tr>
           <tr valign="top">
             <td><b>Item number visibility</b></td>
-            <td><%=product.boolean_item_number_visiblity%>
+            <td><%=(product.boolean_item_number_visiblity)?(product.boolean_item_number_visiblity):((product.item_number_visiblity)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_item_number_visiblity).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_item_number_visiblity)%>)</label>
               <%end%>
@@ -688,7 +688,7 @@
           </tr>
           <tr valign="top">
             <td><b>Free Shipping</b></td>
-            <td><%=product.boolean_shipping_free%>
+            <td><%=(product.boolean_shipping_free)?(product.boolean_shipping_free):((product.free_shipping)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_shipping_free).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_shipping_free)%>)</label>
               <%end%>
@@ -697,7 +697,7 @@
           </tr>
           <tr valign="top">
             <td><b>Commercial Free Shipping</b></td>
-            <td><%=product.boolean_commercial_free_shipping%>
+            <td><%=(product.boolean_commercial_free_shipping)?(product.boolean_commercial_free_shipping):((product.commercial_free_shipping)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_commercial_free_shipping).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_commercial_free_shipping)%>)</label>
               <%end%>
@@ -717,7 +717,7 @@
                 
           <tr valign="top">
             <td><b>Streetsign Free Shipping</b></td>
-            <td><%=product.boolean_streetsign_freeshiping%>
+            <td><%=(product.boolean_streetsign_freeshiping)?(product.boolean_streetsign_freeshiping):((product.streetsign_free_shipping)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_streetsign_freeshiping).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_streetsign_freeshiping)%>)</label>
               <%end%>
@@ -737,7 +737,7 @@
 
           <tr valign="top">
             <td><b>Streetlights Free Shipping</b></td>
-            <td><%=product.boolean_streetlights_free_shipping%>
+            <td><%=(product.boolean_streetlights_free_shipping)?(product.boolean_streetlights_free_shipping):((product.streetlights_free_shipping)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_streetlights_free_shipping).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_streetlights_free_shipping)%>)</label>
               <%end%>
@@ -756,7 +756,7 @@
 
           <tr valign="top">
             <td><b>Addressplag Free Shipping</b></td>
-            <td><%=product.boolean_addressplag_free_shipping%>
+            <td><%=(product.boolean_addressplag_free_shipping)?(product.boolean_addressplag_free_shipping):((product.addressplaq_free_shipping)?("YES"):("NO"))%>
               <%unless product.errors.on(:boolean_addressplag_free_shipping).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:boolean_addressplag_free_shipping)%>)</label>
               <%end%>
