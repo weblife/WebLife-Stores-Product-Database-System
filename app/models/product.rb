@@ -374,7 +374,7 @@ class Product < ActiveRecord::Base
       property.overall_size
   end
   def output_profit
-      (self.free_shipping)?(output_sale_price-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1)))):(output_sale_price+([20+(self.property.actual_weight*0.45),((self.free_shipping)?(0):(15+(self.property.wholesale_cost*0.1))),0].max)-((output_sale_price*0.04)+(self.property.wholesale_cost+(15+self.property.wholesale_cost*0.1))))
+      (self.free_shipping)?(output_sale_price.to_f-((output_sale_price.to_f*0.04)+(self.property.wholesale_cost.to_f+(15+self.property.wholesale_cost.to_f*0.1)))):(output_sale_price.to_f+([20+(self.property.actual_weight.to_f*0.45),((self.free_shipping)?(0):(15+(self.property.wholesale_cost.to_f*0.1))),0].max)-((output_sale_price.to_f*0.04)+(self.property.wholesale_cost.to_f+(15+self.property.wholesale_cost.to_f*0.1))))
   end
   def output_good_margins
       (output_profit>35)?("Yes"):("")
@@ -427,7 +427,7 @@ class Product < ActiveRecord::Base
   end
 
   def commercial_adjustment_rate
-      (self.property.wholesale_cost<20)?(0.99):((self.property.wholesale_cost<50)?(0.95):((self.property.wholesale_cost<150)?(0.92):((self.property.wholesale_cost<500)?(0.9):(0.85))))
+      (self.property.wholesale_cost.to_f<20)?(0.99):((self.property.wholesale_cost.to_f<50)?(0.95):((self.property.wholesale_cost.to_f<150)?(0.92):((self.property.wholesale_cost.to_f<500)?(0.9):(0.85))))
   end
 
   def meta_data
