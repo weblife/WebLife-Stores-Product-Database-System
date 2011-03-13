@@ -4,28 +4,42 @@
       <b>Errors and Warnings</b>
     </td>
   </tr>
-  <%errors=[]%>
-  <%warnings=[]%>
+  <%errors="<table>"%>
+  <%warnings="<table>"%>
   <%comp_ids_array=[]%>
-<%@compscraper_array.each do |comp|%>
+<%@compscraper_array.each_with_index do |comp,index|%>
   <%comp.valid?%>
+  <%is_error_found=is_warning_found=true%>
  <%comp.errors.each do |field,error|%>
     <%if field=="compscrapper_id" && error!="Compscraper id not exist in database, will be ignored."%>
-      <%errors.push(error)%>
+      <%if is_error_found%>
+      <%errors+="<tr><td>#{link_to index+1,:action=>"upload_compscraper_file",:page=>index+1}&nbsp;#{link_to "[show]",:action=>"upload_compscraper_file",:page=>index+1}</td>"%>
+      <%else%>
+        <%errors+="<tr><td>&nbsp;</td>"%>
+      <%end%>
+      <%errors+="<td>#{error}</td></tr>"%>
+      <%is_error_found=false%>
     <%else%>
-      <%warnings.push(error)%>
+      <%if is_warning_found %>
+      <%warnings+="<tr><td>#{link_to index+1,:action=>"upload_compscraper_file",:page=>index+1}&nbsp;#{link_to "[show]",:action=>"upload_compscraper_file",:page=>index+1}</td>"%>
+      <%else%>
+      <%warnings+="<tr><td>&nbsp;</td>"%>
+      <%end%>
+      <%warnings+="<td>#{error}</td></tr>"%>
+      <%is_warning_found=false%>
     <%end%>
   <%end%>
     <%comp_ids_array.push(comp.compscrapper_id)%>
 <%end%>
-<%if !errors.blank?%>
-  <%hash=errors.dup_hash%>
-  <%errs=""%>
-  <%hash.each {|key, value| errs+="(#{value}) #{key}<br/>" }%>
-    <%if !comp_ids_array.blank? && !comp_ids_array.uniq!.blank?%>
-      <%errs+="Duplicate ids in same upload not allowed.<br/>"%>
+<%errors+="</table>"%>
+<%warnings+="</table>"%>
+  <%comp_ids_array=comp_ids_array.compact%>
+<%(!comp_ids_array.blank? && !comp_ids_array.uniq!.blank?)?(is_uniq=false):(is_uniq=true)%>
+<%if ((!errors.gsub("<table></table>","").blank?) || (!is_uniq))%>
+    <%if !is_uniq%>
+        <%errors=errors.gsub("</table>","")%>
+      <%errors+="<tr rowspan='4' ><td colspan='2'= >&nbsp;</td></tr><tr><td>&nbsp;</td><td>Duplicate ids in same upload not allowed.</td></tr></table>"%>
     <%end%>
-
   <tr>
     <td>
       <b>Errors:</b>
@@ -35,20 +49,13 @@
     </td>
   </tr>
   <tr>
-    <td>
-      <b>&nbsp;</b>
-    </td>
-    <td>
-      <label style="color:red;" ><b><%=errs%></b></label>
+    <td colspan="2" >
+      <label style="color:red;" ><b><%=errors%></b></label>
     </td>
   </tr>
 <%end%>
 
-<%if !warnings.blank?%>
-  <%hash=warnings.dup_hash%>
-  <%warn=""%>
-  <%hash.each {|key, value| warn+="(#{value}) #{key}<br/>" }%>
-
+<%if !warnings.blank? && !warnings.gsub("<table></table>","").blank?%>
   <tr>
     <td>
       <b>Warnings:</b>
@@ -56,8 +63,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>&nbsp;</td>
-    <td><%=warn%></td>
+    <td colspan="2" ><%=warnings%></td>
   </tr>
 <%end%>
 </table>

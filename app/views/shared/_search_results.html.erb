@@ -16,7 +16,7 @@
       Select Category:
     </td>
     <td colspan="2" >
-      <%=select("search", "search_field", options_for_select([["Manufacturer", "manufacturer"],["Code", "code"], ["Name", "name"], ["Description", "Item_description_with_html"]],:selected=>(params[:search][:search_field] rescue nil)))%>
+      <%=select("search", "search_field", options_for_select([["Manufacturer", "manufacturer"],["Code", "code"], ["ID", "id"], ["Name", "name"], ["Description", "Item_description_with_html"]],:selected=>(params[:search][:search_field] rescue nil)))%>
     </td>
   </tr>
 </table>

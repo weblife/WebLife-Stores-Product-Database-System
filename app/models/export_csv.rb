@@ -14,7 +14,7 @@ class ExportCsv
       file_path=export_addressplaques(products) if search[:store_csv].to_i==BUDGET_ADDRESS_PLAQUE
       file_path=export_streetsign(products) if search[:store_csv].to_i==BUDGET_STREET_SIGNS
       file_path=export_quickbooks(products) if search[:other_csv].to_i==QUICKBOOKS
-      file_path=export_compscraper() if search[:other_csv].to_i==COMPSCRAPER
+      file_path=export_compscraper(products) if search[:other_csv].to_i==COMPSCRAPER
       return file_path
   end
 
@@ -44,10 +44,9 @@ class ExportCsv
         header=['Active Status','item','Description','Type','Purchase Description','COGS Account','Cost','Price','Account','Sales Tax Code','Preferred Vendor','Purchased for Resale','Is New','MPN']
         create_file(header,products,"quickbooks-#{Time.now.strftime("%d-%m-%Y %H:%M")}",5)
   end
-  def self.export_compscraper()
-        compscrappers=Compscraper.find :all
+  def self.export_compscraper(products)
         header=['id','Item search phrase','Word that occur','Sort Options','Lowest Price','2nd','3rd','4th','5th','6th','Lowest Site','2nd Site','3rd Site','4th Site','5th Site','6th Site']
-        create_compscraper_file(header,compscrappers,"compscraper-#{Time.now.strftime("%d-%m-%Y %H:%M")}")
+        create_file(header,products,"compscraper-#{Time.now.strftime("%d-%m-%Y %H:%M")}",6)
   end
 
 
@@ -67,24 +66,12 @@ class ExportCsv
              title << FasterCSV::Row.new(header,[product.product_id,"http://www.budgetstreetsigns.com/#{product.product_id}.html",product.path,product.manufacturer,product.code,product.name+" by Budget Street Signs",(product.output_sale_price.to_f*product.commercial_adjustment_rate.to_f*product.streetsign_adjustment.to_f),((product.output_sale_price.to_f*product.commercial_adjustment_rate.to_f*product.streetsign_adjustment.to_f*1.25).round(2)),product.output_caption,product.options,product.output_ship_weight,product.availability,product.warranty,product.shipping_time,(product.streetsign_free_shipping)?("Yes"):("No"),(product.is_usps_approved)?("Yes"):("No"),product.output_shipping_costs,product.Item_description_with_html,product.image,product.inset.inset,product.inset.inset_2,product.inset.inset_3,product.inset.inset_4,product.inset.inset_5,product.inset.inset_6,product.inset.inset_7,product.inset.inset_8,product.inset.inset_9,product.property.material,product.property.style,product.property.color,product.output_model_no,(product.streetsign_free_shipping)?(0):(""),product.free_ship_method,product.property.ship_weight,(product.taxable)?("Yes"):("NO"),"",(product.ship_alone)?("Yes"):("No"),product.origin_zip,product.property.number_of_boxes,product.property.multi_box_weights,product.property.multi_box_dimensions,product.invalid_ship_methods,product.related_Items,(product.phone_number_visibility)?("Yes"):("No"),(product.item_number_visiblity)?("Yes"):("No"),product.property.overall_size,product.output_return_details,product.output_good_margins,product.output_size_for_data_feeds,product.output_ships_within_for_feed,product.output_need_for_feed_under_70,product.output_et_right_order,product.output_et_right_break,product.output_et_right_cross,product.output_et_right_feature,Time.now.strftime("%d-%m-%Y")])
            elsif type==QUICKBOOKS
              title << FasterCSV::Row.new(header,[product.active_status,product.output_item,product.name,product.product_type,product.output_purchase_description,product.cogs_account,product.property.wholesale_cost,product.output_sale_price,product.account,product.sales_tax_code,product.manufacturer,product.purchased_for_resale,product.is_new,product.code])
+           elsif type==COMPSCRAPER
+             title << FasterCSV::Row.new(header,[product.product_id,product.compscraper.item_search_phrase,product.compscraper.word_that_occur,product.compscraper.sort_options,product.compscraper.lowest_price,product.compscraper.lowest_price_2,product.compscraper.lowest_price_3,product.compscraper.lowest_price_4,product.compscraper.lowest_price_5,product.compscraper.lowest_price_6,product.compscraper.lowest_site,product.compscraper.lowest_site_2,product.compscraper.lowest_site_3,product.compscraper.lowest_site_4,product.compscraper.lowest_site_5,product.compscraper.lowest_site_6])
            end
          end
       end
       outfile.close
       return file
   end
-
-  def self.create_compscraper_file(header,compscrapers,name)
-      file= "#{RAILS_ROOT}/public/input_files/#{name}.csv" #local directory path
-      outfile = File.open(file, 'wb')
-      FasterCSV.open(file,"w") do |title|
-         title << header
-         compscrapers.each do |comp|
-             title << FasterCSV::Row.new(header,[comp.product.product_id,comp.item_search_phrase,comp.word_that_occur,comp.sort_options,comp.lowest_price,comp.lowest_price_2,comp.lowest_price_3,comp.lowest_price_4,comp.lowest_price_5,comp.lowest_price_6,comp.lowest_site,comp.lowest_site_2,comp.lowest_site_3,comp.lowest_site_4,comp.lowest_site_5,comp.lowest_site_6])
-         end
-      end
-      outfile.close
-      return file
-  end
-
 end

@@ -298,6 +298,7 @@ class Product < ActiveRecord::Base
       
       db_field="code" if searched_field=="code"
       db_field="name" if searched_field=="name"
+      db_field="product_id" if searched_field=="id"
       db_field="Item_description_with_html" if searched_field=="Item_description_with_html"
       db_field="manufacturer" if searched_field.blank? || (searched_field=="manufacturer") || db_field.blank?
 
@@ -452,6 +453,8 @@ class Product < ActiveRecord::Base
       added_products=Product.count(:all,:conditions=>["user_id=? and created_at=?",user.id,user.cached_information.latest_products_uploaded_time])
       updated_products=Product.count(:all,:conditions=>["user_id=? and updated_at=?",user.id,user.cached_information.latest_products_uploaded_time])
       (added_products==updated_products)?(added_products_count=added_products):(added_products_count=added_products;updated_products_count=(updated_products-added_products))
+      added_products_count=0 if added_products_count<0
+      updated_products_count=0 if updated_products_count<0
       return added_products_count,updated_products_count
   end
 
