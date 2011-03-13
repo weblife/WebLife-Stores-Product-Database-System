@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login_from_admin '/login_from_admin/:id', :controller => 'users', :action => 'login_from_admin'
   map.dashboard '/dashboard', :controller => 'users', :action => 'dashboard'
   map.resources :users
+  map.resources :stores
 
   map.resource :session
 
@@ -65,4 +66,9 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
+
+  map.connect '*path',
+    :controller=>"admins",
+    :action=>"unintended_url"
+
 end

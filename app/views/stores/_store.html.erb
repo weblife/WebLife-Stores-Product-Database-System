@@ -1,0 +1,44 @@
+<% form_for(@store) do |f| %>
+<%= f.error_messages %>
+  <table border="0" cellspacing="5" cellpadding="0">
+    <tr>
+      <td>
+        <b>Name:</b>
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <%= f.text_field :name%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Url:</b>
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <%= f.text_field :store_url%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Type:</b>
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <%=f.select(:store_type, { "Store" => "1", "Other" => "2"},{:selected => store.store_type.to_s}) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>Status:</b>
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <%=f.select(:is_active, { "Active" => "1", "Inactive" => "0"},{:selected => (store.is_active)?("1"):("0")}) %>
+      </td>
+    </tr>
+
+  </table>
+<p class="alignR "><%= f.submit((is_add)?( 'Save'):( 'Update'))%>&nbsp;or&nbsp;<%=link_to "Cancel",stores_path%></p>
+<% end %>
+

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
    layout "layout"
+   before_filter :validate_user
   def search_items
       if request.post?
         @results=Product.search_products(params[:search][:search_field],params[:search_text])

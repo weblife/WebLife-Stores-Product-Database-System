@@ -1,6 +1,6 @@
 class BulkUploadsController < ApplicationController
     layout "layout"
-
+  before_filter :validate_user
     
   def upload_products_file
 

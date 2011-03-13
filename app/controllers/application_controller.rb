@@ -9,5 +9,18 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
    filter_parameter_logging :password
+   
   # require 'Utilities'
+  def validate_user
+      if current_user.blank?
+          redirect_to login_url and return false
+      end
+  end
+  def validate_admin
+      if current_user.blank? or (!current_user.blank? && current_user.is_admin)
+        return true 
+      else
+          render :file => "#{RAILS_ROOT}/public/422.html",:status=>422
+      end
+  end
 end

@@ -11,4 +11,13 @@
 #
 
 class Store < ActiveRecord::Base
+  belongs_to :user
+  validates_presence_of :name,:message=>"Name cannot be blank."
+  validates_presence_of :store_url,:message=>"Store url cannot be blank.",:if=>:is_store?
+
+  private
+
+  def is_store?
+      store_type=="1"
+  end
 end

@@ -42,6 +42,7 @@ class User < ActiveRecord::Base
   has_many :products,:dependent => :destroy
   has_many :compscrapers,:dependent => :destroy
   has_one :cached_information,:dependent => :destroy
+  has_many :stores,:dependent => :destroy
 
   after_save :set_cached_info
 
@@ -74,6 +75,7 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+  
 
   def self.count_active_users
       count(:all,:conditions=>["state='active'"])

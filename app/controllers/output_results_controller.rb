@@ -1,5 +1,6 @@
 class OutputResultsController < ApplicationController
     layout "layout"
+    before_filter :validate_user
   def output
     @product=Product.find :first
     if request.post?
