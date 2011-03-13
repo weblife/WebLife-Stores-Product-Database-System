@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110305122042) do
+ActiveRecord::Schema.define(:version => 20110313080942) do
 
   create_table "cached_informations", :force => true do |t|
     t.integer  "user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110305122042) do
     t.string   "lowest_site_6"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "compscrapper_id"
+    t.integer  "product_id"
   end
 
   create_table "hard_code_informations", :force => true do |t|

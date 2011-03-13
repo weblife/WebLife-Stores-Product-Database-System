@@ -122,26 +122,26 @@ class BulkUploadsController < ApplicationController
       page_no=1
       is_error=false
       @compscraper_array.each do |compp|
-          if !compp.valid? && !compp.errors.on(:compscrapper_id).blank?
+          if !compp.valid? && !compp.errors.on(:compscrapper_id).blank? && compp.errors.on(:compscrapper_id)!="Compscraper id not exist in database, will be ignored."
             is_error=true
             break
           end
           page_no+=1
       end
-
       if (page_no-1)==@compscraper_array.count && !is_error
         @compscraper_array.each do |comp|
            comp.user_id=current_user.id
            product=Product.find_by_product_id(comp.compscrapper_id)
-           compscraper=Compscraper.find_by_id(product.id) rescue nil
+           compscraper=product.compscraper rescue nil
            if compscraper
              cr_at=compscraper.created_at
             compscraper.attributes=comp.attributes
             compscraper.created_at=cr_at
+            compscraper.product=product
             compscraper.save(false)
-           else
-            comp.id=product.id if product
-            comp.save(false)
+#           else
+#            comp.id=product.id if product
+#            comp.save(false)
            end
            page_no=page_no-1
         end
@@ -149,10 +149,10 @@ class BulkUploadsController < ApplicationController
         added_count,updated_count=Compscraper.count_latest_uploaded_comp_items(current_user)
         flash[:notice]="#{added_count} item(s) successfully added at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && added_count!=0
         flash[:updated_notice]="#{updated_count} item(s) successfully updated at #{current_user.cached_information.latest_comp_uploaded_time.strftime("%a %b %d %H:%M:%S %p %Z %Y")}" if @compscraper_array && updated_count!=0
+        current_user.cached_information.set_compscraper_reverted
+        File.delete(current_user.cached_information.compscrapper_cached_path)
+        current_user.cached_information.set_compscraper_cached_file_null
       end
-      current_user.cached_information.set_compscraper_reverted
-      File.delete(current_user.cached_information.compscrapper_cached_path)
-      current_user.cached_information.set_compscraper_cached_file_null
 
       
       redirect_to :action=>"upload_compscraper_file",:page=>page_no

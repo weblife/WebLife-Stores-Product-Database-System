@@ -10,7 +10,7 @@
 <%@compscraper_array.each do |comp|%>
   <%comp.valid?%>
  <%comp.errors.each do |field,error|%>
-    <%if field=="compscrapper_id"%>
+    <%if field=="compscrapper_id" && error!="Compscraper id not exist in database, will be ignored."%>
       <%errors.push(error)%>
     <%else%>
       <%warnings.push(error)%>

@@ -28,6 +28,7 @@ class Compscraper < ActiveRecord::Base
 
   validates_presence_of :compscrapper_id,:message=>"Id cannot be blank.",:on=>:create
   validates_format_of :compscrapper_id, :with => /^[a-z0-9-]+$/i,:message=>"ID format is invalid.",:allow_nil=>true,:on=>:create
+  validate :compscrapper_item_availability,:on=>:create
 
   validates_length_of :item_search_phrase,:allow_nil => true,:maximum   => 100,:too_long  => "Search item phrase must have at most 100 characters"
   validates_length_of :word_that_occur,:allow_nil => true,:maximum   => 100,:too_long  => "word that occur must have at most 100 characters"
@@ -39,7 +40,9 @@ class Compscraper < ActiveRecord::Base
   validates_length_of :lowest_site_5,:allow_nil => true,:maximum   => 100,:too_long  => "5th lowest site must have at most 100 characters"
   validates_length_of :lowest_site_6,:allow_nil => true,:maximum   => 100,:too_long  => "6th lowest site must have at most 100 characters"
 
-  attr_accessor :minimum_lowest_price
+  attr_accessor :minimum_lowest_price,:compscrapper_id
+
+  belongs_to :product
 
     def self.parse_compsraper_csv(file,current_user,is_uploading_require)
               #uploading file locally
@@ -114,5 +117,10 @@ class Compscraper < ActiveRecord::Base
       return added_items_count,updated_items_count
   end
 
-
+  private
+  def compscrapper_item_availability
+      return true if compscrapper_id.blank?
+      prd=Product.find(:first,:conditions=>["product_id=?",compscrapper_id])
+      errors.add(:compscrapper_id,"Compscraper id not exist in database, will be ignored.") if prd.blank?
+  end
 end

@@ -64,9 +64,10 @@
       </tr>
       <%@compscrapers.each do |compscraper|%>
           <tr valign="top">
-            <td nowrap><b>ID</b></td>
+            <td nowrap><b>ID</b>
+            </td>
             <td>
-              <%=compscraper.compscrapper_id%>
+              <%=(!compscraper.compscrapper_id.blank?)?(compscraper.compscrapper_id):((compscraper.product)?(compscraper.product.product_id):(""))%>
               <%unless compscraper.errors.on(:compscrapper_id).blank?%>
               <label style="color:red;" > (<%=compscraper.errors.on(:compscrapper_id)%>)</label>
               <%end%>

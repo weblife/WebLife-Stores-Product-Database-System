@@ -80,7 +80,7 @@ class ExportCsv
       FasterCSV.open(file,"w") do |title|
          title << header
          compscrapers.each do |comp|
-             title << FasterCSV::Row.new(header,[comp.compscrapper_id,comp.item_search_phrase,comp.word_that_occur,comp.sort_options,comp.lowest_price,comp.lowest_price_2,comp.lowest_price_3,comp.lowest_price_4,comp.lowest_price_5,comp.lowest_price_6,comp.lowest_site,comp.lowest_site_2,comp.lowest_site_3,comp.lowest_site_4,comp.lowest_site_5,comp.lowest_site_6])
+             title << FasterCSV::Row.new(header,[comp.product.product_id,comp.item_search_phrase,comp.word_that_occur,comp.sort_options,comp.lowest_price,comp.lowest_price_2,comp.lowest_price_3,comp.lowest_price_4,comp.lowest_price_5,comp.lowest_price_6,comp.lowest_site,comp.lowest_site_2,comp.lowest_site_3,comp.lowest_site_4,comp.lowest_site_5,comp.lowest_site_6])
          end
       end
       outfile.close

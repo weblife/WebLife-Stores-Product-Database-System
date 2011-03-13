@@ -121,6 +121,7 @@ class Product < ActiveRecord::Base
   has_one :property, :dependent => :destroy
   has_one :text_anchor, :dependent => :destroy
   has_one :url_link, :dependent => :destroy
+  has_one :compscraper, :dependent => :destroy
 
   accepts_nested_attributes_for :inset
   accepts_nested_attributes_for :property
@@ -130,6 +131,8 @@ class Product < ActiveRecord::Base
   before_validation_on_create :initialize_children
 
   before_save :set_default_values
+
+  after_create :create_compscraper
 
   #Output fields
   attr_accessor :output_product_url,:output_ship_weight,:output_description,:output_model_no,
@@ -503,6 +506,13 @@ class Product < ActiveRecord::Base
       self.streetlights_free_shipping=true if self.boolean_streetlights_free_shipping=="YES"
       self.addressplaq_free_shipping=true if self.boolean_addressplag_free_shipping=="YES"
 
+  end
+
+  def create_compscraper
+      cp=Compscraper.new
+      cp.product_id=self.id
+      cp.user_id=self.user_id
+      cp.save(false)
   end
 
 end
