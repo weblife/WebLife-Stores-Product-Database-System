@@ -191,19 +191,16 @@
           <tr valign="top">
             <td><b>Wholesale Cost</b></td>
             <td><%=product.property.wholesale_cost%>
-              <%unless product.property.errors.on(:wholesale_cost).blank?%>
-              <label style="color:red;" > (<%=product.property.errors.on(:wholesale_cost)%>)</label>
-              <%end%>
-
             </td>
           </tr>
           <tr valign="top">
             <td><b>Price Override</b></td>
             <td><%=product.price_override%>
-              <%unless product.errors.on(:price_override).blank?%>
+              <%if !product.errors.on(:price_override).blank?%>
               <label style="color:red;" > (<%=product.errors.on(:price_override)%>)</label>
+              <%elsif !product.property.errors.on(:wholesale_cost).blank?%>
+              <label style="color:red;" > (<%=product.property.errors.on(:wholesale_cost)%>)</label>
               <%end%>
-
             </td>
           </tr>
           <tr valign="top">

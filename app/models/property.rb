@@ -38,7 +38,7 @@ class Property < ActiveRecord::Base
 
   private
   def compare_price
-      errors.add(:wholesale_cost,"Price Override must be GREATER than Wholesale Price.") if product.price_override.to_f!=0 && wholesale_cost.to_f!=0 && product.price_override.to_f< wholesale_cost.to_f
+      errors.add(:wholesale_cost,"Price Override must be GREATER than Wholesale Price.") if !product.price_override.blank? && wholesale_cost.to_f!=0 && product.price_override.to_f< wholesale_cost.to_f
   end
 
 end
