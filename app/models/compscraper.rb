@@ -88,7 +88,7 @@ class Compscraper < ActiveRecord::Base
 
     def minimum_lowest_price
         lp=[]
-        prod=Product.find self.id
+        prod=self.product
         whole_sale=prod.property.wholesale_cost rescue 0
         whole_sale=0.0 if whole_sale.blank?
         lowest_prices = [lowest_price,lowest_price_2,lowest_price_3,lowest_price_4,lowest_price_5,lowest_price_6]

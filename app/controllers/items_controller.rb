@@ -45,6 +45,7 @@ class ItemsController < ApplicationController
       format.js {
         render :update do |page|
           page.replace_html "success_msg_top","<p style='color:red'><b>Product is successfully updated.</b></p>"
+          page.replace_html "reference_area",:partial=>"reference_fields",:locals=>{:product=>@product}
           page << "scrollToDiv('success_msg_top')"
         end
       }

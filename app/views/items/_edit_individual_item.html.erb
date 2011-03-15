@@ -66,14 +66,6 @@
     <td><%=text_field(:property, :overall_size, :size => 50)%></td>
   </tr>
   <tr>
-    <td>Wholesale Cost:</td>
-    <td><%=text_field(:property, :wholesale_cost, :size => 50)%></td>
-  </tr>
-  <tr>
-    <td>MAP Pricing:</td>
-    <td><%=text_field(:property, :map_pricing, :size => 50)%></td>
-  </tr>
-  <tr>
     <td valign="top">Item Description - NO HTML:</td>
     <td>
       <%=text_area(:product, :Item_description_without_html,:rows=>10,:cols=>60)%>
@@ -308,16 +300,6 @@
     </td>
   </tr>
   <tr>
-    <td>Price Overide:</td>
-    <td><%=text_field(:product, :price_override, :size => 50)%></td>
-  </tr>
-  <tr>
-    <td>Free Shipping:</td>
-    <td>
-      <%=select(:product, :free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.free_shipping)?("1"):("0")})%>
-    </td>
-  </tr>
-  <tr>
     <td>Commercial Free Shipping:</td>
     <td>
       <%=select(:product, :commercial_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.commercial_free_shipping)?("1"):("0")})%>
@@ -418,8 +400,31 @@
     <td>6th Lowest Site:</td>
     <td><%=text_field(:compscraper, :lowest_site_6, :size => 50)%></td>
   </tr>
-
+  <tr>
+    <td>Wholesale Cost:</td>
+    <td><%=text_field(:property, :wholesale_cost, :size => 50)%></td>
+  </tr>
+  <tr>
+    <td>MAP Pricing:</td>
+    <td><%=text_field(:property, :map_pricing, :size => 50)%></td>
+  </tr>
+  <tr>
+    <td>Price Overide:</td>
+    <td><%=text_field(:product, :price_override, :size => 50)%></td>
+  </tr>
+  <tr>
+    <td>Free Shipping:</td>
+    <td>
+      <%=select(:product, :free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.free_shipping)?("1"):("0")})%>
+    </td>
+  </tr>
 </table>
+<div id="reference_area">
+<%=render :partial=>"reference_fields",:locals=>{:product=>@product}%>
+  </div>
+
+
+
 
     <%= submit_tag 'Update',{:name=>"bottom_botton",:id=>"bottom_botton"}  %>
    <% end -%>

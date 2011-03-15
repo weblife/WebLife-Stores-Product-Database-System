@@ -141,7 +141,9 @@ class Product < ActiveRecord::Base
                 :output_size_for_data_feeds,:output_good_margins,:output_profit,:output_invalid_ship_method,
                 :output_multibox_dimensions,:output_multibox_weights,:output_no_of_boxes,:output_origin_zip,
                 :output_flat_ship_rate,:output_free_shipping,:output_item,:output_purchase_description,:output_et_right_cross,
-                :output_et_right_break,:output_et_right_feature,:meta_data
+                :output_et_right_break,:output_et_right_feature,:meta_data,:freight_cost,:raw_cost_and_freight_cost,
+                :real_break_even,:estimated_break_even,:minimum_price_competitor,:price_match,:minimum_acceptable_markup,
+                :profit_amount,:percentage_profit_amount,:formula_based_shipping
 #Boolean fields for validations
   attr_accessor :boolean_ups_approved_field,:boolean_promo_code_section_availablility,
                 :boolean_phone_number_visibility,:boolean_item_number_visiblity,
@@ -356,16 +358,42 @@ class Product < ActiveRecord::Base
       caption+=(!self.related_referrence_sku.blank?)? (meta_data.reference_mid_tag+self.name+" "+meta_data.reference_mid_2+self.related_referrence_sku+meta_data.reference_end_tag):("")
       return caption
   end
-
-  def output_sale_price
-    	j3=((self.property.wholesale_cost.to_f+(15+(0.1*self.property.wholesale_cost.to_f)))*1.045)
-      r3=((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))*100
-      cmp=Compscraper.find self.id rescue nil
-      (cmp.blank?)?(k3=0):(k3=cmp.minimum_lowest_price)
-      m3=(!self.free_shipping)?((((self.property.wholesale_cost.to_f*r3)<k3))?(k3-0.5):(self.property.wholesale_cost.to_f)):(((j3*r3)>k3)?(j3*r3):(k3-0.5))
-      (self.property.map_pricing.to_f>(j3*r3))?(self.property.map_pricing.to_f):((self.price_override.blank?)?((m3<self.property.map_pricing.to_f)?(self.property.map_pricing.to_f):(m3)):(self.price_override.to_f))
+  def freight_cost
+      (15+(self.property.wholesale_cost.to_f*0.1))
+  end
+  def raw_cost_and_freight_cost
+      (freight_cost+self.property.wholesale_cost.to_f)
   end
 
+  def output_sale_price
+      (self.property.map_pricing.to_f>(estimated_break_even*minimum_acceptable_markup))?(self.property.map_pricing.to_f):((self.price_override.blank?)?((price_match<self.property.map_pricing.to_f)?(self.property.map_pricing.to_f):(price_match)):(self.price_override.to_f))
+  end
+
+  def real_break_even
+      (raw_cost_and_freight_cost+(price_match*0.04)).round(2)
+  end
+
+  def estimated_break_even
+      (raw_cost_and_freight_cost*1.045).round(2)
+  end
+  def minimum_price_competitor
+      compscraper.minimum_lowest_price
+  end
+  def minimum_acceptable_markup
+     ((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))
+  end
+  def price_match
+      (!self.free_shipping)?((((self.property.wholesale_cost.to_f*minimum_acceptable_markup)<minimum_price_competitor))?(minimum_price_competitor-0.5):(self.property.wholesale_cost.to_f*minimum_acceptable_markup)):(((estimated_break_even*minimum_acceptable_markup)>minimum_price_competitor)?(estimated_break_even*minimum_acceptable_markup):(minimum_price_competitor-0.5))
+  end
+  def formula_based_shipping
+      (self.free_shipping)?(0):(freight_cost)
+  end
+  def profit_amount
+      (self.free_shipping)?(output_sale_price-real_break_even):((output_sale_price+formula_based_shipping)-real_break_even)
+  end
+  def percentage_profit_amount
+      ((profit_amount.to_f/output_sale_price.to_f)*100).round(2)
+  end
   def output_price
       output_sale_price.to_f*1.25
   end

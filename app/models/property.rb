@@ -25,7 +25,7 @@ class Property < ActiveRecord::Base
   
   validates_numericality_of :actual_weight,:message=>"Actuall weight is not a number.",:allow_nil=>true
   validates_numericality_of :ship_weight,:message=>"Ship weight is not a number.",:allow_nil=>true
-  validates_numericality_of :wholesale_cost,:message=>"Wholesale cost is not a number.",:allow_nil=>true
+  validates_numericality_of :wholesale_cost,:message=>"Wholesale cost must be greater than 0.",:greater_than_or_equal_to=>0.01
   validates_numericality_of :map_pricing,:message=>"Map pricing is not a number.",:allow_nil=>true
   validates_numericality_of :number_of_boxes,:only_integer=>true,:message=>"Number of boxes is not a number.",:allow_nil=>true
   
@@ -38,7 +38,7 @@ class Property < ActiveRecord::Base
 
   private
   def compare_price
-      errors.add(:wholesale_cost,"Price Override must be GREATER than Wholesale Price.") if !product.price_override.blank? && wholesale_cost.to_f!=0 && product.price_override.to_f< wholesale_cost.to_f
+      errors.add(:wholesale_cost,"Price Override must be GREATER than Wholesale Price.") if !product.price_override.blank? && wholesale_cost.to_f>0 && product.price_override.to_f< wholesale_cost.to_f
   end
 
 end
