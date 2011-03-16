@@ -16,7 +16,7 @@
   </tr>
   <tr >
     <td style="background-color:#CCCCCC;" ><b>Minimum Competitor Price:</b></td>
-    <td style="background-color:#CCCCCC;"><%=product.minimum_price_competitor%></td>
+    <td style="background-color:#CCCCCC;"><%=(product.minimum_price_competitor.to_f!=0)?(product.minimum_price_competitor):("-")%></td>
     <td style="background-color:#CCCCCC;"><b>PRICE MATCH:</b></td>
     <td style="background-color:#CCCCCC;"><%=product.price_match%></td>
   </tr>
@@ -24,11 +24,11 @@
     <td style="background-color:#CCCCCC;"><b>Profit Amount:</b></td>
     <td style="background-color:#CCCCCC;"><%=product.profit_amount%></td>
     <td style="background-color:#CCCCCC;"><b>% of Profit:</b></td>
-    <td style="background-color:#CCCCCC;"><%=product.percentage_profit_amount%></td>
+    <td style="background-color:#CCCCCC;"><%=product.percentage_profit_amount%> %</td>
   </tr>
   <tr>
     <td style="background-color:#CCCCCC;"><b>Minimum Acceptable Markup:</b></td>
-    <td style="background-color:#CCCCCC;" ><%=product.minimum_acceptable_markup%></td>
+    <td style="background-color:#CCCCCC;" ><%=(product.minimum_acceptable_markup)*100%> %</td>
     <td style="background-color:#CCCCCC;"><b>Sale Price:</b></td>
     <td style="background-color:#CCCCCC;" ><%=product.output_sale_price%></td>
   </tr>

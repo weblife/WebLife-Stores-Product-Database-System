@@ -42,7 +42,7 @@ class BulkUploadsController < ApplicationController
         product_ids_array.push(product.product_id)
           if !product.valid? && !product.errors.on(:product_id).blank? or !product.property.errors.on(:wholesale_cost).blank? or !product.errors.on(:name).blank?
             is_error=true
-           # page_no+=1
+            page_no+=1
             break
           end
           page_no+=1

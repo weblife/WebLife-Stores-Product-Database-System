@@ -370,7 +370,7 @@ class Product < ActiveRecord::Base
   end
 
   def real_break_even
-      (raw_cost_and_freight_cost+(price_match*0.04)).round(2)
+      (raw_cost_and_freight_cost+(output_sale_price*0.04)).round(2)
   end
 
   def estimated_break_even
@@ -383,7 +383,7 @@ class Product < ActiveRecord::Base
      ((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))
   end
   def price_match
-      (!self.free_shipping)?((((self.property.wholesale_cost.to_f*minimum_acceptable_markup)<minimum_price_competitor))?(minimum_price_competitor-0.5):(self.property.wholesale_cost.to_f*minimum_acceptable_markup)):(((estimated_break_even*minimum_acceptable_markup)>minimum_price_competitor)?(estimated_break_even*minimum_acceptable_markup):(minimum_price_competitor-0.5))
+      ((!self.free_shipping)?((((self.property.wholesale_cost.to_f*minimum_acceptable_markup)<minimum_price_competitor.to_f))?(minimum_price_competitor.to_f-0.5):(self.property.wholesale_cost.to_f*minimum_acceptable_markup)):(((estimated_break_even*minimum_acceptable_markup)>minimum_price_competitor.to_f)?(estimated_break_even*minimum_acceptable_markup):(minimum_price_competitor.to_f-0.5))).round(2)
   end
   def formula_based_shipping
       (self.free_shipping)?(0):(freight_cost)
