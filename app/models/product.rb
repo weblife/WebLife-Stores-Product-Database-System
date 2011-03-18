@@ -143,7 +143,7 @@ class Product < ActiveRecord::Base
                 :output_flat_ship_rate,:output_free_shipping,:output_item,:output_purchase_description,:output_et_right_cross,
                 :output_et_right_break,:output_et_right_feature,:meta_data,:freight_cost,:raw_cost_and_freight_cost,
                 :real_break_even,:estimated_break_even,:minimum_price_competitor,:price_match,:minimum_acceptable_markup,
-                :profit_amount,:percentage_profit_amount,:formula_based_shipping
+                :profit_amount,:percentage_profit_amount,:formula_based_shipping,:acceptable_markup
 #Boolean fields for validations
   attr_accessor :boolean_ups_approved_field,:boolean_promo_code_section_availablility,
                 :boolean_phone_number_visibility,:boolean_item_number_visiblity,
@@ -380,7 +380,17 @@ class Product < ActiveRecord::Base
       compscraper.minimum_lowest_price
   end
   def minimum_acceptable_markup
-     ((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))
+      if override_acceptable_markup.nil?
+         ((self.property.wholesale_cost.to_f<20)?(2):((self.property.wholesale_cost.to_f<50)?(1.75):((self.property.wholesale_cost.to_f<150)?(1.5):((self.property.wholesale_cost.to_f<500)?(1.4):(1.25)))))
+      else
+          override_acceptable_markup
+      end
+  end
+  def acceptable_markup
+      ((override_acceptable_markup.nil?)?(minimum_acceptable_markup):(override_acceptable_markup)).to_f*100
+  end
+  def acceptable_markup=(val)
+      self.override_acceptable_markup=(val.blank?)?(nil):(val.to_f/100)
   end
   def price_match
       ((!self.free_shipping)?((((self.property.wholesale_cost.to_f*minimum_acceptable_markup)<minimum_price_competitor.to_f))?(minimum_price_competitor.to_f-0.5):(self.property.wholesale_cost.to_f*minimum_acceptable_markup)):(((estimated_break_even*minimum_acceptable_markup)>minimum_price_competitor.to_f)?(estimated_break_even*minimum_acceptable_markup):(minimum_price_competitor.to_f-0.5))).round(2)
@@ -395,7 +405,7 @@ class Product < ActiveRecord::Base
       ((profit_amount.to_f/output_sale_price.to_f)*100).round(2)
   end
   def output_price
-      output_sale_price.to_f*1.25
+      (output_sale_price.to_f*1.25).ceil
   end
 
   def output_ships_within_for_feed

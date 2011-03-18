@@ -402,7 +402,8 @@
   </tr>
   <tr>
     <td>Wholesale Cost:</td>
-    <td><%=text_field(:property, :wholesale_cost, :size => 50)%></td>
+    <td><%=text_field(:property, :wholesale_cost, :size => 50)%>
+    </td>
   </tr>
   <tr>
     <td>MAP Pricing:</td>
@@ -417,6 +418,10 @@
     <td>
       <%=select(:product, :free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.free_shipping)?("1"):("0")})%>
     </td>
+  </tr>
+  <tr>
+    <td>Override Minimum Acceptable Markup:</td>
+    <td><%=text_field(:product, :acceptable_markup, :size => 45)%> %</td>
   </tr>
 </table>
 <div id="reference_area">
