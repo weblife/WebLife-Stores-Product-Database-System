@@ -5,11 +5,12 @@ class StoresController < ApplicationController
   before_filter :validate_user,:validate_admin
 
   def index
-    @stores = Store.all
+    @normal_stores = Store.find_normal_stores
+    @compscraper_stores = Store.find_compscraper_stores
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @stores }
+      format.xml  { render :xml => @normal_stores }
     end
   end
 

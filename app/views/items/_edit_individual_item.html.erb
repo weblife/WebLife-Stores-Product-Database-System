@@ -423,6 +423,10 @@
     <td>Override Minimum Acceptable Markup:</td>
     <td><%=text_field(:product, :acceptable_markup, :size => 45)%> %</td>
   </tr>
+  <tr>
+    <td>Suggested Retail Price Override:</td>
+    <td><%=text_field(:product, :suggested_retail_price_override, :size => 45)%></td>
+  </tr>
 </table>
 <div id="reference_area">
 <%=render :partial=>"reference_fields",:locals=>{:product=>@product}%>

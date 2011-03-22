@@ -769,7 +769,19 @@
 
             </td>
           </tr>
+          <tr valign="top">
+            <td><b>Sale Price</b></td>
+            <td><%=product.output_sale_price%></td>
+          </tr>
+          <tr valign="top">
+            <td><b>Suggested Retail Price Override</b></td>
+            <td><%=product.suggested_retail_price_override%>
+              <%unless product.errors.on(:suggested_retail_price_override).blank?%>
+              <label style="color:red;" > (<%=product.errors.on(:suggested_retail_price_override)%>)</label>
+              <%end%>
 
+            </td>
+          </tr>
       <%end%>
     </table>
 

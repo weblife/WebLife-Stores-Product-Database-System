@@ -29,7 +29,13 @@
   <tr>
     <td style="background-color:#CCCCCC;"><b>Minimum Acceptable Markup:</b></td>
     <td style="background-color:#CCCCCC;" ><%=product.acceptable_markup%> %</td>
+    <td style="background-color:#CCCCCC;"><b>Sugg. Retail Price Override:</b></td>
+    <td style="background-color:#CCCCCC;" ><%=(product.suggested_retail_price_override)?(product.suggested_retail_price_override):("-")%></td>
+  </tr>
+  <tr>
     <td style="background-color:#CCCCCC;"><b>Sale Price:</b></td>
     <td style="background-color:#CCCCCC;" ><%=product.output_sale_price%></td>
+    <td style="background-color:#CCCCCC;"><b>Price:</b></td>
+    <td style="background-color:#CCCCCC;" ><%=product.output_price%> %</td>
   </tr>
 </table>

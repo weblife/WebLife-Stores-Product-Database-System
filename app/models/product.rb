@@ -185,6 +185,8 @@ class Product < ActiveRecord::Base
   validates_inclusion_of :boolean_streetlights_free_shipping, :in => ["YES", "NO"],:message=>"Streetlights free value should contain 'Yes' or 'No' ",:allow_nil=>true
   validates_inclusion_of :boolean_addressplag_free_shipping, :in => ["YES", "NO"],:message=>"Addressplag free value should contain 'Yes' or 'No' ",:allow_nil=>true
 
+  validate :compare_price
+
 
 
   before_save :change_text_values_to_boolean
@@ -214,7 +216,7 @@ class Product < ActiveRecord::Base
               else
                 file_path=file
               end
-              product_array=['path','id','Manufacturer','code','name','Warranty','Is this item USPS Approved?','Image','Item Description - HTML','Options','Item Description - NO HTML','return details','Availability','Shipping-Time','Related Items','Related Referrence Sku','Promo-Code Section Available','disclaimer-name','disclaimer-text','Where-Prod-Cmng-Img-Tag-HTML','Brief Summary of Manu.','Freight Cost Overide','PO Description Details','Origin-zip','Invalid-ship-methods','Phone-number','Item-number-visiblity','Price Overide','Free Shipping','Commercial Free Shipping','Commercial Adjustment','StreetSign Free Shipping','StreetSign Adjustment','StreetLights Free Shipping','StreetLights Adjustment','AddressPlaq Free Shipping','AddressPlaq Adjustment']
+              product_array=['path','id','Manufacturer','code','name','Warranty','Is this item USPS Approved?','Image','Item Description - HTML','Options','Item Description - NO HTML','return details','Availability','Shipping-Time','Related Items','Related Referrence Sku','Promo-Code Section Available','disclaimer-name','disclaimer-text','Where-Prod-Cmng-Img-Tag-HTML','Brief Summary of Manu.','Freight Cost Overide','PO Description Details','Origin-zip','Invalid-ship-methods','Phone-number','Item-number-visiblity','Price Overide','Free Shipping','Commercial Free Shipping','Commercial Adjustment','StreetSign Free Shipping','StreetSign Adjustment','StreetLights Free Shipping','StreetLights Adjustment','AddressPlaq Free Shipping','AddressPlaq Adjustment','Suggested Retail Price Override','Override Acceptable Markup %']
               inset_array=['Inset','Inset-2','Inset-3','Inset-4','Inset-5','Inset-6','Inset-7','Inset-8','Inset-9']
               property_array=['material','style','color','actual-weight','ship-weight','overall-size','Wholesale Cost','MAP Pricing','Number-of-boxes','Multi-box-weights','Multi-box-dimensions']
               text_achor_array=['1st anchor text','2nd anchor text','3rd anchor text','4th anchor text','5th anchor text','6th anchor text','7th anchor text','8th anchor text','9th anchor text','10th anchor text']
@@ -225,8 +227,8 @@ class Product < ActiveRecord::Base
 
 
 
-              sequenced_csv_array=['path','Manufacturer','code','name','Item Description - HTML','Options','actual-weight','ship-weight','material','style','color','overall-size','Wholesale Cost','MAP Pricing','Item Description - NO HTML','return details','Availability','Shipping-Time','Warranty','Is this item USPS Approved?','Image','Inset','Inset-2','Inset-3','Inset-4','Inset-5','Related Items','id','Related Referrence Sku','Promo-Code Section Available','Inset-6','Inset-7','Inset-8','Inset-9','disclaimer-name','disclaimer-text','1st url link','1st anchor text','2nd url link','2nd anchor text','3rd url link','3rd anchor text','4th url link','4th anchor text','5th url link','5th anchor text','6th url link','6th anchor text','7th url link','7th anchor text','8th url link','8th anchor text','9th url link','9th anchor text','10th url link','10th anchor text','Where-Prod-Cmng-Img-Tag-HTML','Brief Summary of Manu.','Freight Cost Overide','PO Description Details','Origin-zip','Number-of-boxes','Multi-box-weights','Multi-box-dimensions','Invalid-ship-methods','Phone-number','Item-number-visiblity','Price Overide','Free Shipping','Commercial Free Shipping','Commercial Adjustment','StreetSign Free Shipping','StreetSign Adjustment','StreetLights Free Shipping','StreetLights Adjustment','AddressPlaq Free Shipping','AddressPlaq Adjustment']
-              sequenced_db_array=['path','manufacturer','code','name','Item_description_with_html','options','actual_weight','ship_weight','material','style','color','overall_size','wholesale_cost','map_pricing','Item_description_without_html','return_details','availability','shipping_time','warranty','boolean_ups_approved_field','image','inset','inset_2','inset_3','inset_4','inset_5','related_Items','product_id','related_referrence_sku','boolean_promo_code_section_availablility','inset_6','inset_7','inset_8','inset_9','disclaimer_name','disclaimer_text','url_link_1','anchor_text_1','url_link_2','anchor_text_2','url_link_3','anchor_text_3','url_link_4','anchor_text_4','url_link_5','anchor_text_5','url_link_6','anchor_text_6','url_link_7','anchor_text_7','url_link_8','anchor_text_8','url_link_9','anchor_text_9','url_link_10','anchor_text_10','product_cmng_img_tag_html','brief_summary_of_menu','freight_cost_overide','po_description_details','origin_zip','number_of_boxes','multi_box_weights','multi_box_dimensions','invalid_ship_methods','boolean_phone_number_visibility','boolean_item_number_visiblity','price_override','boolean_shipping_free','boolean_commercial_free_shipping','commercial_adjustment','boolean_streetsign_freeshiping','streetsign_adjustment','boolean_streetlights_free_shipping','streetlights_adjustment','boolean_addressplag_free_shipping','addressplaq_adjustment']
+              sequenced_csv_array=['path','Manufacturer','code','name','Item Description - HTML','Options','actual-weight','ship-weight','material','style','color','overall-size','Wholesale Cost','MAP Pricing','Item Description - NO HTML','return details','Availability','Shipping-Time','Warranty','Is this item USPS Approved?','Image','Inset','Inset-2','Inset-3','Inset-4','Inset-5','Related Items','id','Related Referrence Sku','Promo-Code Section Available','Inset-6','Inset-7','Inset-8','Inset-9','disclaimer-name','disclaimer-text','1st url link','1st anchor text','2nd url link','2nd anchor text','3rd url link','3rd anchor text','4th url link','4th anchor text','5th url link','5th anchor text','6th url link','6th anchor text','7th url link','7th anchor text','8th url link','8th anchor text','9th url link','9th anchor text','10th url link','10th anchor text','Where-Prod-Cmng-Img-Tag-HTML','Brief Summary of Manu.','Freight Cost Overide','PO Description Details','Origin-zip','Number-of-boxes','Multi-box-weights','Multi-box-dimensions','Invalid-ship-methods','Phone-number','Item-number-visiblity','Price Overide','Free Shipping','Commercial Free Shipping','Commercial Adjustment','StreetSign Free Shipping','StreetSign Adjustment','StreetLights Free Shipping','StreetLights Adjustment','AddressPlaq Free Shipping','AddressPlaq Adjustment','Suggested Retail Price Override','Override Acceptable Markup %']
+              sequenced_db_array=['path','manufacturer','code','name','Item_description_with_html','options','actual_weight','ship_weight','material','style','color','overall_size','wholesale_cost','map_pricing','Item_description_without_html','return_details','availability','shipping_time','warranty','boolean_ups_approved_field','image','inset','inset_2','inset_3','inset_4','inset_5','related_Items','product_id','related_referrence_sku','boolean_promo_code_section_availablility','inset_6','inset_7','inset_8','inset_9','disclaimer_name','disclaimer_text','url_link_1','anchor_text_1','url_link_2','anchor_text_2','url_link_3','anchor_text_3','url_link_4','anchor_text_4','url_link_5','anchor_text_5','url_link_6','anchor_text_6','url_link_7','anchor_text_7','url_link_8','anchor_text_8','url_link_9','anchor_text_9','url_link_10','anchor_text_10','product_cmng_img_tag_html','brief_summary_of_menu','freight_cost_overide','po_description_details','origin_zip','number_of_boxes','multi_box_weights','multi_box_dimensions','invalid_ship_methods','boolean_phone_number_visibility','boolean_item_number_visiblity','price_override','boolean_shipping_free','boolean_commercial_free_shipping','commercial_adjustment','boolean_streetsign_freeshiping','streetsign_adjustment','boolean_streetlights_free_shipping','streetlights_adjustment','boolean_addressplag_free_shipping','addressplaq_adjustment','suggested_retail_price_override','acceptable_markup']
               params=Hash.new
               products_array=[]
               count=-1
@@ -405,7 +407,11 @@ class Product < ActiveRecord::Base
       ((profit_amount.to_f/output_sale_price.to_f)*100).round(2)
   end
   def output_price
+      if suggested_retail_price_override.nil? || suggested_retail_price_override.to_f < output_sale_price.to_f
       (output_sale_price.to_f*1.25).ceil
+      else
+        suggested_retail_price_override
+      end
   end
 
   def output_ships_within_for_feed
@@ -554,6 +560,10 @@ class Product < ActiveRecord::Base
       cp.product_id=self.id
       cp.user_id=self.user_id
       cp.save(false)
+  end
+
+  def compare_price
+      errors.add(:suggested_retail_price_override,"Suggested Retail Price must be GREATER than sale Price.") if !suggested_retail_price_override.blank? && suggested_retail_price_override.to_f< output_sale_price.to_f
   end
 
 end

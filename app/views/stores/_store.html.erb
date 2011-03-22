@@ -1,3 +1,4 @@
+<%=javascript_include_tag 'admin'%>
 <% form_for(@store) do |f| %>
 <%= f.error_messages %>
   <table border="0" cellspacing="5" cellpadding="0">
@@ -10,7 +11,8 @@
         <%= f.text_field :name%>
       </td>
     </tr>
-    <tr>
+    
+    <tr id="store_url" class="<%if @store[:is_compscraper_related].to_s=="false"%>display_class<%else%>hide_class<%end%>">
       <td>
         <b>Url:</b>
       </td>
@@ -19,16 +21,17 @@
         <%= f.text_field :store_url%>
       </td>
     </tr>
-    <tr>
+    <tr id="store_type"  class="<%if @store[:is_compscraper_related].to_s=="false"%>display_class<%else%>hide_class<%end%>">
       <td>
-        <b>Type:</b>
+        <b>Type:
+        </b>
       </td>
       <td>&nbsp;</td>
       <td>
         <%=f.select(:store_type, { "Store" => "1", "Other" => "2"},{:selected => store.store_type.to_s}) %>
       </td>
     </tr>
-    <tr>
+    <tr id="store_status"  class="<%if @store[:is_compscraper_related].to_s=="false"%>display_class<%else%>hide_class<%end%>">
       <td>
         <b>Status:</b>
       </td>
@@ -37,7 +40,15 @@
         <%=f.select(:is_active, { "Active" => "1", "Inactive" => "0"},{:selected => (store.is_active)?("1"):("0")}) %>
       </td>
     </tr>
-
+    <tr>
+      <td>
+        &nbsp;
+      </td>
+      <td>&nbsp;</td>
+      <td>
+        <%=f.check_box(:is_compscraper_related,{:onclick=>"toggle_store_fields(this)"})%>&nbsp;&nbsp; Is that store related to Compscraper?
+      </td>
+    </tr>
   </table>
 <p class="alignR "><%= f.submit((is_add)?( 'Save'):( 'Update'))%>&nbsp;or&nbsp;<%=link_to "Cancel",stores_path%></p>
 <% end %>
