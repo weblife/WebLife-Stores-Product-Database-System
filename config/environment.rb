@@ -46,6 +46,6 @@ Rails::Initializer.run do |config|
 end
 
   include ArrayExtensions
-  require "bundler"
+
 
 
