@@ -3,9 +3,6 @@
 # Repository:
 source "http://rubygems.org"
 
-# Rails version, which must be specified here AND in the environment.rb:
-gem 'rails', '~> 2.3.8'
-
 # Selectively-loaded:
 gem 'mysql',        '~> 2.8.1', :require => false # For commonly used database driver
 
