@@ -116,8 +116,8 @@ class Compscraper < ActiveRecord::Base
     end
 
   def self.find_latest_compscraper_items(current_user)
-      items=self.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,current_user.cached_information.latest_comp_uploaded_time])
-      updated_items=self.find(:all,:conditions=>["user_id=? and updated_at=?",current_user.id,current_user.cached_information.latest_comp_uploaded_time])
+      items=self.find(:all,:conditions=>["user_id=? and created_at>=? and created_at<=?",current_user.id,current_user.cached_information.latest_comp_uploaded_start_time,current_user.cached_information.latest_comp_uploaded_end_time])
+      updated_items=self.find(:all,:conditions=>["user_id=? and updated_at>=? and updated_at<=?",current_user.id,current_user.cached_information.latest_comp_uploaded_start_time,current_user.cached_information.latest_comp_uploaded_end_time])
       updated_items.each do |item|
         items << item
       end
@@ -127,8 +127,8 @@ class Compscraper < ActiveRecord::Base
 
   def self.count_latest_uploaded_comp_items(user)
       added_items_count=updated_items_count=0
-      added_products=self.count(:all,:conditions=>["user_id=? and created_at=?",user.id,user.cached_information.latest_comp_uploaded_time])
-      updated_products=self.count(:all,:conditions=>["user_id=? and updated_at=?",user.id,user.cached_information.latest_comp_uploaded_time])
+      added_products=self.count(:all,:conditions=>["user_id=? and created_at>=? and created_at<=?",user.id,user.cached_information.latest_comp_uploaded_start_time,user.cached_information.latest_comp_uploaded_end_time])
+      updated_products=self.count(:all,:conditions=>["user_id=? and updated_at>=? and updated_at<=?",user.id,user.cached_information.latest_comp_uploaded_start_time,user.cached_information.latest_comp_uploaded_end_time])
       (added_products==updated_products)?(added_items_count=added_products):(added_items_count=added_products;updated_items_count=(updated_products-added_products))
       return added_items_count,updated_items_count
   end

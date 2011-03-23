@@ -9,18 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110320143648) do
+ActiveRecord::Schema.define(:version => 20110323191605) do
 
   create_table "cached_informations", :force => true do |t|
     t.integer  "user_id"
-    t.boolean  "is_product_info_reverted",      :default => false
+    t.boolean  "is_product_info_reverted",            :default => false
     t.string   "products_cached_path"
-    t.boolean  "is_compscrapper_info_reverted", :default => false
+    t.boolean  "is_compscrapper_info_reverted",       :default => false
     t.string   "compscrapper_cached_path"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "latest_products_uploaded_time"
-    t.datetime "latest_comp_uploaded_time"
+    t.datetime "latest_products_uploaded_start_time"
+    t.datetime "latest_comp_uploaded_start_time"
+    t.datetime "latest_products_uploaded_end_time"
+    t.datetime "latest_comp_uploaded_end_time"
   end
 
   create_table "compscrapers", :force => true do |t|

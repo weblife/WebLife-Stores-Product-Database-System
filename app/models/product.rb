@@ -483,8 +483,8 @@ class Product < ActiveRecord::Base
   end
 
   def self.find_latest_products(current_user)
-      products=Product.find(:all,:conditions=>["user_id=? and created_at=?",current_user.id,current_user.cached_information.latest_products_uploaded_time])
-      updated_products=Product.find(:all,:conditions=>["user_id=? and updated_at=?",current_user.id,current_user.cached_information.latest_products_uploaded_time])
+      products=Product.find(:all,:conditions=>["user_id=? and created_at>=? and created_at<=?",current_user.id,current_user.cached_information.latest_products_uploaded_start_time,current_user.cached_information.latest_products_uploaded_end_time])
+      updated_products=Product.find(:all,:conditions=>["user_id=? and updated_at>=? and updated_at<=?",current_user.id,current_user.cached_information.latest_products_uploaded_start_time,current_user.cached_information.latest_products_uploaded_end_time])
       updated_products.each do |p|
           products << p
       end
@@ -494,8 +494,8 @@ class Product < ActiveRecord::Base
 
   def self.count_latest_uploaded_products(user)
       added_products_count=updated_products_count=0
-      added_products=Product.count(:all,:conditions=>["user_id=? and created_at=?",user.id,user.cached_information.latest_products_uploaded_time])
-      updated_products=Product.count(:all,:conditions=>["user_id=? and updated_at=?",user.id,user.cached_information.latest_products_uploaded_time])
+      added_products=Product.count(:all,:conditions=>["user_id=? and created_at>=? and created_at<=?",user.id,user.cached_information.latest_products_uploaded_start_time,user.cached_information.latest_products_uploaded_end_time])
+      updated_products=Product.count(:all,:conditions=>["user_id=? and updated_at>=? and updated_at<=?",user.id,user.cached_information.latest_products_uploaded_start_time,user.cached_information.latest_products_uploaded_end_time])
       (added_products==updated_products)?(added_products_count=added_products):(added_products_count=added_products;updated_products_count=(updated_products-added_products))
       added_products_count=0 if added_products_count<0
       updated_products_count=0 if updated_products_count<0
