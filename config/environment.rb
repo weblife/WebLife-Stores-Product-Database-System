@@ -47,5 +47,5 @@ end
 
   include ArrayExtensions
   require "bundler"
-  require "rubygems"
-  require "bundler/setup"
+
+

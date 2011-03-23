@@ -3,7 +3,6 @@
 # Repository:
 source "http://rubygems.org"
 
-
 # Selectively-loaded:
 gem 'mysql',        '~> 2.8.1', :require => false # For commonly used database driver
 
