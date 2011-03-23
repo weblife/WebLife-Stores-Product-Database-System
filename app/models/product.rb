@@ -379,7 +379,7 @@ class Product < ActiveRecord::Base
       (raw_cost_and_freight_cost*1.045).round(2)
   end
   def minimum_price_competitor
-      compscraper.minimum_lowest_price
+      compscraper.minimum_lowest_price rescue 0
   end
   def minimum_acceptable_markup
       if override_acceptable_markup.nil?
