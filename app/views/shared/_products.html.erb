@@ -98,7 +98,7 @@
             <td valign="top" nowrap>
               <%=product.path%>
             </td>
-            <td valign="top" nowrap><%=truncate(product.Item_description_with_html.strip,90,"..")%>
+            <td valign="top" nowrap><%=truncate(product.Item_description_with_html,90,"..")%>
             </td>
             <td valign="top" nowrap><%=truncate(product.options,16,"..") rescue nil%></td>
             <td valign="top" nowrap><%=truncate(product.property.actual_weight,16,"..") rescue nil%></td>
