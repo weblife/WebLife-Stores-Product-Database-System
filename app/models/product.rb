@@ -466,7 +466,7 @@ class Product < ActiveRecord::Base
   end
 
   def output_et_right_break
-      "For Sale at Discounted Prices Today. Order Online and SAVE!<br><br>"
+      promo_text
   end
   def output_et_right_feature
   end
