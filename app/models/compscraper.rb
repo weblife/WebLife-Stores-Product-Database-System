@@ -110,7 +110,7 @@ class Compscraper < ActiveRecord::Base
         compscraper_stores.each{|s| stores_array.push(s.name) } if !compscraper_stores.blank?
 
         lowest_prices.each_with_index do |price, i|
-          lp << price if price.to_f > whole_sale.to_f && !stores_array.include?(lowest_sites[i].to_s.strip) # #lowest_sites[i] != "Budgetmailboxes.com" && lowest_sites[i] != "Budgetcommercial.com" && lowest_sites[i] != "Budgetstreetsigns.com" && lowest_sites[i] != "Budgetstreetlights.com" && lowest_sites[i] != "Budgetaddressplaues.com"
+          lp << price if price.to_f > whole_sale.to_f && price.to_f <= (whole_sale.to_f*3.0) && !stores_array.include?(lowest_sites[i].to_s.strip) # #lowest_sites[i] != "Budgetmailboxes.com" && lowest_sites[i] != "Budgetcommercial.com" && lowest_sites[i] != "Budgetstreetsigns.com" && lowest_sites[i] != "Budgetstreetlights.com" && lowest_sites[i] != "Budgetaddressplaues.com"
         end
         (lp.empty?)?(0):(lp.min)
     end
