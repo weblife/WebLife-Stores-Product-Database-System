@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110323191605) do
+ActiveRecord::Schema.define(:version => 20110324182614) do
 
   create_table "cached_informations", :force => true do |t|
     t.integer  "user_id"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20110323191605) do
     t.decimal  "addressplaq_adjustment",                          :precision => 8, :scale => 2, :default => 0.0
     t.decimal  "override_acceptable_markup",                      :precision => 8, :scale => 2
     t.decimal  "suggested_retail_price_override",                 :precision => 8, :scale => 2
+    t.text     "promo_text"
   end
 
   create_table "properties", :force => true do |t|
