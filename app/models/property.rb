@@ -33,10 +33,15 @@ class Property < ActiveRecord::Base
   validates_length_of :style,:allow_nil => true,:maximum   => 30,:too_long  => "style must have at most 30 characters"
   validates_length_of :multi_box_dimensions,:allow_nil => true,:maximum   => 256,:too_long  => "Multi box dimensions must have at most 256 characters"
   validate :compare_price
+  before_validation :make_weight_integer
 
   private
   def compare_price
       errors.add(:wholesale_cost,"Price Override must be GREATER than Wholesale Price.") if !product.price_override.blank? && wholesale_cost.to_f>0 && product.price_override.to_f< wholesale_cost.to_f
+  end
+  def make_weight_integer
+      self.actual_weight=actual_weight.to_f
+      self.ship_weight=ship_weight.to_f
   end
 
 end

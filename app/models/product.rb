@@ -446,7 +446,7 @@ class Product < ActiveRecord::Base
   end
 
   def output_flat_ship_rate
-      0
+      freight_cost_overide
   end
 
   def output_free_shipping

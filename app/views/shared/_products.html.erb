@@ -84,7 +84,7 @@
               <%=index+1%>
             </td>
             <td valign="top" nowrap >
-              <%=truncate(product.product_id,16,"..")%>
+              <label title="<%=product.product_id%>" ><%=truncate(product.product_id,16,"..")%></label>
             </td>
             <td valign="top" nowrap>
               <%=highlight(product.name,truncate(params[:search_text],90,".."), :highlighter => '<strong>\1</strong>')%>
@@ -98,67 +98,67 @@
             <td valign="top" nowrap>
               <%=product.path%>
             </td>
-            <td valign="top" nowrap><%=truncate(product.Item_description_with_html,90,"..")%>
+            <td valign="top" nowrap><label title="<%=product.Item_description_with_html%>" ><%=truncate(product.Item_description_with_html,90,"..")%></label>
             </td>
-            <td valign="top" nowrap><%=truncate(product.options,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.actual_weight,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.ship_weight,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.material,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.style,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.color,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.overall_size,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.wholesale_cost,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.map_pricing,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.Item_description_without_html,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.return_details,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.availability,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.shipping_time,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.warranty,16,"..") rescue nil%></td>
+            <td valign="top" nowrap><label title="<%=product.options%>"><%=truncate(product.options,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.actual_weight%>"><%=truncate(product.property.actual_weight,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.ship_weight%>"><%=truncate(product.property.ship_weight,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.material%>"><%=truncate(product.property.material,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.style%>"><%=truncate(product.property.style,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.color%>"><%=truncate(product.property.color,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.overall_size%>"><%=truncate(product.property.overall_size,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.wholesale_cost%>"><%=truncate(product.property.wholesale_cost,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.map_pricing%>"><%=truncate(product.property.map_pricing,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.Item_description_without_html%>"><%=truncate(product.Item_description_without_html,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.return_details%>"><%=truncate(product.return_details,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.availability%>"><%=truncate(product.availability,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.shipping_time%>"><%=truncate(product.shipping_time,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.warranty%>"><%=truncate(product.warranty,16,"..") rescue nil%></label></td>
             <td valign="top" nowrap><%=product.boolean_ups_approved_field%></td>
-            <td valign="top" nowrap><%=truncate(product.image,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_2,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_3,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_4,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_5,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.related_Items,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.related_referrence_sku,16,"..") rescue nil%></td>
+            <td valign="top" nowrap><label title="<%=product.image%>"><%=truncate(product.image,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset%>"><%=truncate(product.inset.inset,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_2%>"><%=truncate(product.inset.inset_2,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_3%>"><%=truncate(product.inset.inset_3,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_4%>"><%=truncate(product.inset.inset_4,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_5%>"><%=truncate(product.inset.inset_5,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.related_Items%>"><%=truncate(product.related_Items,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.related_referrence_sku%>"><%=truncate(product.related_referrence_sku,16,"..") rescue nil%></label></td>
             <td valign="top" nowrap><%=product.boolean_promo_code_section_availablility%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_6,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_7,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_8,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.inset.inset_9,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.disclaimer_name,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.disclaimer_text,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_1,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_1,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_2,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_2,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_3,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_3,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_4,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_4,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_5,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_5,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_6,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_6,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_7,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_7,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_8,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_8,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_9,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_9,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.url_link.url_link_10,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.text_anchor.anchor_text_10,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.product_cmng_img_tag_html,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.brief_summary_of_menu,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.po_description_details,16,"..") rescue nil%></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_6%>"><%=truncate(product.inset.inset_6,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_7%>"><%=truncate(product.inset.inset_7,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_8%>"><%=truncate(product.inset.inset_8,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.inset.inset_9%>"><%=truncate(product.inset.inset_9,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.disclaimer_name%>"><%=truncate(product.disclaimer_name,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.disclaimer_text%>"><%=truncate(product.disclaimer_text,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_1%>"><%=truncate(product.url_link.url_link_1,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_1%>"><%=truncate(product.text_anchor.anchor_text_1,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_2%>"><%=truncate(product.url_link.url_link_2,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_2%>"><%=truncate(product.text_anchor.anchor_text_2,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_3%>"><%=truncate(product.url_link.url_link_3,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_3%>"><%=truncate(product.text_anchor.anchor_text_3,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_4%>"><%=truncate(product.url_link.url_link_4,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_4%>"><%=truncate(product.text_anchor.anchor_text_4,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_5%>"><%=truncate(product.url_link.url_link_5,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_5%>"><%=truncate(product.text_anchor.anchor_text_5,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_6%>"><%=truncate(product.url_link.url_link_6,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_6%>"><%=truncate(product.text_anchor.anchor_text_6,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_7%>"><%=truncate(product.url_link.url_link_7,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_7%>"><%=truncate(product.text_anchor.anchor_text_7,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_8%>"><%=truncate(product.url_link.url_link_8,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_8%>"><%=truncate(product.text_anchor.anchor_text_8,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_9%>"><%=truncate(product.url_link.url_link_9,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_9%>"><%=truncate(product.text_anchor.anchor_text_9,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.url_link.url_link_10%>"><%=truncate(product.url_link.url_link_10,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.text_anchor.anchor_text_10%>"><%=truncate(product.text_anchor.anchor_text_10,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.product_cmng_img_tag_html%>"><%=truncate(product.product_cmng_img_tag_html,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.brief_summary_of_menu%>"><%=truncate(product.brief_summary_of_menu,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.po_description_details%>"><%=truncate(product.po_description_details,16,"..") rescue nil%></label></td>
             <td valign="top" nowrap><%=product.freight_cost_overide%></td>
-            <td valign="top" nowrap><%=truncate(product.origin_zip,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.number_of_boxes,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.multi_box_weights,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.property.multi_box_dimensions,16,"..") rescue nil%></td>
-            <td valign="top" nowrap><%=truncate(product.invalid_ship_methods,16,"..") rescue nil%></td>
+            <td valign="top" nowrap><label title="<%=product.origin_zip%>"><%=truncate(product.origin_zip,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.number_of_boxes%>"><%=truncate(product.property.number_of_boxes,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.multi_box_weights%>"><%=truncate(product.property.multi_box_weights,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.property.multi_box_dimensions%>"><%=truncate(product.property.multi_box_dimensions,16,"..") rescue nil%></label></td>
+            <td valign="top" nowrap><label title="<%=product.invalid_ship_methods%>"><%=truncate(product.invalid_ship_methods,16,"..") rescue nil%></label></td>
             <td valign="top" nowrap><%=product.boolean_phone_number_visibility%></td>
             <td valign="top" nowrap><%=product.boolean_item_number_visiblity%></td>
           </tr>
