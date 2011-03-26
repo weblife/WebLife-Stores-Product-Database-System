@@ -1,4 +1,5 @@
 class ExportCsv
+  require 'zip/zip'
   BUDGET_MAILBOXES=1
   BUDGET_COMMERCIAL_MAILBOXES=2
   BUDGET_ADDRESS_PLAQUE=3
@@ -16,6 +17,26 @@ class ExportCsv
       file_path=export_quickbooks(products) if search[:other_csv].to_i==QUICKBOOKS
       file_path=export_compscraper(products) if search[:other_csv].to_i==COMPSCRAPER
       return file_path
+  end
+
+  def self.export_as_zip(export,user)
+      products=Product.find_recent_products(export[:time])
+      export[:stores]=["1","2","3","4","5","6"] if export[:stores].nil?
+      export[:stores].delete("")
+      file= "#{RAILS_ROOT}/public/zip_files/stores.zip" #local directory path
+      Zip::ZipFile.open(file, Zip::ZipFile::CREATE) {|zipfile|
+        export[:stores].each do |num|
+          file_path=export_budgetmailboxes(products) if num.to_i==BUDGET_MAILBOXES
+          file_path=export_budgetcommercialmailboxes(products) if num.to_i==BUDGET_COMMERCIAL_MAILBOXES
+          file_path=export_addressplaques(products) if num.to_i==BUDGET_ADDRESS_PLAQUE
+          file_path=export_streetsign(products) if num.to_i==BUDGET_STREET_SIGNS
+          file_path=export_quickbooks(products) if num.to_i==QUICKBOOKS
+          file_path=export_compscraper(products) if num.to_i==COMPSCRAPER
+          zipfile.add(file_path.split("/").last,file_path)
+        end
+      }
+
+      return file
   end
 
   private

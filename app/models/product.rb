@@ -185,7 +185,7 @@ class Product < ActiveRecord::Base
   validates_inclusion_of :boolean_streetlights_free_shipping, :in => ["YES", "NO"],:message=>"Streetlights free value should contain 'Yes' or 'No' ",:allow_nil=>true
   validates_inclusion_of :boolean_addressplag_free_shipping, :in => ["YES", "NO"],:message=>"Addressplag free value should contain 'Yes' or 'No' ",:allow_nil=>true
 
-  validate :compare_price
+  validate :compare_price,:compare_price_with_markup
 
 
 
@@ -304,6 +304,10 @@ class Product < ActiveRecord::Base
       db_field="manufacturer" if searched_field.blank? || (searched_field=="manufacturer") || db_field.blank?
 
       Product.find(:all,:conditions=>["#{db_field} LIKE ?","%#{searched_text}%"])
+  end
+
+  def self.find_recent_products(time)
+      Product.find(:all,:conditions=>["updated_at>=?",Time.now.gmtime-(time.to_i.minutes)])
   end
 
   #output fields
@@ -561,6 +565,10 @@ class Product < ActiveRecord::Base
 
   def compare_price
       errors.add(:suggested_retail_price_override,"Suggested Retail Price must be GREATER than sale Price.") if !suggested_retail_price_override.blank? && suggested_retail_price_override.to_f< output_sale_price.to_f
+  end
+
+  def compare_price_with_markup
+      errors.add(:price_override,"Price Override is less than Minimum Acceptable Markup.") if !price_override.nil? && price_override.to_f < (minimum_acceptable_markup.to_f*self.property.wholesale_cost.to_f)
   end
 
 end

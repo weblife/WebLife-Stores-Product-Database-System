@@ -1,6 +1,9 @@
 <%= form_tag({:action => 'search_items'}, :multipart => true)%>
 <%=render :partial=>"/shared/search_results",:locals=>{:title=>"Edit Items"}%>
-    <%= submit_tag 'Submit' %>
+    <%= submit_tag 'Submit',{:onclick=>"Element.show('spinner')"} %>
+<span id="spinner" style="display: none;">
+  <img  src="images/sml_spinner.gif"  />&nbsp; Searching....
+</span>
 </form>
 <%if !@results.blank?%>
 <%=render :partial=>"/shared/products",:locals=>{:products=>@results,:is_edit=>true}%>

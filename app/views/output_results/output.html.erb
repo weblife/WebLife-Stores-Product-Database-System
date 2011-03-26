@@ -1,6 +1,10 @@
 <%= form_tag({:action => 'output'}, :multipart => true)%>
 <%=render :partial=>"/shared/search_results",:locals=>{:title=>"Output Results"}%>
-    <%= submit_tag 'Submit' %>
+    <%= submit_tag 'Submit',{:onclick=>"Element.show('spinner')"} %>
+<span id="spinner" style="display: none;">
+  <img  src="images/sml_spinner.gif"  />&nbsp; Searching....
+</span>
+
 </form>
 
 
@@ -10,5 +14,8 @@
 <%elsif request.post?%>
 <b>No Record Found</b>
 <%end%>
+
+<br/>
+<%=render :partial=>"recent_export_changes"%>
 
 

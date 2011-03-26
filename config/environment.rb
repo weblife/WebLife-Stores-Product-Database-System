@@ -38,6 +38,7 @@ Rails::Initializer.run do |config|
 
   config.gem 'ruby-debug', :version => '0.10.3', :environment => [:development]
   config.gem 'fastercsv', :version => '1.5.3'
+  config.gem 'rubyzip', :version => '0.9.4'
   config.gem 'annotate', :version => '2.4.0', :environment => [:development]
 
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.

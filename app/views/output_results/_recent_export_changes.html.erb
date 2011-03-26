@@ -1,0 +1,59 @@
+<script>
+  function select_all(element)
+  {
+    if(element.value=='')
+      {
+        var start_loop=1
+        var end_loop=element.length-1
+
+        while(start_loop<=end_loop)
+          {
+            element[start_loop].selected='selected';
+            start_loop+=1
+          }
+
+      }
+  }
+</script>
+<%= form_tag({:action => 'export_zip'})%>
+<table border="0" cellspacing="0" cellpadding="0" width="100%" style="background-color: gray;" >
+  <tr>
+    <td colspan="4" align="center" >
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center" >
+      <b>Export Recent Changes</b>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center" >
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td align="center" >How far back?:</td>
+    <td align="center" ><%=select("export", "time", options_for_select([["Last 10 minutes", "10"], ["Last 30 minutes", "30"], ["Last 24 hours", "1440"], ["Last 7 days", "10080"]]))%></td>
+    <td align="center" >Which Store/File? <br/> (select All that apply) &nbsp;</td>
+    <td align="center" >
+      <%=select("export", "stores", options_for_select([["All Stores", ""],["BudgetMailboxes.com", "1"], ["BudgetCommercialMailboxes.com", "2"], ["BudgetAddressPlaque.com", "3"], ["BudgetStreetSigns.com", "4"],["QuickBooks", "5"], ["CompScrapper", "6"]],{:selected=>"1"}),{},{:multiple=>"multiple",:onclick=>"select_all(this);"})%>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center" >
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" align="right" >
+      <%= submit_tag 'Export Recent Changes'%>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="4" align="center" >
+      &nbsp;
+    </td>
+  </tr>
+</table>
+</form>
