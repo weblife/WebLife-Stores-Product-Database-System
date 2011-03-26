@@ -24,6 +24,7 @@ class ExportCsv
       export[:stores]=["1","2","3","4","5","6"] if export[:stores].nil?
       export[:stores].delete("")
       file= "#{RAILS_ROOT}/public/zip_files/stores.zip" #local directory path
+      File.delete(file)
       Zip::ZipFile.open(file, Zip::ZipFile::CREATE) {|zipfile|
         export[:stores].each do |num|
           file_path=export_budgetmailboxes(products) if num.to_i==BUDGET_MAILBOXES
