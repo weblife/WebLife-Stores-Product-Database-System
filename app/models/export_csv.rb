@@ -33,7 +33,7 @@ class ExportCsv
           file_path=export_streetsign(products) if num.to_i==BUDGET_STREET_SIGNS
           file_path=export_quickbooks(products) if num.to_i==QUICKBOOKS
           file_path=export_compscraper(products) if num.to_i==COMPSCRAPER
-          zipfile.add(file_path.split("/").last,file_path)
+          zipfile.add("#{file_path.split("/").last.split(" ").first}.csv",file_path)
         end
       }
 
