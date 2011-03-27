@@ -10,13 +10,17 @@
 
 <br/><br/>
 <%=render :partial=>"/shared/success_error",:locals=>{:success_class_name=>"width_560 zero_left_margin left_align_text",:error_class_name=>"user_created_margin"}%>
+<span id="spinner" style="display: none;padding-left: 200px;">
+  <img  src="images/sml_spinner.gif"  />&nbsp; Wait....
+</span>
+
 <table border="1" cellspacing="10" cellpadding="0" >
   <tr>
     <td>
         <%=link_to "New Upload",upload_compscraper_file_path%>
     </td>
     <td>
-      <%=link_to "Add",save_compscraper_path%>
+      <%=link_to "Add",save_compscraper_path,{:onclick=>"Element.show('spinner')"}%>
     </td>
     <td>
     <%=link_to "Revert",revert_compscraper_path((!@compscrapers.blank?)?(@compscrapers.total_entries):())%>
@@ -27,7 +31,7 @@
   <%= form_tag({:action => 'upload_compscraper_file'}, :multipart => true)%>
     <label for="file">File to Upload</label>
         <%= file_field_tag "file" %>
-    <%= submit_tag 'Upload' %>
+    <%= submit_tag 'Upload',{:onclick=>"Element.show('spinner')"} %>
    <%=form_tag %>
     </td>
   </tr>
