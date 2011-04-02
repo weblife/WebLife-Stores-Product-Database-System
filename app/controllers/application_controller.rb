@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
+  include ExceptionNotification::Notifiable
 
   # Scrub sensitive parameters from your log
    filter_parameter_logging :password
