@@ -1,4 +1,41 @@
 <br></br><br></br>
+<%unless @product.errors.on(:name).blank?%>
+<label style="color:red;" >*<%=@product.errors.on(:name)%></label>
+<%end%>
+
+<%unless @product.property.errors.on(:wholesale_cost).blank?%>
+  <br/><label style="color:red;" >*<%=@product.property.errors.on(:wholesale_cost)%></label>
+<%end%>
+<br></br><br></br><br></br>
+<%if !@product.valid? || !@product.property.valid? || !@product.inset.valid? || !@product.url_link.valid? || !@product.text_anchor.valid? || !@product.compscraper.valid?%>
+<b>Warnings:</b>
+<%end%>
+<%@product.errors.each do |field,error|%>
+  <%if field!="name"%>
+    <br/>*<%=error%>
+  <%end%>
+<%end%>
+<%@product.property.errors.each do |field,error|%>
+  <%if field!="wholesale_cost"%>
+    <br/>*<%=error%>
+  <%end%>
+<%end%>
+<%@product.inset.errors.each do |field,error|%>
+    <br/>*<%=error%>
+<%end%>
+<%@product.url_link.errors.each do |field,error|%>
+    <br/>*<%=error%>
+<%end%>
+<%@product.text_anchor.errors.each do |field,error|%>
+    <br/>*<%=error%>
+<%end%>
+<%@product.compscraper.errors.each do |field,error|%>
+    <br/>*<%=error%>
+<%end%>
+
+
+
+<br></br><br></br><br></br>
 <div>
   <b>Edit Item-<%=@product.product_id%></b>
 </div>
@@ -11,398 +48,403 @@
     </td>
   <tr>
     <td>ID:</td>
-    <td><%=@product.product_id%></td>
+    <td colspan="2"><%=@product.product_id%></td>
   </tr>
   <tr>
     <td>Path:</td>
-    <td><%=text_field(:product, :path, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :path, :size => 50)%></td>
   </tr>
   <tr>
     <td>Manufacturer:</td>
-    <td><%=text_field(:product, :manufacturer, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :manufacturer, :size => 50)%></td>
   </tr>
   <tr>
     <td>Code:</td>
-    <td><%=text_field(:product, :code, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :code, :size => 50)%></td>
   </tr>
   <tr>
     <td>Name:</td>
     <td><%=text_field(:product, :name, :size => 50)%></td>
+    <td>&nbsp;
+      <%unless @product.errors.on(:name).blank?%>
+      <label style="color:red;" >*</label>
+      <%end%>
+    </td>
   </tr>
   <tr>
     <td valign="top">Item Description - HTML:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :Item_description_with_html,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td valign="top">Options:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :options,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td>actual-weight:</td>
-    <td><%=text_field(:property, :actual_weight, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :actual_weight, :size => 50)%></td>
   </tr>
   <tr>
     <td>ship-weight:</td>
-    <td><%=text_field(:property, :ship_weight, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :ship_weight, :size => 50)%></td>
   </tr>
   <tr>
     <td>material:</td>
-    <td><%=text_field(:property, :material, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :material, :size => 50)%></td>
   </tr>
   <tr>
     <td>style:</td>
-    <td><%=text_field(:property, :style, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :style, :size => 50)%></td>
   </tr>
   <tr>
     <td>color:</td>
-    <td><%=text_field(:property, :color, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :color, :size => 50)%></td>
   </tr>
   <tr>
     <td>overall-size:</td>
-    <td><%=text_field(:property, :overall_size, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :overall_size, :size => 50)%></td>
   </tr>
   <tr>
     <td valign="top">Item Description - NO HTML:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :Item_description_without_html,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td>Return Details:</td>
-    <td><%=text_field(:product, :return_details, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :return_details, :size => 50)%></td>
   </tr>
   <tr>
     <td>Availability:</td>
-    <td><%=text_field(:product, :availability, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :availability, :size => 50)%></td>
   </tr>
   <tr>
     <td>Shipping Time:</td>
-    <td><%=text_field(:product, :shipping_time, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :shipping_time, :size => 50)%></td>
   </tr>
   <tr>
     <td>Warranty:</td>
-    <td><%=text_field(:product, :warranty, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :warranty, :size => 50)%></td>
   </tr>
   <tr>
     <td>is_usps_approved:</td>
-    <td>
+    <td colspan="2">
         <%=select(:product, :is_usps_approved,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.is_usps_approved)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Image:</td>
-    <td><%=text_field(:product, :image, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :image, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset:</td>
-    <td><%=text_field(:inset, :inset, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 2:</td>
-    <td><%=text_field(:inset, :inset_2, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_2, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 3:</td>
-    <td><%=text_field(:inset, :inset_3, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_3, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 4:</td>
-    <td><%=text_field(:inset, :inset_4, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_4, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 5:</td>
-    <td><%=text_field(:inset, :inset_5, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_5, :size => 50)%></td>
   </tr>
   <tr>
     <td>Related Items:</td>
-    <td><%=text_field(:product, :related_Items, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :related_Items, :size => 50)%></td>
   </tr>
   <tr>
     <td>Related Referrence Sku:</td>
-    <td><%=text_field(:product, :related_referrence_sku, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :related_referrence_sku, :size => 50)%></td>
   </tr>
   <tr>
     <td>Promo Code Section Availablility:</td>
-    <td>
+    <td colspan="2">
         <%=select(:product, :promo_code_section_availablility,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.promo_code_section_availablility)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Inset 6:</td>
-    <td><%=text_field(:inset, :inset_6, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_6, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 7:</td>
-    <td><%=text_field(:inset, :inset_7, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_7, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 8:</td>
-    <td><%=text_field(:inset, :inset_8, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_8, :size => 50)%></td>
   </tr>
   <tr>
     <td>Inset 9:</td>
-    <td><%=text_field(:inset, :inset_9, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:inset, :inset_9, :size => 50)%></td>
   </tr>
   <tr>
     <td>Disclaimer Name:</td>
-    <td><%=text_field(:product, :disclaimer_name, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :disclaimer_name, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>Disclaimer Text:</td>
-    <td><%=text_field(:product, :disclaimer_text, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :disclaimer_text, :size => 50)%></td>
   </tr>
   <tr>
     <td>1st url link:</td>
-    <td><%=text_field(:url_link, :url_link_1, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_1, :size => 50)%></td>
   </tr>
   <tr>
     <td>1st anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_1, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_1, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>2nd url link:</td>
-    <td><%=text_field(:url_link, :url_link_2, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_2, :size => 50)%></td>
   </tr>
   <tr>
     <td>2nd anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_2, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_2, :size => 50)%></td>
   </tr>
 
     <tr>
     <td>3rd url link:</td>
-    <td><%=text_field(:url_link, :url_link_3, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_3, :size => 50)%></td>
   </tr>
   <tr>
     <td>3rd anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_3, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_3, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>4th url link:</td>
-    <td><%=text_field(:url_link, :url_link_4, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_4, :size => 50)%></td>
   </tr>
   <tr>
     <td>4th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_4, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_4, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>5th url link:</td>
-    <td><%=text_field(:url_link, :url_link_5, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_5, :size => 50)%></td>
   </tr>
   <tr>
     <td>5th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_5, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_5, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>6th url link:</td>
-    <td><%=text_field(:url_link, :url_link_6, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_6, :size => 50)%></td>
   </tr>
   <tr>
     <td>6th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_6, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_6, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>7th url link:</td>
-    <td><%=text_field(:url_link, :url_link_7, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_7, :size => 50)%></td>
   </tr>
   <tr>
     <td>7th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_7, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_7, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>8th url link:</td>
-    <td><%=text_field(:url_link, :url_link_8, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_8, :size => 50)%></td>
   </tr>
   <tr>
     <td>8th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_8, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_8, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>9th url link:</td>
-    <td><%=text_field(:url_link, :url_link_9, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_9, :size => 50)%></td>
   </tr>
   <tr>
     <td>9th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_9, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_9, :size => 50)%></td>
   </tr>
 
   <tr>
     <td>10th url link:</td>
-    <td><%=text_field(:url_link, :url_link_10, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:url_link, :url_link_10, :size => 50)%></td>
   </tr>
   <tr>
     <td>10th anchor text:</td>
-    <td><%=text_field(:text_anchor, :anchor_text_10, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:text_anchor, :anchor_text_10, :size => 50)%></td>
   </tr>
   <tr>
     <td valign="top">Where-Prod-Cmng-Img-Tag-HTML:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :product_cmng_img_tag_html,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td valign="top">Brief Summary of Manu:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :brief_summary_of_menu,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td>Freight Cost Overide:</td>
-    <td><%=text_field(:product, :freight_cost_overide, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :freight_cost_overide, :size => 50)%></td>
   </tr>
   <tr>
     <td valign="top">PO Description Details:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :po_description_details,:rows=>10,:cols=>60)%>
     </td>
   </tr>
   <tr>
     <td>Origin-zip:</td>
-    <td><%=text_field(:product, :origin_zip, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :origin_zip, :size => 50)%></td>
   </tr>
   <tr>
     <td>Number-of-boxes:</td>
-    <td><%=text_field(:property, :number_of_boxes, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :number_of_boxes, :size => 50)%></td>
   </tr>
   <tr>
     <td>Multi-box-weights:</td>
-    <td><%=text_field(:property, :multi_box_weights, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :multi_box_weights, :size => 50)%></td>
   </tr>
   <tr>
     <td>multi_box_dimensions:</td>
-    <td><%=text_field(:property, :multi_box_dimensions, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :multi_box_dimensions, :size => 50)%></td>
   </tr>
   <tr>
     <td>Invalid-ship-methods:</td>
-    <td><%=text_field(:product, :invalid_ship_methods, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :invalid_ship_methods, :size => 50)%></td>
   </tr>
   <tr>
     <td>Phone-number:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :phone_number_visibility,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.phone_number_visibility)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Item-number-visiblity:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :item_number_visiblity,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.item_number_visiblity)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Commercial Free Shipping:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :commercial_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.commercial_free_shipping)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Commercial Adjustment:</td>
-    <td><%=text_field(:product, :commercial_adjustment, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :commercial_adjustment, :size => 50)%></td>
   </tr>
   <tr>
     <td>Streetsign Free Shipping:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :streetsign_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.streetsign_free_shipping)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Streetsign Adjustment:</td>
-    <td><%=text_field(:product, :streetsign_adjustment, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :streetsign_adjustment, :size => 50)%></td>
   </tr>
  <tr>
     <td>Streetlights Free Shipping:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :streetlights_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.streetlights_free_shipping)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Streetlights Adjustment:</td>
-    <td><%=text_field(:product, :streetlights_adjustment, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :streetlights_adjustment, :size => 50)%></td>
   </tr>
 
  <tr>
     <td>Addressplaq Free Shipping:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :addressplaq_free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.addressplaq_free_shipping)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Addressplaq Adjustment:</td>
-    <td><%=text_field(:product, :addressplaq_adjustment, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :addressplaq_adjustment, :size => 50)%></td>
   </tr>
   <tr>
     <td>Item search phrase:</td>
-    <td><%=text_field(:compscraper, :item_search_phrase, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :item_search_phrase, :size => 50)%></td>
   </tr>
   <tr>
     <td>Word that occur:</td>
-    <td><%=text_field(:compscraper, :word_that_occur, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :word_that_occur, :size => 50)%></td>
   </tr>
   <tr>
     <td>Sort Options:</td>
-    <td><%=text_field(:compscraper, :sort_options, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :sort_options, :size => 50)%></td>
   </tr>
   <tr>
     <td> Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price, :size => 50)%></td>
   </tr>
   <tr>
     <td>2nd Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price_2, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price_2, :size => 50)%></td>
   </tr>
   <tr>
     <td>3rd Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price_3, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price_3, :size => 50)%></td>
   </tr>
   <tr>
     <td>4th Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price_4, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price_4, :size => 50)%></td>
   </tr>
   <tr>
     <td>5th Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price_5, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price_5, :size => 50)%></td>
   </tr>
   <tr>
     <td>6th Lowest Price:</td>
-    <td><%=text_field(:compscraper, :lowest_price_6, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_price_6, :size => 50)%></td>
   </tr>
   <tr>
     <td>Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site, :size => 50)%></td>
   </tr>
   <tr>
     <td>2nd Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site_2, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site_2, :size => 50)%></td>
   </tr>
   <tr>
     <td>3rd Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site_3, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site_3, :size => 50)%></td>
   </tr>
   <tr>
     <td>4th Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site_4, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site_4, :size => 50)%></td>
   </tr>
   <tr>
     <td>5th Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site_5, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site_5, :size => 50)%></td>
   </tr>
   <tr>
     <td>6th Lowest Site:</td>
-    <td><%=text_field(:compscraper, :lowest_site_6, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:compscraper, :lowest_site_6, :size => 50)%></td>
   </tr>
   <tr>
     <td valign="top">Promo Text:</td>
-    <td>
+    <td colspan="2">
       <%=text_area(:product, :promo_text,:rows=>10,:cols=>60)%>
     </td>
   </tr>
@@ -410,28 +452,33 @@
     <td>Wholesale Cost:</td>
     <td><%=text_field(:property, :wholesale_cost, :size => 50)%>
     </td>
+    <td>&nbsp;
+      <%unless @product.property.errors.on(:wholesale_cost).blank?%>
+      <label style="color:red;" >*</label>
+      <%end%>
+    </td>
   </tr>
   <tr>
     <td>MAP Pricing:</td>
-    <td><%=text_field(:property, :map_pricing, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:property, :map_pricing, :size => 50)%></td>
   </tr>
   <tr>
     <td>Price Overide:</td>
-    <td><%=text_field(:product, :price_override, :size => 50)%></td>
+    <td colspan="2"><%=text_field(:product, :price_override, :size => 50)%></td>
   </tr>
   <tr>
     <td>Free Shipping:</td>
-    <td>
+    <td colspan="2">
       <%=select(:product, :free_shipping,{ "No" => "0", "Yes" => "1"},{:selected=>(@product.free_shipping)?("1"):("0")})%>
     </td>
   </tr>
   <tr>
     <td>Override Minimum Acceptable Markup:</td>
-    <td><%=text_field(:product, :acceptable_markup, :size => 45)%> %</td>
+    <td colspan="2"><%=text_field(:product, :acceptable_markup, :size => 45)%> %</td>
   </tr>
   <tr>
     <td>Suggested Retail Price Override:</td>
-    <td><%=text_field(:product, :suggested_retail_price_override, :size => 45)%></td>
+    <td colspan="2"><%=text_field(:product, :suggested_retail_price_override, :size => 45)%></td>
   </tr>
 </table>
 <div id="reference_area">

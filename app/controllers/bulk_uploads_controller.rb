@@ -173,10 +173,10 @@ class BulkUploadsController < ApplicationController
   end
 
   def product_template
-      download_file("/public/sample_csv_input_files/items.csv",'product_upload_template.csv')
+      download_file("/input_files/sample_csv_input_files/items.csv",'product_upload_template.csv')
   end
   def compscraper_template
-      download_file("/public/sample_csv_input_files/comprasor.csv",'compscraper_upload_template.csv')
+      download_file("/input_files/sample_csv_input_files/comprasor.csv",'compscraper_upload_template.csv')
   end
 
   private

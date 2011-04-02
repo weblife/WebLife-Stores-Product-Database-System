@@ -162,7 +162,7 @@ class Product < ActiveRecord::Base
   end 
 
   validates_presence_of :product_id,:message=>"Id cannot be blank.",:on=>:create
-  validates_presence_of :name,:message=>"Name cannot be blank.",:on=>:create
+  validates_presence_of :name,:message=>"Name cannot be blank."
   validates_format_of :product_id, :with => /^[a-z0-9-]+$/i,:message=>"product id format is invalid.",:allow_nil=>true,:on=>:create
 
   #validates_uniqueness_of :product_id,:message=>"Id must be uniq.",:allow_nil=>true,:on=>:create
@@ -280,12 +280,12 @@ class Product < ActiveRecord::Base
   def self.upload_file_locally file, user,new_file_name
       ext_array = [".csv"]
       file_name= file.original_filename
-      directory= "#{RAILS_ROOT}/public/input_files" #local directory path
+      directory= "#{RAILS_ROOT}/input_files" #local directory path
       ext = File.extname(file_name)
       ext = ext.downcase
       if ext_array.include?(ext)
         local_path= File.join(directory,file_name)
-        new_path= File.join(directory,"#{new_file_name}_#{user.id}_#{Time.now.strftime("%Y-%m-%dT%H:%M:%S%z")}")
+        new_path= File.join(directory,"#{new_file_name}_#{user.id}_#{Time.now.strftime("%Y-%m-%dT%H:%M:%S%z")}.csv")
         file.rewind
         File.open(local_path,"wb"){|f| f.write(file.read)}
         File.rename(local_path,new_path)
