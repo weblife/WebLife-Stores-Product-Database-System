@@ -106,7 +106,6 @@ class UsersController < ApplicationController
   end
   def dashboard
       @products_count=Product.count :all
-      error
   end
   # There's no page here to update or destroy a user.  If you add those, be
   # smart -- make sure you check that the visitor is authorized to do so, that they
