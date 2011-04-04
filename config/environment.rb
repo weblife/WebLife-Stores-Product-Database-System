@@ -44,17 +44,21 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
-  config.action_controller.consider_all_requests_local = false
-  config.action_mailer.perform_deliveries = true
+    config.action_mailer.perform_deliveries = true
   config.action_mailer.default_charset = "utf-8"
   config.action_mailer.smtp_settings = {
-    :address => "test@weblife.com",
-    :domain => "test@weblife.com"
+      :address => "smtp.gmail.com",
+      :port => 25,
+      :domain => "localhost",
+      :authentication => :plain,
+      :user_name => "wblife.2011@gmail.com",
+      :password => "wblife1234"
   }
 
 end
+
 
   include ArrayExtensions
   ExceptionNotification::Notifier.exception_recipients = %w(rao_faisalejaz@hotmail.com)
