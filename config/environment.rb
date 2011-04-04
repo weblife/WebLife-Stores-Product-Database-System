@@ -46,13 +46,13 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_charset = "utf-8"
   config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
       :port => 25,
       :domain => "localhost",
-      :authentication => :plain,
+      :authentication => :login,
       :user_name => "wblife.2011@gmail.com",
       :password => "wblife1234"
   }
