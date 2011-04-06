@@ -23,7 +23,7 @@ class ExportCsv
       products=Product.find_recent_products(export[:time])
       export[:stores]=["1","2","3","4","5","6"] if export[:stores].nil?
       export[:stores].delete("")
-      file= "#{RAILS_ROOT}/public/zip_files/stores.zip" #local directory path
+      file= "#{RAILS_ROOT}/input_files/zip_files/stores.zip" #local directory path
       File.delete(file)
       Zip::ZipFile.open(file, Zip::ZipFile::CREATE) {|zipfile|
         export[:stores].each do |num|
@@ -73,7 +73,7 @@ class ExportCsv
 
 
   def self.create_file(header,products,name,type)
-      file= "#{RAILS_ROOT}/public/input_files/#{name}.csv" #local directory path
+      file= "#{RAILS_ROOT}/input_files/#{name}.csv" #local directory path
       outfile = File.open(file, 'wb')
       FasterCSV.open(file,"w") do |title|
          title << header

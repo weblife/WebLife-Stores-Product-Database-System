@@ -56,10 +56,27 @@ class BulkUploadsController < ApplicationController
            product.user_id=current_user.id
            pr=Product.find_by_product_id(product.product_id) rescue nil
            if pr
-              cr_at=pr.created_at
+              cr_date=pr.created_at
+              pr_id=pr.id
               pr.attributes=product.attributes
-              pr.created_at=cr_at
+              pr.created_at=cr_date
               pr.save(false)
+              pr.property.attributes=product.property.attributes
+              pr.property.created_at=cr_date
+              pr.property.product_id=pr_id
+              pr.property.save(false)
+              pr.inset.attributes=product.inset.attributes
+              pr.inset.created_at=cr_date
+              pr.inset.product_id=pr_id
+              pr.inset.save(false)
+              pr.url_link.attributes=product.url_link.attributes
+              pr.url_link.created_at=cr_date
+              pr.url_link.product_id=pr_id
+              pr.url_link.save(false)
+              pr.text_anchor.attributes=product.text_anchor.attributes
+              pr.text_anchor.created_at=cr_date
+              pr.text_anchor.product_id=pr_id
+              pr.text_anchor.save(false)
            else
              product.save(false)
            end
